@@ -1,7 +1,7 @@
 import React from 'react';
 import Tap from './Tappable.jsx';
 
-class SideMenu extends React.Component {
+class SideNav extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		databases: React.PropTypes.array.isRequired,
@@ -10,9 +10,11 @@ class SideMenu extends React.Component {
 		collections: React.PropTypes.array.isRequired,
 		onCollectionSelect: React.PropTypes.func.isRequired,
 	};
-	onDbSelect(db, e) {
+
+	onDbSelect(e) {
+		console.log('e.target.value', e.target.value);
 		e.preventDefault();
-		this.props.onDbSelect(db);
+		this.props.onDbSelect(e.target.value);
 	}
 
 	onCollectionSelect(collection, e) {
@@ -22,15 +24,20 @@ class SideMenu extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h3>Databases</h3>
-				{this.props.databases.map((db, i) => <Tap key={`db_${i}`} onClickTap={this.onDbSelect.bind(this, db.name)}>{db.name}</Tap>)}
+			<nav>
+				<div>
+					Databases:
+					<select value={this.props.selectedDb} onChange={this.onDbSelect.bind(this)}>
+						<option value=""></option>
+						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db.name}>{db.name}</option>)}
+					</select>
+				</div>
 
 				<h3>Collections</h3>
 				{this.props.collections.map((collection, i) => <Tap key={`col_${i}`} onClickTap={this.onCollectionSelect.bind(this, collection)}>{collection}</Tap>)}
-			</div>
+			</nav>
 		);
 	}
 }
 
-export default SideMenu;
+export default SideNav;

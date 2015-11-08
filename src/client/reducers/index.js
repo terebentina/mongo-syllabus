@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import {SELECT_DB, SELECT_COLLECTION, REQUEST_DATABASES, RECEIVE_DATABASES, REQUEST_COLLECTIONS, RECEIVE_COLLECTIONS} from '../actions';
+import * as ActionTypes from '../actions';
 
 function selectedDb(state = '', action) {
 	switch (action.type) {
-		case SELECT_DB:
+		case ActionTypes.SELECT_DB:
 			return action.db;
 		default:
 			return state;
@@ -12,8 +12,10 @@ function selectedDb(state = '', action) {
 
 function selectedCollection(state = '', action) {
 	switch (action.type) {
-		case SELECT_COLLECTION:
+		case ActionTypes.SELECT_COLLECTION:
 			return action.collection;
+		case ActionTypes.SELECT_DB:
+			return '';
 		default:
 			return state;
 	}
@@ -21,7 +23,7 @@ function selectedCollection(state = '', action) {
 
 function databases(state = [], action) {
 	switch (action.type) {
-		case RECEIVE_DATABASES:
+		case ActionTypes.RECEIVE_DATABASES:
 			return Object.assign([], state, action.databases);
 		default:
 			return state;
@@ -30,8 +32,10 @@ function databases(state = [], action) {
 
 function collections(state = [], action) {
 	switch (action.type) {
-		case RECEIVE_COLLECTIONS:
+		case ActionTypes.RECEIVE_COLLECTIONS:
 			return Object.assign([], state, action.collections);
+		case ActionTypes.SELECT_DB:
+			return [];
 		default:
 			return state;
 	}
@@ -39,15 +43,28 @@ function collections(state = [], action) {
 
 function isFetching(state = false, action) {
 	switch (action.type) {
-		case REQUEST_DATABASES:
-		case REQUEST_COLLECTIONS:
+		case ActionTypes.REQUEST_DATABASES:
+		case ActionTypes.REQUEST_COLLECTIONS:
 			return true;
-		case RECEIVE_DATABASES:
-		case RECEIVE_COLLECTIONS:
+		case ActionTypes.RECEIVE_DATABASES:
+		case ActionTypes.RECEIVE_COLLECTIONS:
 			return false;
 		default:
 			return state;
 	}
+}
+
+function message(state = null, action) {
+	if (action.type === ActionTypes.SHOW_MESSAGE) {
+		return {
+			message: action.message,
+			type: action.messageType,
+		};
+	} else if (action.type === ActionTypes.HIDE_MESSAGE) {
+		return null;
+	}
+
+	return state;
 }
 
 const rootReducer = combineReducers({
@@ -56,6 +73,7 @@ const rootReducer = combineReducers({
 	selectedDb,
 	selectedCollection,
 	isFetching,
+	message,
 });
 
 export default rootReducer;

@@ -1,4 +1,9 @@
-div, span {
+div,
+header,
+main,
+nav,
+footer,
+span {
 	box-sizing: border-box;
 	position: relative;
 
@@ -12,4 +17,34 @@ div, span {
 	border: 0 solid black;
 	margin: 0;
 	padding: 0;
+}
+
+.app {
+	min-height: 100vh;
+}
+
+.body {
+	flex: 1 0 auto;
+}
+
+.main {
+	flex: 1;
+}
+
+nav {
+	/* 12em is the width of the columns */
+	flex: 0 0 12em;
+	/* put the nav on the left */
+	order: -1;
+}
+
+header,
+footer {
+	flex: none;
+}
+
+@media (min-width: 768px) {
+	.body {
+		flex-direction: row;
+	}
 }
