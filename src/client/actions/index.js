@@ -26,9 +26,16 @@ function fetchDatabases() {
 	return (dispatch) => {
 		dispatch(requestDatabases());
 		return fetch(`/api/databases`)
-			.then((response) => response.json())
-			.then((json) => dispatch(receiveDatabases(json)))
-			.catch((err) => dispatch(showMessage(err.message, MESSAGE_ERROR)));
+			.then((response) => {
+				if (response.status >= 400) {
+					throw new Error('Bad response from server');
+				}
+				return response.json();
+			}).then((json) => dispatch(receiveDatabases(json)))
+			.catch((err) => {
+				dispatch(receiveDatabases([]));
+				return dispatch(showMessage(err.message, MESSAGE_ERROR));
+			});
 	};
 }
 
@@ -75,8 +82,16 @@ export function fetchCollections(db) {
 	return (dispatch) => {
 		dispatch(requestCollections(db));
 		return fetch(`/api/collections/${db}`)
-			.then(response => response.json())
-			.then(json => dispatch(receiveCollections(db, json)));
+			.then((response) => {
+				if (response.status >= 400) {
+					throw new Error('Bad response from server');
+				}
+				return response.json();
+			}).then(json => dispatch(receiveCollections(db, json)))
+			.catch((err) => {
+				dispatch(receiveCollections(db, []));
+				return dispatch(showMessage(err.message, MESSAGE_ERROR));
+			});
 	};
 }
 
