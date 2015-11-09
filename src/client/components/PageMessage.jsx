@@ -1,10 +1,13 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import classnames from 'classnames';
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { pacomoDecorator } from '../utils/pacomo';
+
+import './PageMessage.scss';
 
 const duration = 3000;
 
 const PageMessage = React.createClass({
+	displayName: 'PageMessage',
 	propTypes: {
 		message: React.PropTypes.object,
 		onHide: React.PropTypes.func.isRequired,
@@ -12,22 +15,15 @@ const PageMessage = React.createClass({
 	},
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.message !== this.props.message && nextProps.message !== null) {
-			setTimeout(() => {
-				this.props.onHide();
-			}, duration);
+			setTimeout(this.props.onHide, duration);
 		}
 	},
 	render: function() {
-		let content = null;
 		if (this.props.message) {
-			content = <div className={classnames('message', 'message--' + this.props.message.type, this.props.className)}>{this.props.message.message}</div>;
+			return <div className={this.props.message.type}>{this.props.message.message}</div>;
 		}
-		return (
-			<ReactCSSTransitionGroup transitionName="message" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
-				{content}
-			</ReactCSSTransitionGroup>
-		);
+		return false;
 	},
 });
 
-export default PageMessage;
+export default pacomoDecorator(PageMessage);

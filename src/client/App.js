@@ -1,5 +1,4 @@
 import React from 'react';
-//import { pacomoDecorator } from './utils/pacomo';
 import { connect } from 'react-redux';
 import { selectDb, selectCollection, fetchCollections, fetchDatabasesIfNeeded, hideMessage } from './actions';
 import SideNav from './components/SideNav.jsx';
@@ -58,5 +57,4 @@ function mapStateToProps(state) {
 	return {selectedDb, databases, selectedCollection, collections, isFetching, message};
 }
 
-//export default pacomoDecorator(App);
 export default connect(mapStateToProps)(App);

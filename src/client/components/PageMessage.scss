@@ -1,0 +1,20 @@
+.App-PageMessage {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin-bottom: 10px;
+	z-index: 8000;
+	align-items: center;
+	justify-content: center;
+
+	&-error {
+		background-color: #ffcfcf;
+		border-color: #F6A1A1;
+	}
+
+	&-success {
+		background-color: #DDFFCF;
+		border-color: #AFE991;
+	}
+}
