@@ -1,8 +1,11 @@
 import React from 'react';
 import Highlight from './Highlight.jsx';
 import shouldPureComponentUpdate from 'react-pure-render/function';
+const beautify = require('js-beautify').js_beautify;
 
 import './Doc.scss';
+
+const beautyOpts = { indent_size: 2 };
 
 class Doc extends React.Component {
 	static propTypes = {
@@ -15,7 +18,7 @@ class Doc extends React.Component {
 	render() {
 		return (
 			<article>
-				<Highlight className="language-javascript">{JSON.stringify(this.props.doc)}</Highlight>
+				<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>
 			</article>
 		);
 	}

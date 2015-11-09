@@ -19,6 +19,10 @@ article {
 	padding: 0;
 }
 
+.App-SideNav {
+	flex-shrink: 0;
+}
+
 .app {
 	min-height: 100vh;
 }

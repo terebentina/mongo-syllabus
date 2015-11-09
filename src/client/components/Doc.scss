@@ -1,4 +1,7 @@
-article {
+.App-Main-results article {
 	flex: 1;
-	overflow: hidden;
+	overflow: auto;
+	max-height: 10vh;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
 }
