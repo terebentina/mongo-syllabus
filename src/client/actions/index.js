@@ -4,6 +4,8 @@ export const REQUEST_DATABASES = 'REQUEST_DATABASES';
 export const RECEIVE_DATABASES = 'RECEIVE_DATABASES';
 export const REQUEST_COLLECTIONS = 'REQUEST_COLLECTIONS';
 export const RECEIVE_COLLECTIONS = 'RECEIVE_COLLECTIONS';
+export const REQUEST_DOCS = 'REQUEST_DOCS';
+export const RECEIVE_DOCS = 'RECEIVE_DOCS';
 export const SELECT_DB = 'SELECT_DB';
 export const SELECT_COLLECTION = 'SELECT_COLLECTION';
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
@@ -61,6 +63,34 @@ function receiveCollections(db, json) {
 	};
 }
 
+function requestDocs(collection) {
+	return {type: REQUEST_DOCS, collection};
+}
+
+function receiveDocs(collection, json) {
+	return {
+		type: RECEIVE_DOCS,
+		collection: collection,
+		docs: json,
+	};
+}
+
+export function fetchDocs(collection) {
+	return (dispatch) => {
+		dispatch(requestDocs(collection));
+		return fetch(`/api/docs/${collection}`)
+			.then((response) => {
+				if (response.status >= 400) {
+					throw new Error('Bad response from server');
+				}
+				return response.json();
+			}).then(json => dispatch(receiveDocs(collection, json)))
+			.catch((err) => {
+				dispatch(receiveDocs(collection, []));
+				return dispatch(showMessage(err.message, MESSAGE_ERROR));
+			});
+	};
+}
 
 export function selectDb(db) {
 	return {type: SELECT_DB, db};

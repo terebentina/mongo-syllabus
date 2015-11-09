@@ -50,18 +50,18 @@ app.listen(3000, function listen() {
 	console.log('%s listening at %s', app.name, app.url);
 });
 
-process.on('SIGINT', function() {
-	console.log('\nGracefully shutting down from SIGINT (Ctrl-C)');
-	// some other closing procedures go here
-	app.close(function() {
-		process.exit(0);
-	});
-});
-
-process.on('SIGTERM', function() {
-	console.log('\nGracefully shutting down from SIGTERM');
-	// some other closing procedures go here
-	app.close(function() {
-		process.exit(0);
-	});
-});
+//process.on('SIGINT', function() {
+//	console.log('\nGracefully shutting down from SIGINT (Ctrl-C)');
+//	// some other closing procedures go here
+//	app.close(function() {
+//		process.exit(0);
+//	});
+//});
+//
+//process.on('SIGTERM', function() {
+//	console.log('\nGracefully shutting down from SIGTERM');
+//	// some other closing procedures go here
+//	app.close(function() {
+//		process.exit(0);
+//	});
+//});
