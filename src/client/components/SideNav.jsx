@@ -9,8 +9,8 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 class SideNav extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
-		databases: React.PropTypes.array.isRequired,
-		collections: React.PropTypes.array.isRequired,
+		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 	componentWillReceiveProps(nextProps) {
@@ -40,7 +40,7 @@ class SideNav extends React.Component {
 					<h3>Databases:</h3>
 					<select value={this.props.selectedDb} onChange={this.onDbSelect.bind(this)}>
 						<option value=""></option>
-						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db.name}>{db.name}</option>)}
+						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
 				</div>
 

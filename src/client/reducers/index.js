@@ -41,6 +41,18 @@ function collections(state = [], action) {
 	}
 }
 
+function docs(state = [], action) {
+	switch (action.type) {
+		case ActionTypes.RECEIVE_DOCS:
+			return Object.assign([], state, action.docs);
+		case ActionTypes.SELECT_DB:
+		case ActionTypes.SELECT_COLLECTION:
+			return [];
+		default:
+			return state;
+	}
+}
+
 function isFetching(state = false, action) {
 	switch (action.type) {
 		case ActionTypes.REQUEST_DATABASES:
@@ -70,6 +82,7 @@ function message(state = null, action) {
 const rootReducer = combineReducers({
 	databases,
 	collections,
+	docs,
 	selectedDb,
 	selectedCollection,
 	isFetching,

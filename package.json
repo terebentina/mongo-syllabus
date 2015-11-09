@@ -42,7 +42,6 @@
     "blue-tape": "^0.1.10",
     "css-loader": "^0.21.0",
     "node-sass": "^3.4.1",
-    "postcss-loader": "^0.7.0",
     "react-addons-test-utils": "^0.14.1",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.1",

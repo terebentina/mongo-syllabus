@@ -75,10 +75,10 @@ function receiveDocs(collection, json) {
 	};
 }
 
-export function fetchDocs(collection) {
+export function fetchDocs(db, collection) {
 	return (dispatch) => {
 		dispatch(requestDocs(collection));
-		return fetch(`/api/docs/${collection}`)
+		return fetch(`/api/docs/${db}/${collection}`)
 			.then((response) => {
 				if (response.status >= 400) {
 					throw new Error('Bad response from server');

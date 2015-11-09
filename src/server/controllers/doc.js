@@ -3,17 +3,20 @@ const MongoClient = require('mongodb').MongoClient;
 const _ = require('lodash');
 const url = 'mongodb://192.168.55.103:27017';
 
-const DatabaseCtrl = {
+const DocCtrl = {
 	index(req, res, next) {
-		// Use connect method to connect to the Server
-		MongoClient.connect(url, function(err, db) {
+		// warning!!! req.params.db is not sanitized!!! @todo
+		const dbUrl = `${url}/${req.params.db}`;
+		MongoClient.connect(dbUrl, function(err, db) {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
 			}
-			const adminDb = db.admin();
-			adminDb.listDatabases().then(function(dbs) {
-				res.json(_.pluck(dbs.databases, 'name'));
+			const collection = db.collection(req.params.collection);
+
+			collection.find({}).skip(0).limit(10).toArray().then(function(docs) {
+				console.log('docs', docs);
+				res.json(docs);
 				db.close();
 				next();
 			}).catch(function(err2) {
@@ -24,4 +27,4 @@ const DatabaseCtrl = {
 	},
 };
 
-module.exports = DatabaseCtrl;
+module.exports = DocCtrl;

@@ -1,10 +1,11 @@
 import React from 'react';
 import Prism from 'prismjs';
 
+import 'prismjs/themes/prism.css';
+
 function hightlight(elem) {
 	Prism.highlightElement(elem, false);
 }
-
 
 class Highlight extends React.Component {
 	static propTypes = {
@@ -22,11 +23,9 @@ class Highlight extends React.Component {
 
 	render() {
 		return (
-			<pre ref="code">
-				<code className={this.props.className}>
-					{this.props.children}
-				</code>
-			</pre>
+			<code ref="code" className={this.props.className}>
+				{this.props.children}
+			</code>
 		);
 	}
 }

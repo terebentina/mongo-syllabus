@@ -43,6 +43,7 @@ module.exports = {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelConfig, include: path.join(__dirname, 'src/client') },
 			{ test: /\.scss$/, loader: 'style!css?sourceMap!autoprefixer?' + AUTOPREFIXER_PARAMS + '!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
+			{ test: /\.css$/, loader: 'style!css?sourceMap!autoprefixer?' + AUTOPREFIXER_PARAMS },
 		],
 	},
 	target: 'web',
