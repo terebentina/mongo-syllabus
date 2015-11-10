@@ -41,13 +41,13 @@ function collections(state = [], action) {
 	}
 }
 
-function docs(state = [], action) {
+function docs(state = {}, action) {
 	switch (action.type) {
 		case ActionTypes.RECEIVE_DOCS:
-			return Object.assign([], state, action.docs);
+			return Object.assign({}, state, action.docs);
 		case ActionTypes.SELECT_DB:
 		case ActionTypes.SELECT_COLLECTION:
-			return [];
+			return {};
 		default:
 			return state;
 	}

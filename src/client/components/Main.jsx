@@ -3,6 +3,8 @@ import { pacomoDecorator } from '../utils/pacomo';
 import { connect } from 'react-redux';
 import { fetchDocs } from '../actions';
 import Doc from './Doc.jsx';
+import Pagination from './Pagination.jsx';
+import QueryBox from './QueryBox.jsx';
 
 import './Main.scss';
 
@@ -13,7 +15,8 @@ class Main extends React.Component {
 		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-		docs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+		//docs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+		docs: React.PropTypes.object.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
@@ -23,20 +26,28 @@ class Main extends React.Component {
 		}
 	}
 
+	onNewQuery(query) {
+		this.props.dispatch(fetchDocs(this.props.selectedDb, this.props.selectedCollection, query));
+	}
+
 	render() {
 		return (
 			<main>
 				<h2>{`Collection: ${this.props.selectedCollection}`}</h2>
-				<textarea ref="query" />
-				<div className="results">
-					{this.props.docs.map((doc, i) => <Doc key={`doc_${i}`} doc={doc} />)}
-				</div>
+				<QueryBox onSubmit={this.onNewQuery} />
+				{this.props.docs.total ? <Pagination total={this.props.docs.total} next={this.props.docs.next} prev={this.props.docs.prev} /> : null}
+				{this.props.docs && this.props.docs.results ?
+					<div className="results">
+						{this.props.docs.results.map((doc, i) => <Doc key={`doc_${i}`} doc={doc}/>)}
+					</div>
+					: null
+				}
 			</main>
 		);
 	}
 }
 
-function mapStateToProps(state = {selectedDb: '', databases: [], selectedCollection: '', collections: [], docs: []}) {
+function mapStateToProps(state = {selectedDb: '', databases: [], selectedCollection: '', collections: [], docs: {}}) {
 	return state;
 }
 

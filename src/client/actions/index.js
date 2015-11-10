@@ -75,10 +75,13 @@ function receiveDocs(collection, json) {
 	};
 }
 
-export function fetchDocs(db, collection) {
+export function fetchDocs(db, collection, query = {}, skip = 0, limit = 0) {
 	return (dispatch) => {
 		dispatch(requestDocs(collection));
-		return fetch(`/api/docs/${db}/${collection}`)
+		let qs = {
+
+		};
+		return fetch(`/api/docs/${db}/${collection}?query=${encodeURIComponent(JSON.stringify(query))}&skip=${parseInt(skip, 10)}&limit=${parseInt(limit, 10)}`)
 			.then((response) => {
 				if (response.status >= 400) {
 					throw new Error('Bad response from server');

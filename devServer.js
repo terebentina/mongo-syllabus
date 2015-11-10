@@ -31,7 +31,7 @@ app.use(require('webpack-hot-middleware')(compiler, {
 	heartbeat: 10 * 1000,
 }));
 
-//app.use(restify.queryParser());
+app.use(restify.queryParser());
 //app.use(restify.gzipResponse());
 //app.use(restify.CORS({
 //	//origins: ['https://foo.com'],

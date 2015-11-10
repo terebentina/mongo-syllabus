@@ -6,6 +6,8 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
+import 'normalize.css';
+
 ReactDOM.render((
 	<Provider store={store}>
 		<Router />
