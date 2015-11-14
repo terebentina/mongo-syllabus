@@ -3,10 +3,6 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 
-/**
- * store should be like this: {databases: [], collections: [], isFetching: false, selectedDb: '', selectedCollection: ''}
- */
-
 const createStoreWithMiddleware = applyMiddleware(
 	thunkMiddleware,
 	createLogger()

@@ -40,12 +40,12 @@ const DocCtrl = {
 					results: arr[0],
 					total: arr[1],
 				};
-				if (skip + limit < arr[1]) {
-					json.next = `/api/docs/${dbName}/${collectionName}?query=${encodeURIComponent(query)}&skip=${skip + limit}`;
-				}
-				if (skip > 0) {
-					json.prev = `/api/docs/${dbName}/${collectionName}?query=${encodeURIComponent(query)}&skip=${Math.max(0, skip - limit)}`;
-				}
+				//if (skip + limit < arr[1]) {
+				//	json.next = `/api/docs/${dbName}/${collectionName}?query=${encodeURIComponent(query)}&skip=${skip + limit}`;
+				//}
+				//if (skip > 0) {
+				//	json.prev = `/api/docs/${dbName}/${collectionName}?query=${encodeURIComponent(query)}&skip=${Math.max(0, skip - limit)}`;
+				//}
 				res.json(json);
 				db.close();
 				next();

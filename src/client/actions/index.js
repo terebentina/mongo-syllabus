@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import request from '../utils/request';
 
 export const REQUEST_DATABASES = 'REQUEST_DATABASES';
 export const RECEIVE_DATABASES = 'RECEIVE_DATABASES';
@@ -6,7 +6,9 @@ export const REQUEST_COLLECTIONS = 'REQUEST_COLLECTIONS';
 export const RECEIVE_COLLECTIONS = 'RECEIVE_COLLECTIONS';
 export const REQUEST_DOCS = 'REQUEST_DOCS';
 export const RECEIVE_DOCS = 'RECEIVE_DOCS';
+export const FILTER_DOCS = 'FILTER_DOCS';
 export const SELECT_DB = 'SELECT_DB';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SELECT_COLLECTION = 'SELECT_COLLECTION';
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 export const HIDE_MESSAGE = 'HIDE_MESSAGE';
@@ -27,13 +29,8 @@ function receiveDatabases(json) {
 function fetchDatabases() {
 	return (dispatch) => {
 		dispatch(requestDatabases());
-		return fetch(`/api/databases`)
-			.then((response) => {
-				if (response.status >= 400) {
-					throw new Error('Bad response from server');
-				}
-				return response.json();
-			}).then((json) => dispatch(receiveDatabases(json)))
+		return request.get(`/api/databases`)
+			.then((json) => dispatch(receiveDatabases(json)))
 			.catch((err) => {
 				dispatch(receiveDatabases([]));
 				return dispatch(showMessage(err.message, MESSAGE_ERROR));
@@ -63,8 +60,8 @@ function receiveCollections(db, json) {
 	};
 }
 
-function requestDocs(collection) {
-	return {type: REQUEST_DOCS, collection};
+function requestDocs() {
+	return {type: REQUEST_DOCS};
 }
 
 function receiveDocs(collection, json) {
@@ -75,23 +72,30 @@ function receiveDocs(collection, json) {
 	};
 }
 
-export function fetchDocs(db, collection, query = {}, skip = 0, limit = 0) {
-	return (dispatch) => {
-		dispatch(requestDocs(collection));
-		let qs = {
+export function setDocsFilter(obj = {query: '', limit: 30}) {
+	return {
+		type: FILTER_DOCS,
+		filter: obj,
+	};
+}
 
-		};
-		return fetch(`/api/docs/${db}/${collection}?query=${encodeURIComponent(JSON.stringify(query))}&skip=${parseInt(skip, 10)}&limit=${parseInt(limit, 10)}`)
-			.then((response) => {
-				if (response.status >= 400) {
-					throw new Error('Bad response from server');
-				}
-				return response.json();
-			}).then(json => dispatch(receiveDocs(collection, json)))
+export function fetchDocs() {
+	return (dispatch, getState) => {
+		dispatch(requestDocs());
+		const state = getState();
+		return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, {query: state.filter.query, p: state.currentPage, limit: state.filter.limit})
+			.then(json => dispatch(receiveDocs(state.selectedCollection, json)))
 			.catch((err) => {
-				dispatch(receiveDocs(collection, []));
+				dispatch(receiveDocs(state.selectedCollection, []));
 				return dispatch(showMessage(err.message, MESSAGE_ERROR));
 			});
+	};
+}
+
+export function setCurrentPage(pageNum) {
+	return {
+		type: SET_CURRENT_PAGE,
+		page: pageNum,
 	};
 }
 
@@ -114,13 +118,8 @@ export function selectCollection(collection) {
 export function fetchCollections(db) {
 	return (dispatch) => {
 		dispatch(requestCollections(db));
-		return fetch(`/api/collections/${db}`)
-			.then((response) => {
-				if (response.status >= 400) {
-					throw new Error('Bad response from server');
-				}
-				return response.json();
-			}).then(json => dispatch(receiveCollections(db, json)))
+		return request.get(`/api/collections/${db}`)
+			.then(json => dispatch(receiveCollections(db, json)))
 			.catch((err) => {
 				dispatch(receiveCollections(db, []));
 				return dispatch(showMessage(err.message, MESSAGE_ERROR));

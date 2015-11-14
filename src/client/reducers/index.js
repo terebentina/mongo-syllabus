@@ -1,6 +1,21 @@
 import { combineReducers } from 'redux';
 import * as ActionTypes from '../actions';
 
+/**
+ * state = {
+ *      databases: [],
+ *      selectedDb: '',
+ *      collections: [],
+ *      selectedCollection: '',
+ *      filter: {query: '', limit: 30}
+ *      docs: [],
+ *      totalDocs: 0,
+ *      currentPage: 0,
+ *      isFetching: true|false,
+ *      message: ''
+ * }
+ */
+
 function selectedDb(state = '', action) {
 	switch (action.type) {
 		case ActionTypes.SELECT_DB:
@@ -41,13 +56,40 @@ function collections(state = [], action) {
 	}
 }
 
-function docs(state = {}, action) {
+function filter(state = {query: '', limit: 30}, action) {
+	switch (action.type) {
+		case ActionTypes.FILTER_DOCS:
+			return Object.assign({}, state, action.filter);
+		default:
+			return state;
+	}
+}
+
+function docs(state = [], action) {
 	switch (action.type) {
 		case ActionTypes.RECEIVE_DOCS:
-			return Object.assign({}, state, action.docs);
+			return Object.assign([], action.docs.results);
 		case ActionTypes.SELECT_DB:
 		case ActionTypes.SELECT_COLLECTION:
-			return {};
+			return [];
+		default:
+			return state;
+	}
+}
+
+function totalDocs(state = 0, action) {
+	switch (action.type) {
+		case ActionTypes.RECEIVE_DOCS:
+			return action.docs.total;
+		default:
+			return state;
+	}
+}
+
+function currentPage(state = 0, action) {
+	switch (action.type) {
+		case ActionTypes.SET_CURRENT_PAGE:
+			return action.page;
 		default:
 			return state;
 	}
@@ -81,10 +123,13 @@ function message(state = null, action) {
 
 const rootReducer = combineReducers({
 	databases,
-	collections,
-	docs,
 	selectedDb,
+	collections,
 	selectedCollection,
+	filter,
+	docs,
+	totalDocs,
+	currentPage,
 	isFetching,
 	message,
 });

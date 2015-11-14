@@ -1,0 +1,9 @@
+.App-Pagination {
+	flex-wrap: wrap;
+	justify-content: space-around;
+	flex-direction: row;
+
+	a {
+		display : inline-block;
+	}
+}
