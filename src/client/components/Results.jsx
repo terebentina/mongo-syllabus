@@ -3,6 +3,8 @@ import { pacomoDecorator } from '../utils/pacomo';
 import Pagination from './Pagination.jsx';
 import Doc from './Doc.jsx';
 
+import './Results.scss';
+
 @pacomoDecorator
 class Results extends React.Component {
 	static propTypes = {

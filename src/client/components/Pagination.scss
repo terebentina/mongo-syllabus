@@ -6,4 +6,10 @@
 	a {
 		display : inline-block;
 	}
+
+	&-active {
+		text-decoration: none;
+		color: #aaa;
+		cursor: default;
+	}
 }

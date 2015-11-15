@@ -1,8 +1,15 @@
-.App-Results article {
-	flex: 1;
-	overflow: auto;
-	max-height: 15vh;
-	margin-bottom: 15px;
-	border: 1px solid #ccc;
-	font-size: 80%;
+.App-Results-results {
+	article {
+		flex: 1 0 auto;
+		min-width: 0;
+		max-width: 50vw;
+		overflow: auto;
+		max-height: 15vh;
+		border: 1px solid #ccc;
+		font-size: 80%;
+
+		span {
+			display: inline;
+		}
+	}
 }

@@ -51,19 +51,19 @@ class Pagination extends React.Component {
 
 		// Generate links data in accordance with calculated numbers
 		for (let i = n1; i <= n2; i++) {
-			links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage == i -1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
 		}
 		if (useN3) {
 			links.push(<span key={`pag_${n3}`}>...</span>);
 		}
 		for (let i = n4; i <= n5; i++) {
-			links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage == i -1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
 		}
 		if (useN6) {
 			links.push(<span key={`pag_${n6}`}>...</span>);
 		}
 		for (let i = n7; i <= n8; i++) {
-			links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage == i -1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
 		}
 
 		return (
