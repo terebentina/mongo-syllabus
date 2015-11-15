@@ -19,7 +19,7 @@ const DocCtrl = {
 			next(err);
 		}
 
-		const skip = parseInt(req.query.skip, 10) || 0;
+		const p = parseInt(req.query.p, 10) || 0;
 		const limit = parseInt(req.query.limit, 10) || 30;
 
 		const dbUrl = `${url}/${dbName}`;
@@ -33,7 +33,7 @@ const DocCtrl = {
 			const collection = db.collection(collectionName);
 
 			Promise.all([
-				collection.find(query).skip(skip).limit(limit).toArray(),
+				collection.find(query).skip(p * limit).limit(limit).toArray(),
 				collection.count(query),
 			]).then(function(arr) {
 				const json = {

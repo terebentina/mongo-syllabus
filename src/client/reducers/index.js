@@ -39,7 +39,7 @@ function selectedCollection(state = '', action) {
 function databases(state = [], action) {
 	switch (action.type) {
 		case ActionTypes.RECEIVE_DATABASES:
-			return Object.assign([], state, action.databases);
+			return action.databases.slice();
 		default:
 			return state;
 	}
@@ -48,7 +48,7 @@ function databases(state = [], action) {
 function collections(state = [], action) {
 	switch (action.type) {
 		case ActionTypes.RECEIVE_COLLECTIONS:
-			return Object.assign([], state, action.collections);
+			return action.collections.slice();
 		case ActionTypes.SELECT_DB:
 			return [];
 		default:
@@ -56,10 +56,14 @@ function collections(state = [], action) {
 	}
 }
 
-function filter(state = {query: '', limit: 30}, action) {
+const DEFAULT_FILTER = {query: '', limit: 30};
+function filter(state = DEFAULT_FILTER, action) {
 	switch (action.type) {
 		case ActionTypes.FILTER_DOCS:
 			return Object.assign({}, state, action.filter);
+		case ActionTypes.SELECT_DB:
+		case ActionTypes.SELECT_COLLECTION:
+			return Object.assign({}, DEFAULT_FILTER);
 		default:
 			return state;
 	}
@@ -68,7 +72,7 @@ function filter(state = {query: '', limit: 30}, action) {
 function docs(state = [], action) {
 	switch (action.type) {
 		case ActionTypes.RECEIVE_DOCS:
-			return Object.assign([], action.docs.results);
+			return action.docs.results.slice();
 		case ActionTypes.SELECT_DB:
 		case ActionTypes.SELECT_COLLECTION:
 			return [];
@@ -81,6 +85,9 @@ function totalDocs(state = 0, action) {
 	switch (action.type) {
 		case ActionTypes.RECEIVE_DOCS:
 			return action.docs.total;
+		case ActionTypes.SELECT_DB:
+		case ActionTypes.SELECT_COLLECTION:
+			return 0;
 		default:
 			return state;
 	}
@@ -90,6 +97,9 @@ function currentPage(state = 0, action) {
 	switch (action.type) {
 		case ActionTypes.SET_CURRENT_PAGE:
 			return action.page;
+		case ActionTypes.SELECT_DB:
+		case ActionTypes.SELECT_COLLECTION:
+			return 0;
 		default:
 			return state;
 	}
@@ -99,9 +109,11 @@ function isFetching(state = false, action) {
 	switch (action.type) {
 		case ActionTypes.REQUEST_DATABASES:
 		case ActionTypes.REQUEST_COLLECTIONS:
+		case ActionTypes.REQUEST_DOCS:
 			return true;
 		case ActionTypes.RECEIVE_DATABASES:
 		case ActionTypes.RECEIVE_COLLECTIONS:
+		case ActionTypes.RECEIVE_DOCS:
 			return false;
 		default:
 			return state;

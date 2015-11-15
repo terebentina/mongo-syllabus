@@ -20,6 +20,7 @@ class Results extends React.Component {
 				<div className="results">
 					{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} doc={doc} />)}
 				</div>
+				<Pagination total={this.props.total} currentPage={this.props.currentPage} rpp={this.props.rpp} onPageLoadRequest={this.props.onPageLoadRequest} />
 			</div>
 		);
 	}
