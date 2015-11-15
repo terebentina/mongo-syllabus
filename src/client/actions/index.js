@@ -33,7 +33,7 @@ function fetchDatabases() {
 			.then((json) => dispatch(receiveDatabases(json)))
 			.catch((err) => {
 				dispatch(receiveDatabases([]));
-				return dispatch(showMessage(err.message, MESSAGE_ERROR));
+				return dispatch(showMessage(err.statusText, MESSAGE_ERROR));
 			});
 	};
 }
@@ -87,7 +87,7 @@ export function fetchDocs() {
 			.then(json => dispatch(receiveDocs(state.selectedCollection, json)))
 			.catch((err) => {
 				dispatch(receiveDocs(state.selectedCollection, []));
-				return dispatch(showMessage(err.message, MESSAGE_ERROR));
+				return dispatch(showMessage(err.statusText, MESSAGE_ERROR));
 			});
 	};
 }
@@ -122,7 +122,7 @@ export function fetchCollections(db) {
 			.then(json => dispatch(receiveCollections(db, json)))
 			.catch((err) => {
 				dispatch(receiveCollections(db, []));
-				return dispatch(showMessage(err.message, MESSAGE_ERROR));
+				return dispatch(showMessage(err.statusText, MESSAGE_ERROR));
 			});
 	};
 }
