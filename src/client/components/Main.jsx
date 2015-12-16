@@ -27,18 +27,17 @@ class Main extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.selectedCollection && nextProps.selectedCollection !== this.props.selectedCollection) {
-			nextProps.dispatch(fetchDocs());
+			nextProps.dispatch(fetchDocs(0));
 		}
 	}
 
 	onNewQuery(filter) {
 		this.props.dispatch(setDocsFilter(filter));
-		this.props.dispatch(fetchDocs());
+		this.props.dispatch(fetchDocs(0));
 	}
 
 	onPageLoad(pageNum) {
-		this.props.dispatch(setCurrentPage(pageNum));
-		this.props.dispatch(fetchDocs());
+		this.props.dispatch(fetchDocs(pageNum));
 	}
 
 	render() {

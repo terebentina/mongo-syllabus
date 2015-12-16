@@ -74,7 +74,6 @@ function docs(state = [], action) {
 		case ActionTypes.RECEIVE_DOCS:
 			return action.docs.results.slice();
 		case ActionTypes.SELECT_DB:
-		case ActionTypes.SELECT_COLLECTION:
 			return [];
 		default:
 			return state;
@@ -86,20 +85,19 @@ function totalDocs(state = 0, action) {
 		case ActionTypes.RECEIVE_DOCS:
 			return action.docs.total;
 		case ActionTypes.SELECT_DB:
-		case ActionTypes.SELECT_COLLECTION:
 			return 0;
 		default:
 			return state;
 	}
 }
 
-function currentPage(state = 0, action) {
+function currentPage(state = null, action) {
 	switch (action.type) {
-		case ActionTypes.SET_CURRENT_PAGE:
+		//case ActionTypes.SET_CURRENT_PAGE:
+		case ActionTypes.RECEIVE_DOCS:
 			return action.page;
 		case ActionTypes.SELECT_DB:
-		case ActionTypes.SELECT_COLLECTION:
-			return 0;
+			return null;
 		default:
 			return state;
 	}

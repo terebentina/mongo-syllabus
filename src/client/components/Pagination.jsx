@@ -16,6 +16,13 @@ class Pagination extends React.Component {
 		onPageLoadRequest: React.PropTypes.func.isRequired,
 	};
 
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log('nextProps', nextProps);
+		console.log('nextState', nextState);
+		return true;
+		//return false;
+	}
+
 	onPageClick(pageNum, e) {
 		e.preventDefault();
 		this.props.onPageLoadRequest(pageNum);
@@ -28,10 +35,10 @@ class Pagination extends React.Component {
 		const totalPages = Math.ceil(this.props.total / this.props.rpp);
 		// Beginning group of pages: n1...n2
 		const n1 = 1;
-		const n2 = Math.min(countOut, totalPages);
+		const n2 = Math.min(countOut, totalPages - 1);
 
 		// Ending group of pages: n7...n8
-		const n7 = Math.max(1, totalPages - countOut + 1);
+		const n7 = Math.max(2, totalPages - countOut + 1);
 		const n8 = totalPages;
 
 		// Middle group of pages: n4...n5
@@ -46,24 +53,27 @@ class Pagination extends React.Component {
 		// Point n6 between n5 and n7
 		const n6 = parseInt((n5 + n7) / 2, 10);
 		const useN6 = (useMiddle && ((n7 - n5) > 1));
-
+		console.log('this.props.currentPage', this.props.currentPage);
 		const links = [];
 
 		// Generate links data in accordance with calculated numbers
 		for (let i = n1; i <= n2; i++) {
-			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage == i -1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			console.log('n12 eq?', i - 1, this.props.currentPage, this.props.currentPage === i - 1);
+			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage === i - 1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
 		}
 		if (useN3) {
 			links.push(<span key={`pag_${n3}`}>...</span>);
 		}
 		for (let i = n4; i <= n5; i++) {
-			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage == i -1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			console.log('n45 eq?', i - 1, this.props.currentPage, this.props.currentPage === i - 1);
+			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage === i - 1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
 		}
 		if (useN6) {
 			links.push(<span key={`pag_${n6}`}>...</span>);
 		}
 		for (let i = n7; i <= n8; i++) {
-			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage == i -1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			console.log('n78 eq?', i - 1, this.props.currentPage, this.props.currentPage === i - 1);
+			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage === i - 1 ? 'active' : ''} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
 		}
 
 		return (

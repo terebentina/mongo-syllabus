@@ -18,7 +18,7 @@ const PageMessage = React.createClass({
 			setTimeout(this.props.onHide, duration);
 		}
 	},
-	render: function() {
+	render() {
 		if (this.props.message) {
 			return <div className={this.props.message.type}>{this.props.message.message}</div>;
 		}

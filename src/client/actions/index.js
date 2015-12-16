@@ -64,11 +64,12 @@ function requestDocs() {
 	return {type: REQUEST_DOCS};
 }
 
-function receiveDocs(collection, json) {
+function receiveDocs(collection, page, docs) {
 	return {
 		type: RECEIVE_DOCS,
-		collection: collection,
-		docs: json,
+		collection,
+		page,
+		docs,
 	};
 }
 
@@ -79,25 +80,27 @@ export function setDocsFilter(obj = {query: '', limit: 30}) {
 	};
 }
 
-export function fetchDocs() {
+export function fetchDocs(pageNum = 0) {
 	return (dispatch, getState) => {
-		dispatch(requestDocs());
 		const state = getState();
-		return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, {query: state.filter.query, p: state.currentPage, limit: state.filter.limit})
-			.then(json => dispatch(receiveDocs(state.selectedCollection, json)))
-			.catch((err) => {
-				dispatch(receiveDocs(state.selectedCollection, []));
-				return dispatch(showMessage(err.statusText, MESSAGE_ERROR));
-			});
+		if (pageNum != state.currentPage) {
+			dispatch(requestDocs());
+			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, {query: state.filter.query, p: state.currentPage, limit: state.filter.limit})
+				.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
+				.catch((err) => {
+					dispatch(receiveDocs(state.selectedCollection, []));
+					return dispatch(showMessage(err.statusText, MESSAGE_ERROR));
+				});
+		}
 	};
 }
 
-export function setCurrentPage(pageNum) {
-	return {
-		type: SET_CURRENT_PAGE,
-		page: pageNum,
-	};
-}
+//export function setCurrentPage(pageNum) {
+//	return {
+//		type: SET_CURRENT_PAGE,
+//		page: pageNum,
+//	};
+//}
 
 export function selectDb(db) {
 	return {type: SELECT_DB, db};
