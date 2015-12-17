@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchDatabasesIfNeeded, hideMessage } from './actions';
-import SideNav from './components/SideNav.jsx';
-import Main from './components/Main.jsx';
-import PageMessage from './components/PageMessage.jsx';
+import Main from './components/app/Main.jsx';
+import SideNav from './components/app/SideNav.jsx';
+import PageMessage from './components/app/PageMessage.jsx';
 
 import './app.scss';
 
@@ -12,6 +12,7 @@ const App = React.createClass({
 	propTypes: {
 		message: React.PropTypes.object,
 		dispatch: React.PropTypes.func.isRequired,
+		children: React.PropTypes.node,
 	},
 	componentDidMount() {
 		this.props.dispatch(fetchDatabasesIfNeeded());
@@ -20,7 +21,9 @@ const App = React.createClass({
 		return (
 			<div className="app">
 				<PageMessage message={this.props.message} onHide={() => this.props.dispatch(hideMessage())} />
-				<header>header</header>
+				<header className="row">
+					<span className="title col">Mongo Manager</span>
+				</header>
 				<div className="body">
 					<Main />
 					<SideNav />

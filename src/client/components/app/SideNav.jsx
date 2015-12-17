@@ -1,8 +1,8 @@
 import React from 'react';
-import { pacomoDecorator } from '../utils/pacomo';
+import { pacomoDecorator } from '../../utils/pacomo';
 import { connect } from 'react-redux';
-import { selectDb, selectCollection, fetchCollections } from '../actions';
-import Tap from './Tappable.jsx';
+import { selectDb, selectCollection, fetchCollections } from '../../actions';
+import Tap from '../Tappable.jsx';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 @pacomoDecorator
@@ -13,6 +13,7 @@ class SideNav extends React.Component {
 		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.selectedDb !== this.props.selectedDb) {
 			nextProps.dispatch(fetchCollections(nextProps.selectedDb));
@@ -33,9 +34,7 @@ class SideNav extends React.Component {
 
 	render() {
 		return (
-			<nav>
-				<button>Connect</button>
-
+			<nav className="drawer row">
 				<div>
 					<h3>Databases:</h3>
 					<select value={this.props.selectedDb} onChange={this.onDbSelect.bind(this)}>
@@ -44,7 +43,7 @@ class SideNav extends React.Component {
 					</select>
 				</div>
 
-				<div>
+				<div className="row">
 					<h3>Collections</h3>
 					{this.props.collections.map((collection, i) => <Tap key={`col_${i}`} onClickTap={this.onCollectionSelect.bind(this, collection)}>{collection}</Tap>)}
 				</div>
@@ -54,8 +53,8 @@ class SideNav extends React.Component {
 }
 
 function mapStateToProps(state) {
-	const { selectedDb, databases, selectedCollection, collections } = state || {selectedDb: '', databases: [], selectedCollection: '', collections: []};
-	return {selectedDb, databases, selectedCollection, collections};
+	const { selectedDb, databases, selectedCollection, collections } = state || { selectedDb: '', databases: [], selectedCollection: '', collections: [] };
+	return { selectedDb, databases, selectedCollection, collections };
 }
 
 export default connect(mapStateToProps)(SideNav);

@@ -12,7 +12,7 @@ import * as ActionTypes from '../actions';
  *      totalDocs: 0,
  *      currentPage: 0,
  *      isFetching: true|false,
- *      message: ''
+ *      message: {message: '', type: ''}
  * }
  */
 
@@ -56,7 +56,7 @@ function collections(state = [], action) {
 	}
 }
 
-const DEFAULT_FILTER = {query: '', limit: 30};
+const DEFAULT_FILTER = { query: '', limit: 30 };
 function filter(state = DEFAULT_FILTER, action) {
 	switch (action.type) {
 		case ActionTypes.FILTER_DOCS:

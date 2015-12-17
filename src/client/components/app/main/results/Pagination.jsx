@@ -1,6 +1,6 @@
 import React from 'react';
-import Tap from './Tappable.jsx';
-import { pacomoDecorator } from '../utils/pacomo';
+import Tap from './../../../Tappable.jsx';
+import { pacomoDecorator } from '../../../../utils/pacomo';
 
 import './Pagination.scss';
 

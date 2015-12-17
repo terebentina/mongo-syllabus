@@ -1,7 +1,7 @@
 import React from 'react';
-import { pacomoDecorator } from '../utils/pacomo';
-import Pagination from './Pagination.jsx';
-import Doc from './Doc.jsx';
+import { pacomoDecorator } from '../../../utils/pacomo';
+import Pagination from './results/Pagination.jsx';
+import Doc from './results/Doc.jsx';
 
 import './Results.scss';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import history from '../history';
 
 class Tappable extends React.Component {
 	static propTypes = {
@@ -7,7 +8,9 @@ class Tappable extends React.Component {
 		tabIndex: React.PropTypes.string,
 		rel: React.PropTypes.string,
 		target: React.PropTypes.string,
-		onClickTap: React.PropTypes.func.isRequired,
+		to: React.PropTypes.string,
+		onClick: React.PropTypes.func,
+		onClickTap: React.PropTypes.func,
 		children: React.PropTypes.node,
 	};
 	shouldComponentUpdate() {
@@ -28,11 +31,19 @@ class Tappable extends React.Component {
 			onTouchStart: this.onTouchStart,
 		};
 
-		if (this.props.onClickTap) {
+		if (this.props.to) {
+			props.onClick = props.onTouchEnd = (e) => {
+				e.preventDefault();
+				//console.log('e.type', e.type);
+				history.pushState(null, this.props.to);
+			};
+		} else if (this.props.onClickTap) {
 			props.onClick = this.props.onClickTap;
 			props.onTouchEnd = this.props.onClickTap;
+		} else if (this.props.onClick) {
+			props.onClick = this.props.onClick;
+			props.onTouchEnd = this.props.onClick;
 		}
-
 		return <a {...props}>{this.props.children}</a>;
 	}
 }

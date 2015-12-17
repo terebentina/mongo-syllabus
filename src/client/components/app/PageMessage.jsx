@@ -1,6 +1,6 @@
 import React from 'react';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { pacomoDecorator } from '../utils/pacomo';
+import { pacomoDecorator } from '../../utils/pacomo';
 
 import './PageMessage.scss';
 

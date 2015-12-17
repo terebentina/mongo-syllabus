@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Router from './Router';
 import configureStore from './store/configureStore';
+import App from './App.jsx';
 
 const store = configureStore();
 
@@ -10,6 +10,6 @@ import 'normalize.css';
 
 ReactDOM.render((
 	<Provider store={store}>
-		<Router />
+		<App />
 	</Provider>
 ), document.getElementById('root'));

@@ -1,5 +1,5 @@
 import React from 'react';
-import Highlight from './Highlight.jsx';
+import Highlight from './doc/Highlight.jsx';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 
