@@ -1,5 +1,6 @@
 import React from 'react';
-import { setDocsFilter } from '../actions';
+import shouldPureComponentUpdate from 'react-pure-render/function';
+import { setDocsFilter } from '../../../actions';
 
 class QueryBox extends React.Component {
 	static propTypes = {
@@ -9,15 +10,17 @@ class QueryBox extends React.Component {
 
 	constructor() {
 		super();
-		this.state = {query: ''};
+		this.state = { query: '' };
 	}
 
 	componentWillMount() {
 		this.props.dispatch(setDocsFilter());
 	}
 
+	shouldComponentUpdate = shouldPureComponentUpdate;
+
 	onChange(e) {
-		this.setState({query: e.target.value});
+		this.setState({ query: e.target.value });
 	}
 
 	render() {

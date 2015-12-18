@@ -16,7 +16,7 @@ export const HIDE_MESSAGE = 'HIDE_MESSAGE';
 export const MESSAGE_ERROR = 'error';
 
 function requestDatabases() {
-	return {type: REQUEST_DATABASES};
+	return { type: REQUEST_DATABASES };
 }
 
 function receiveDatabases(json) {
@@ -42,14 +42,11 @@ function shouldFetchDatabases(state) {
 	if (state.databases.length) {
 		return false;
 	}
-	if (state.isFetching) {
-		return false;
-	}
-	return true;
+	return !state.isFetching;
 }
 
 function requestCollections(db) {
-	return {type: REQUEST_COLLECTIONS, db};
+	return { type: REQUEST_COLLECTIONS, db };
 }
 
 function receiveCollections(db, json) {
@@ -61,7 +58,7 @@ function receiveCollections(db, json) {
 }
 
 function requestDocs() {
-	return {type: REQUEST_DOCS};
+	return { type: REQUEST_DOCS };
 }
 
 function receiveDocs(collection, page, docs) {
@@ -73,10 +70,17 @@ function receiveDocs(collection, page, docs) {
 	};
 }
 
-export function setDocsFilter(obj = {query: '', limit: 30}) {
+export function setDocsFilter(obj = { query: '', limit: 30 }) {
 	return {
 		type: FILTER_DOCS,
 		filter: obj,
+	};
+}
+
+export function searchDocs() {
+	return (dispatch) => {
+		dispatch(setDocsFilter());
+		dispatch(fetchDocs());
 	};
 }
 
@@ -85,7 +89,7 @@ export function fetchDocs(pageNum = 0) {
 		const state = getState();
 		if (pageNum != state.currentPage) {
 			dispatch(requestDocs());
-			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, {query: state.filter.query, p: state.currentPage, limit: state.filter.limit})
+			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: state.currentPage, limit: state.filter.limit })
 				.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
 				.catch((err) => {
 					dispatch(receiveDocs(state.selectedCollection, []));
@@ -103,7 +107,7 @@ export function fetchDocs(pageNum = 0) {
 //}
 
 export function selectDb(db) {
-	return {type: SELECT_DB, db};
+	return { type: SELECT_DB, db };
 }
 
 export function fetchDatabasesIfNeeded() {
@@ -115,7 +119,7 @@ export function fetchDatabasesIfNeeded() {
 }
 
 export function selectCollection(collection) {
-	return {type: SELECT_COLLECTION, collection};
+	return { type: SELECT_COLLECTION, collection };
 }
 
 export function fetchCollections(db) {
@@ -131,9 +135,9 @@ export function fetchCollections(db) {
 }
 
 export function showMessage(message, type) {
-	return {type: SHOW_MESSAGE, message: message, messageType: type};
+	return { type: SHOW_MESSAGE, message: message, messageType: type };
 }
 
 export function hideMessage() {
-	return {type: HIDE_MESSAGE};
+	return { type: HIDE_MESSAGE };
 }

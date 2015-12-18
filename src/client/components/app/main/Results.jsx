@@ -1,5 +1,6 @@
 import React from 'react';
 import { pacomoDecorator } from '../../../utils/pacomo';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import Pagination from './results/Pagination.jsx';
 import Doc from './results/Doc.jsx';
 
@@ -14,6 +15,8 @@ class Results extends React.Component {
 		results: React.PropTypes.array.isRequired,
 		onPageLoadRequest: React.PropTypes.func.isRequired,
 	};
+
+	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	render() {
 		return (

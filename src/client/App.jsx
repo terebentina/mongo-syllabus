@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import { fetchDatabasesIfNeeded, hideMessage } from './actions';
 import Main from './components/app/Main.jsx';
 import SideNav from './components/app/SideNav.jsx';
@@ -7,16 +8,19 @@ import PageMessage from './components/app/PageMessage.jsx';
 
 import './app.scss';
 
-const App = React.createClass({
-	displayName: 'App',
-	propTypes: {
+class App extends React.Component {
+	static propTypes = {
 		message: React.PropTypes.object,
 		dispatch: React.PropTypes.func.isRequired,
 		children: React.PropTypes.node,
-	},
+	};
+
 	componentDidMount() {
 		this.props.dispatch(fetchDatabasesIfNeeded());
-	},
+	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate;
+
 	render() {
 		return (
 			<div className="app">
@@ -31,8 +35,8 @@ const App = React.createClass({
 				<footer>footer</footer>
 			</div>
 		);
-	},
-});
+	}
+}
 
 function mapStateToProps(state) {
 	return {

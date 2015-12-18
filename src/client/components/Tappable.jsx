@@ -1,5 +1,6 @@
 import React from 'react';
-import history from '../history';
+import shouldPureComponentUpdate from 'react-pure-render/function';
+//import history from '../history';
 
 class Tappable extends React.Component {
 	static propTypes = {
@@ -13,9 +14,9 @@ class Tappable extends React.Component {
 		onClickTap: React.PropTypes.func,
 		children: React.PropTypes.node,
 	};
-	shouldComponentUpdate() {
-		return false;
-	}
+
+	shouldComponentUpdate = shouldPureComponentUpdate;
+
 	onTouchStart(e) {
 		// this is what prevents click events from happening. Doing the same from touchend doesn't work!!!
 		e.preventDefault();

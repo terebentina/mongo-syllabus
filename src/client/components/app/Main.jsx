@@ -1,14 +1,14 @@
 import React from 'react';
 import { pacomoDecorator } from '../../utils/pacomo';
 import { connect } from 'react-redux';
-import { fetchDocs, setDocsFilter/*, setCurrentPage*/ } from '../actions';
+import shouldPureComponentUpdate from 'react-pure-render/function';
+import { searchDocs, fetchDocs } from '../../actions';
 import QueryBox from './main/QueryBox.jsx';
 import Results from './main/Results.jsx';
 
 import './Main.scss';
 
-@pacomoDecorator
-class Collection extends React.Component {
+class Main extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
@@ -19,21 +19,16 @@ class Collection extends React.Component {
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
-	//constructor() {
-	//	super();
-	//	this.onNewQuery = this.onNewQuery.bind(this);
-	//	this.onPageLoad = this.onPageLoad.bind(this);
-	//}
-
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.selectedCollection && nextProps.selectedCollection !== this.props.selectedCollection) {
-			nextProps.dispatch(fetchDocs(0));
+			nextProps.dispatch(searchDocs());
 		}
 	}
 
+	shouldComponentUpdate = shouldPureComponentUpdate;
+
 	onNewQuery(filter) {
-		this.props.dispatch(setDocsFilter(filter));
-		this.props.dispatch(fetchDocs(0));
+		this.props.dispatch(searchDocs(filter));
 	}
 
 	onPageLoad(pageNum) {
@@ -65,4 +60,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Collection);
+export default pacomoDecorator(connect(mapStateToProps)(Main));

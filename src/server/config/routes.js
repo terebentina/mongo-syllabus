@@ -1,7 +1,7 @@
 const restify = require('restify');
-const DatabaseCtrl = require('./controllers/database');
-const CollectionCtrl = require('./controllers/collection');
-const DocCtrl = require('./controllers/doc');
+const DatabaseCtrl = require('./../controllers/database');
+const CollectionCtrl = require('./../controllers/collection');
+const DocCtrl = require('./../controllers/doc');
 
 module.exports = function() {
 	this.get('/api/databases', DatabaseCtrl.index);

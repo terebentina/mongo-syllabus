@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const config = require('./webpack.config.dev');
 const restify = require('restify');
-const routes = require('./src/server/routes');
+const routes = require('./src/server/config/routes');
 
 const app = restify.createServer({
 	name: 'Mongo GUI',
