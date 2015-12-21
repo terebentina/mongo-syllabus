@@ -1,0 +1,22 @@
+@import "../../mixins";
+
+aside {
+	padding: 15px;
+
+	& > div:last-of-type {
+		@extend %flexbox-container;
+	}
+
+	& > div:first-of-type {
+		@extend %flexbox-container;
+		flex: 0 0 auto;
+
+		h3 {
+			margin-top: 0;
+		}
+		& > div {
+			display: flex;
+			flex-flow: row wrap;
+		}
+	}
+}

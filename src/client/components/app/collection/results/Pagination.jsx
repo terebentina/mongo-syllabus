@@ -1,6 +1,5 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { pacomoDecorator } from '../../../../utils/pacomo';
 import Tap from '../../../Tappable.jsx';
 
 import './Pagination.scss';
@@ -8,7 +7,6 @@ import './Pagination.scss';
 const countOut = 3;
 const countIn = 3;
 
-@pacomoDecorator
 class Pagination extends React.Component {
 	static propTypes = {
 		total: React.PropTypes.number.isRequired,

@@ -1,6 +1,5 @@
 import React from 'react';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { pacomoDecorator } from '../../utils/pacomo';
 
 import './PageMessage.scss';
 
@@ -26,4 +25,4 @@ const PageMessage = React.createClass({
 	},
 });
 
-export default pacomoDecorator(PageMessage);
+export default PageMessage;
