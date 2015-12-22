@@ -35,7 +35,7 @@ class SideNav extends React.Component {
 	render() {
 		return (
 			<aside>
-				<div>
+				<header>
 					<h3>Databases:</h3>
 					<div>
 						<select value={this.props.selectedDb} onChange={this.onDbSelect.bind(this)}>
@@ -44,12 +44,12 @@ class SideNav extends React.Component {
 						</select>
 						<a href=""><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a>
 					</div>
-				</div>
+				</header>
 
-				<div>
+				<nav>
 					<h3>Collections</h3>
-					{this.props.collections.map((collection, i) => <Tap key={`col_${i}`} onClickTap={this.onCollectionSelect.bind(this, collection)}>{collection}</Tap>)}
-				</div>
+					{this.props.collections.map((collection, i) => <Tap key={`col_${i}`} onClickTap={this.onCollectionSelect.bind(this, collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</Tap>)}
+				</nav>
 			</aside>
 		);
 	}

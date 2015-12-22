@@ -41,8 +41,8 @@ class App extends React.Component {
 				</header>
 				<main>
 					{content}
-					<SideNav />
 				</main>
+				<SideNav />
 				<footer>footer</footer>
 			</div>
 		);
