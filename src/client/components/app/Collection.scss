@@ -1,6 +1,10 @@
-.App-Collection {
+@import "../../mixins";
 
-	&-results {
-		margin-top: 30px;
+main > div {
+	@extend %flexbox-container;
+
+	& > section {
+		@extend %flexbox-container;
+		margin-top: 4em;
 	}
 }

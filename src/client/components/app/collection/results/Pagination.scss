@@ -1,16 +1,36 @@
+@import "../../../../mixins";
+
 .App-Pagination {
-	flex-wrap: wrap;
+	@extend %flexbox-container;
 	justify-content: flex-start;
 	flex-direction: row;
+	margin-bottom: 1em;
 
 	a {
 		display : inline-block;
-		padding: 0 0.4vw;
+		width: 2.5em;
+		padding: .4em 0;
+		text-align: center;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		margin-right: 8px;
+		text-decoration: none;
+		
+		&:hover {
+			background-color: #37474F;
+			color: #fff;
+		}
 	}
 
-	&-active {
-		text-decoration: none;
+	a.App-Pagination-item--active {
 		color: #aaa;
 		cursor: default;
+		border: none;
+	}
+
+	span {
+		display : inline-block;
+		margin-right: 5px;
+		padding: .4em 0;
 	}
 }

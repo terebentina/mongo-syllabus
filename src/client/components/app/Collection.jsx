@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
+import { pacomoDecorator } from '../../utils/pacomo';
 import { searchDocs, fetchDocs } from '../../actions';
 import QueryBox from './collection/QueryBox.jsx';
 import Results from './collection/Results.jsx';
 
 import './Collection.scss';
 
+@pacomoDecorator
 class Collection extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
