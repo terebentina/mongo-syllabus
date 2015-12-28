@@ -37,7 +37,7 @@ class App extends React.Component {
 			<div className="app">
 				<PageMessage message={this.props.message} onHide={() => this.props.dispatch(hideMessage())} />
 				<header>
-					<span className="title col">Mongo Manager</span>
+					<span className="title col">Mongodb Syllabus</span>
 				</header>
 				<main>
 					{content}

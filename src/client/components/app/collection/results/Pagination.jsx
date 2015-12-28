@@ -5,8 +5,8 @@ import Tap from '../../../Tappable.jsx';
 
 import './Pagination.scss';
 
-const countOut = 3;
-const countIn = 3;
+const countOut = 2;
+const countIn = 2;
 
 @pacomoDecorator
 class Pagination extends React.Component {
@@ -51,29 +51,45 @@ class Pagination extends React.Component {
 		const useN6 = (useMiddle && ((n7 - n5) > 1));
 		const links = [];
 
-		if (this.props.currentPage > 0) {
-			links.push(<Tap key="prev" onClickTap={this.onPageClick.bind(this, this.props.currentPage - 1)}><svg className="icon-chevron_left"><use xlinkHref="#icon-chevron_left"></use></svg></Tap>);
+		if (this.props.currentPage == 0) {
+			links.push(<span key="prev" className="previous">&lt;</span>);
+		} else {
+			links.push(<Tap key="prev" className="previous" onClickTap={this.onPageClick.bind(this, this.props.currentPage - 1)}>&lt;</Tap>);
 		}
 
 		// Generate links data in accordance with calculated numbers
 		for (let i = n1; i <= n2; i++) {
-			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage === i - 1 ? 'item--active' : 'item'} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			if (this.props.currentPage === i - 1) {
+				links.push(<span key={`pag_${i}`}>{i}</span>);
+			} else {
+				links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			}
 		}
 		if (useN3) {
 			links.push(<span key={`pag_${n3}`}>...</span>);
 		}
 		for (let i = n4; i <= n5; i++) {
-			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage === i - 1 ? 'item--active' : 'item'} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			if (this.props.currentPage === i - 1) {
+				links.push(<span key={`pag_${i}`}>{i}</span>);
+			} else {
+				links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			}
 		}
 		if (useN6) {
 			links.push(<span key={`pag_${n6}`}>...</span>);
 		}
 		for (let i = n7; i <= n8; i++) {
-			links.push(<Tap key={`pag_${i}`} className={this.props.currentPage === i - 1 ? 'item--active' : 'item'} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			if (this.props.currentPage === i - 1) {
+				links.push(<span key={`pag_${i}`}>{i}</span>);
+			} else {
+				links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+			}
 		}
 
-		if (this.props.currentPage < totalPages - 1) {
-			links.push(<Tap key="next" onClickTap={this.onPageClick.bind(this, this.props.currentPage + 1)}><svg className="icon-chevron_right"><use xlinkHref="#icon-chevron_right"></use></svg></Tap>);
+		if (this.props.currentPage == totalPages - 1) {
+			links.push(<span key="next">&gt;</span>);
+		} else {
+			links.push(<Tap key="next" className="next" onClickTap={this.onPageClick.bind(this, this.props.currentPage + 1)}>&gt;</Tap>);
 		}
 
 		return (
