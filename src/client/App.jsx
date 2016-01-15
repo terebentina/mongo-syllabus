@@ -40,9 +40,9 @@ class App extends React.Component {
 					<span className="title col">Mongodb Syllabus</span>
 				</header>
 				<main>
+					<SideNav />
 					{content}
 				</main>
-				<SideNav />
 				<footer>footer</footer>
 			</div>
 		);

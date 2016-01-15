@@ -1,7 +1,8 @@
 @import "../../mixins";
 
-main > div {
+div.App-Collection {
 	@extend %flexbox-container;
+	padding-left: 1em;
 
 	& > section {
 		@extend %flexbox-container;

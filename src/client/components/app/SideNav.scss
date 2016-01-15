@@ -1,6 +1,8 @@
 @import "../../mixins";
 
 aside {
+	@extend %flexbox-container;
+	flex: 0 1 250px;
 	padding: 15px;
 	background-color: color(c1);
 	color: #eceff1;

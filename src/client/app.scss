@@ -27,9 +27,7 @@ body,
 		flex-wrap: nowrap;
 		flex: 0 0 auto;
 		height: 3em;
-		width: calc(100% - 250px);
 		justify-content: center;
-		margin: 0 0 0 250px;
 		border: none;
 		z-index: 1003;
 		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -51,22 +49,12 @@ body,
 	& > main {
 		@extend %flexbox-container;
 		flex-direction: row;
-		margin-left: 250px;
 		padding: 5px;
 		background-color: #F5F5F5;
 
 		& > div {
 			flex: 1 0 auto;
 		}
-	}
-
-	& > aside {
-		@extend %flexbox-container;
-		width: 250px;
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
 	}
 }
 
