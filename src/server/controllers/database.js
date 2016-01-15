@@ -1,6 +1,8 @@
 //const restify = require('restify');
 const MongoClient = require('mongodb').MongoClient;
 const _ = require('lodash');
+
+// yes, I know, this is hardcoded. Just for now @todo
 const url = 'mongodb://192.168.55.103:27017';
 
 const DatabaseCtrl = {

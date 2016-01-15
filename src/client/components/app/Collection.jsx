@@ -21,7 +21,7 @@ class Collection extends React.Component {
 	};
 
 	componentDidMount() {
-		this.props.dispatch(searchDocs());
+		//this.props.dispatch(searchDocs());
 	}
 
 	shouldComponentUpdate = shouldPureComponentUpdate;

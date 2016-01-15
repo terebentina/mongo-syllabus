@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectDb, selectCollection, fetchCollections } from '../../actions';
+import { selectDb, selectAndSearchDocs, fetchCollections } from '../../actions';
 import Tap from '../Tappable.jsx';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
@@ -29,7 +29,7 @@ class SideNav extends React.Component {
 
 	onCollectionSelect(collection, e) {
 		e.preventDefault();
-		this.props.dispatch(selectCollection(collection));
+		this.props.dispatch(selectAndSearchDocs(collection));
 	}
 
 	render() {

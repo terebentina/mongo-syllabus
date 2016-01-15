@@ -97,6 +97,8 @@ function currentPage(state = null, action) {
 		case ActionTypes.RECEIVE_DOCS:
 			return action.page;
 		case ActionTypes.SELECT_DB:
+		case ActionTypes.FILTER_DOCS:
+		case ActionTypes.SELECT_COLLECTION:
 			return null;
 		default:
 			return state;

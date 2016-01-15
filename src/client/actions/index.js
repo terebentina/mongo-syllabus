@@ -77,6 +77,14 @@ export function setDocsFilter(obj = { query: '', limit: 30 }) {
 	};
 }
 
+export function selectAndSearchDocs(collection) {
+	return (dispatch) => {
+		dispatch(selectCollection(collection));
+		dispatch(setDocsFilter());
+		dispatch(fetchDocs());
+	};
+}
+
 export function searchDocs() {
 	return (dispatch) => {
 		dispatch(setDocsFilter());
@@ -87,9 +95,10 @@ export function searchDocs() {
 export function fetchDocs(pageNum = 0) {
 	return (dispatch, getState) => {
 		const state = getState();
+		console.log('fetchDocs', pageNum);
 		if (pageNum != state.currentPage) {
 			dispatch(requestDocs());
-			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: state.currentPage, limit: state.filter.limit })
+			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: pageNum, limit: state.filter.limit })
 				.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
 				.catch((err) => {
 					dispatch(receiveDocs(state.selectedCollection, []));
