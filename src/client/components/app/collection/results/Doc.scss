@@ -1,13 +1,23 @@
+@import "../../../../mixins";
+
 .App-Results-docs {
 	article {
 		width: 40vw;
-		overflow: auto;
-		max-height: 15vh;
-		border: 1px solid #ccc;
-		font-size: 80%;
+		@extend %flexbox-container;
 
-		span {
-			display: inline;
+		& > header {
+			background: #E6E6E6;
+			padding: 3px 10px;
+			@extend %flexbox-container;
+			flex-flow: row;
+			align-items: center;
+		}
+
+		& > div {
+			max-height: 15vh;
+			border: 1px solid #ccc;
+			overflow: auto;
+			font-size: 80%;
 		}
 	}
 }

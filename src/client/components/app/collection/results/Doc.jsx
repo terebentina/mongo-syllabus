@@ -18,7 +18,10 @@ class Doc extends React.Component {
 	render() {
 		return (
 			<article>
-				<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>
+				<header><a href=""><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a><a href=""><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a></header>
+				<div>
+					<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>
+				</div>
 			</article>
 		);
 	}
