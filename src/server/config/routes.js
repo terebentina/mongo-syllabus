@@ -7,6 +7,7 @@ module.exports = function() {
 	this.get('/api/databases', DatabaseCtrl.index);
 	this.get('/api/collections/:db', CollectionCtrl.index);
 	this.get('/api/docs/:db/:collection', DocCtrl.index);
+	this.del('/api/docs/:db/:collection/:docId', DocCtrl.remove);
 
 	this.get(/\/.*/, restify.serveStatic({
 		directory: './',

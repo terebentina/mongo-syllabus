@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import * as ActionTypes from '../actions';
+import _ from 'lodash';
+import * as Constants from '../actions/constants';
 
 /**
  * state = {
@@ -18,7 +19,7 @@ import * as ActionTypes from '../actions';
 
 function selectedDb(state = '', action) {
 	switch (action.type) {
-		case ActionTypes.SELECT_DB:
+		case Constants.SELECT_DB:
 			return action.db;
 		default:
 			return state;
@@ -27,9 +28,9 @@ function selectedDb(state = '', action) {
 
 function selectedCollection(state = '', action) {
 	switch (action.type) {
-		case ActionTypes.SELECT_COLLECTION:
+		case Constants.SELECT_COLLECTION:
 			return action.collection;
-		case ActionTypes.SELECT_DB:
+		case Constants.SELECT_DB:
 			return '';
 		default:
 			return state;
@@ -38,7 +39,7 @@ function selectedCollection(state = '', action) {
 
 function databases(state = [], action) {
 	switch (action.type) {
-		case ActionTypes.RECEIVE_DATABASES:
+		case Constants.RECEIVE_DATABASES:
 			return action.databases.slice();
 		default:
 			return state;
@@ -47,9 +48,9 @@ function databases(state = [], action) {
 
 function collections(state = [], action) {
 	switch (action.type) {
-		case ActionTypes.RECEIVE_COLLECTIONS:
+		case Constants.RECEIVE_COLLECTIONS:
 			return action.collections.slice();
-		case ActionTypes.SELECT_DB:
+		case Constants.SELECT_DB:
 			return [];
 		default:
 			return state;
@@ -59,10 +60,10 @@ function collections(state = [], action) {
 const DEFAULT_FILTER = { query: '', limit: 30 };
 function filter(state = DEFAULT_FILTER, action) {
 	switch (action.type) {
-		case ActionTypes.FILTER_DOCS:
+		case Constants.FILTER_DOCS:
 			return Object.assign({}, state, action.filter);
-		case ActionTypes.SELECT_DB:
-		case ActionTypes.SELECT_COLLECTION:
+		case Constants.SELECT_DB:
+		case Constants.SELECT_COLLECTION:
 			return Object.assign({}, DEFAULT_FILTER);
 		default:
 			return state;
@@ -71,10 +72,16 @@ function filter(state = DEFAULT_FILTER, action) {
 
 function docs(state = [], action) {
 	switch (action.type) {
-		case ActionTypes.RECEIVE_DOCS:
+		case Constants.RECEIVE_DOCS:
 			return action.docs.results.slice();
-		case ActionTypes.SELECT_DB:
+		case Constants.SELECT_DB:
 			return [];
+		case Constants.REMOVE_DOC:
+			const idx = _.findIndex(state, { _id: action.docId });
+			if (idx > -1) {
+				return [...state.slice(0, idx), ...state.slice(idx + 1)];
+			}
+			return state;
 		default:
 			return state;
 	}
@@ -82,9 +89,9 @@ function docs(state = [], action) {
 
 function totalDocs(state = 0, action) {
 	switch (action.type) {
-		case ActionTypes.RECEIVE_DOCS:
+		case Constants.RECEIVE_DOCS:
 			return action.docs.total;
-		case ActionTypes.SELECT_DB:
+		case Constants.SELECT_DB:
 			return 0;
 		default:
 			return state;
@@ -93,12 +100,12 @@ function totalDocs(state = 0, action) {
 
 function currentPage(state = null, action) {
 	switch (action.type) {
-		//case ActionTypes.SET_CURRENT_PAGE:
-		case ActionTypes.RECEIVE_DOCS:
+		//case Constants.SET_CURRENT_PAGE:
+		case Constants.RECEIVE_DOCS:
 			return action.page;
-		case ActionTypes.SELECT_DB:
-		case ActionTypes.FILTER_DOCS:
-		case ActionTypes.SELECT_COLLECTION:
+		case Constants.SELECT_DB:
+		case Constants.FILTER_DOCS:
+		case Constants.SELECT_COLLECTION:
 			return null;
 		default:
 			return state;
@@ -107,13 +114,13 @@ function currentPage(state = null, action) {
 
 function isFetching(state = false, action) {
 	switch (action.type) {
-		case ActionTypes.REQUEST_DATABASES:
-		case ActionTypes.REQUEST_COLLECTIONS:
-		case ActionTypes.REQUEST_DOCS:
+		case Constants.REQUEST_DATABASES:
+		case Constants.REQUEST_COLLECTIONS:
+		case Constants.REQUEST_DOCS:
 			return true;
-		case ActionTypes.RECEIVE_DATABASES:
-		case ActionTypes.RECEIVE_COLLECTIONS:
-		case ActionTypes.RECEIVE_DOCS:
+		case Constants.RECEIVE_DATABASES:
+		case Constants.RECEIVE_COLLECTIONS:
+		case Constants.RECEIVE_DOCS:
 			return false;
 		default:
 			return state;
@@ -121,13 +128,24 @@ function isFetching(state = false, action) {
 }
 
 function message(state = null, action) {
-	if (action.type === ActionTypes.SHOW_MESSAGE) {
+	if (action.type === Constants.SHOW_MESSAGE) {
 		return {
 			message: action.message,
 			type: action.messageType,
 		};
-	} else if (action.type === ActionTypes.HIDE_MESSAGE) {
+	} else if (action.type === Constants.HIDE_MESSAGE) {
 		return null;
+	}
+
+	return state;
+}
+
+function confirmation(state = null, action) {
+	if (action.type === Constants.CONFIRMATION) {
+		return {
+			message: action.message,
+			fn: action.fn,
+		};
 	}
 
 	return state;
@@ -144,6 +162,7 @@ const rootReducer = combineReducers({
 	currentPage,
 	isFetching,
 	message,
+	confirmation,
 });
 
 export default rootReducer;

@@ -7,6 +7,7 @@ import DBDashboard from './components/app/DBDashboard.jsx';
 import Collection from './components/app/Collection.jsx';
 import SideNav from './components/app/SideNav.jsx';
 import PageMessage from './components/app/PageMessage.jsx';
+import Confirm from './components/app/Confirm.jsx';
 
 import './app.scss';
 
@@ -36,8 +37,9 @@ class App extends React.Component {
 		return (
 			<div className="app">
 				<PageMessage message={this.props.message} onHide={() => this.props.dispatch(hideMessage())} />
+				<Confirm />
 				<header>
-					<span className="title col">Mongodb Syllabus</span>
+					<span className="title col">Mongo Syllabus</span>
 				</header>
 				<main>
 					<SideNav />

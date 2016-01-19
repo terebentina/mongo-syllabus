@@ -1,6 +1,9 @@
 'use strict';
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
+
+// @todo remove
 const url = 'mongodb://192.168.55.103:27017';
 
 const DocCtrl = {
@@ -24,7 +27,6 @@ const DocCtrl = {
 
 		const dbUrl = `${url}/${dbName}`;
 
-		console.log('typeof', typeof query);
 		MongoClient.connect(dbUrl, function(err, db) {
 			if (err) {
 				console.log('err', err.stack);
@@ -46,10 +48,32 @@ const DocCtrl = {
 				//if (skip > 0) {
 				//	json.prev = `/api/docs/${dbName}/${collectionName}?query=${encodeURIComponent(query)}&skip=${Math.max(0, skip - limit)}`;
 				//}
-				res.json(json);
 				db.close();
+				res.json(json);
 				next();
 			}).catch(function(err2) {
+				db.close();
+				console.log('err', err2.stack);
+				next(err2);
+			});
+		});
+	},
+
+	remove(req, res, next) {
+		// warning!!! req.params are not sanitized!!! @todo
+		const dbUrl = `${url}/${req.params.db}`;
+		MongoClient.connect(dbUrl, function(err, db) {
+			if (err) {
+				console.log('err', err.stack);
+				return next(err);
+			}
+			const collection = db.collection(req.params.collection);
+			collection.findOneAndDelete({ _id: new ObjectId(req.params.docId) }).then(function(result) {
+				db.close();
+				res.send(204, '');
+				next();
+			}).catch(function(err2) {
+				db.close();
 				console.log('err', err2.stack);
 				next(err2);
 			});
