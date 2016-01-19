@@ -158,7 +158,7 @@ function confirmation(state = null, action) {
 function modalToShow(state = null, action) {
 	if (action.type === Constants.SHOW_MODAL) {
 		return {
-			name: action.name,
+			modal: action.modal,
 			payload: action.payload,
 		};
 	}

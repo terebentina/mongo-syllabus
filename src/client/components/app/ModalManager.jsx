@@ -1,6 +1,11 @@
 import React from 'react';
+import CollectionRename from './modals/CollectionRename.jsx';
 
-//import './ModalManager.scss';
+import './ModalManager.scss';
+
+const Modals = {
+	CollectionRename,
+};
 
 class ModalManager extends React.Component {
 	static propTypes = {
@@ -9,11 +14,11 @@ class ModalManager extends React.Component {
 	};
 
 	render() {
-		const modalToShow = React.createElement(this.props.modal, null, this.props.payload);
+		const Modal = Modals[this.props.modal];
 
 		return (
 			<div id="modals">
-				{modalToShow}
+				<Modal payload={this.props.payload} />
 				<div className="backdrop"></div>
 			</div>
 		);

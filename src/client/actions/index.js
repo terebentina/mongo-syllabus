@@ -170,9 +170,17 @@ export function removeDoc(docId) {
 	};
 }
 
-export function showModal(modalName, payload) {
+export function showModal(modal, payload) {
 	return {
-		modalName,
+		type: Constants.SHOW_MODAL,
+		modal,
 		payload,
+	};
+}
+
+export function hideModal() {
+	document.documentElement.classList.remove('modal_open');
+	return {
+		type: Constants.HIDE_MODAL,
 	};
 }

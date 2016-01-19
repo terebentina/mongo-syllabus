@@ -17,7 +17,7 @@ class App extends React.Component {
 		message: React.PropTypes.object,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
-		modalToShow: React.PropTypes.object.isRequired,
+		modalToShow: React.PropTypes.object,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
@@ -49,7 +49,7 @@ class App extends React.Component {
 					{content}
 				</main>
 				<footer>footer</footer>
-				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.name} payload={this.props.modalToShow.payload} /> : null}
+				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.modal} payload={this.props.modalToShow.payload} /> : null}
 			</div>
 		);
 	}
@@ -57,7 +57,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		modalToShow: state.modalToShow || {},
+		modalToShow: state.modalToShow || null,
 		message: state.message || null,
 		selectedDb: state.selectedDb || '',
 		selectedCollection: state.selectedCollection || '',

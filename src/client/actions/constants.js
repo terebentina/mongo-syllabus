@@ -17,5 +17,6 @@ export const MESSAGE_ERROR = 'error';
 export const CONFIRMATION = 'CONFIRMATION';
 
 export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 

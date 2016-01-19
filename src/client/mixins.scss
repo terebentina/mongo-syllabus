@@ -4,6 +4,9 @@ $breakpoints: (
 
 $zindexes: (
 	base: 1,
+	header: 5,
+	modalBackdrop: 1000,
+	modal: 1001,
 );
 
 $colors: (
@@ -11,6 +14,15 @@ $colors: (
 	c2: #EF3C79,
 	c3: #4DB6AC,
 );
+
+@function zIndex($key) {
+	@if map-has-key($zindexes, $key) {
+		@return map-get($zindexes, $key);
+	}
+
+	@warn "Unknown `#{$key}` in $zindexes.";
+	@return null;
+}
 
 @function color($key) {
 	@if map-has-key($colors, $key) {
