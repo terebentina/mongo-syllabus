@@ -42,7 +42,7 @@ class SideNav extends React.Component {
 							<option value=""></option>
 							{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 						</select>
-						<a href=""><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a>
+						{this.props.selectedDb ? <a href=""><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a> : null}
 					</div>
 				</header>
 

@@ -15,8 +15,14 @@ aside {
 			margin-top: 0;
 		}
 		& > div {
-			display: flex;
+			@extend %flexbox-container;
 			flex-flow: row wrap;
+			justify-content: space-between;
+			color: #000;
+
+			select {
+				flex: 0 1 50%;
+			}
 		}
 	}
 
