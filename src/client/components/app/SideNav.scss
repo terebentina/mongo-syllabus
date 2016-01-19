@@ -11,9 +11,14 @@ aside {
 		@extend %flexbox-container;
 		flex: 0 0 auto;
 
-		h3 {
+		h3:first-of-type {
 			margin-top: 0;
 		}
+
+		.serverUri {
+			font-size: .9em;
+		}
+
 		& > div {
 			@extend %flexbox-container;
 			flex-flow: row wrap;

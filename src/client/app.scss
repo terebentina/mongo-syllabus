@@ -22,6 +22,10 @@ body,
 	@extend %flexbox-container;
 	min-height: 100vh;
 
+	div {
+		display: flex;
+	}
+
 	& > header {
 		@extend %flexbox-container;
 		flex-wrap: nowrap;

@@ -36,6 +36,8 @@ class SideNav extends React.Component {
 		return (
 			<aside>
 				<header>
+					<h3>Server:</h3>
+					<span className="serverUri">mongodb://192.168.55.103:27017</span>
 					<h3>Databases:</h3>
 					<div>
 						<select value={this.props.selectedDb} onChange={this.onDbSelect.bind(this)}>
