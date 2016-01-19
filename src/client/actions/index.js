@@ -159,7 +159,6 @@ function confirm(message, fn) {
 }
 
 export function removeDoc(docId) {
-	console.log('actions removeDoc', docId);
 	return (dispatch, getState) => {
 		const state = getState();
 		return request.delete(`/api/docs/${state.selectedDb}/${state.selectedCollection}/${docId}`)
@@ -168,5 +167,12 @@ export function removeDoc(docId) {
 				console.log('err', err.stack);
 				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
 			});
+	};
+}
+
+export function showModal(modalName, payload) {
+	return {
+		modalName,
+		payload,
 	};
 }

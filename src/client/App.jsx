@@ -8,6 +8,7 @@ import Collection from './components/app/Collection.jsx';
 import SideNav from './components/app/SideNav.jsx';
 import PageMessage from './components/app/PageMessage.jsx';
 import Confirm from './components/app/Confirm.jsx';
+import ModalManager from './components/app/ModalManager.jsx';
 
 import './app.scss';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
 		message: React.PropTypes.object,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
+		modalToShow: React.PropTypes.object.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
@@ -34,6 +36,7 @@ class App extends React.Component {
 		} else {
 			content = <Collection />;
 		}
+
 		return (
 			<div className="app">
 				<PageMessage message={this.props.message} onHide={() => this.props.dispatch(hideMessage())} />
@@ -46,6 +49,7 @@ class App extends React.Component {
 					{content}
 				</main>
 				<footer>footer</footer>
+				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.name} payload={this.props.modalToShow.payload} /> : null}
 			</div>
 		);
 	}
@@ -53,6 +57,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
 	return {
+		modalToShow: state.modalToShow || {},
 		message: state.message || null,
 		selectedDb: state.selectedDb || '',
 		selectedCollection: state.selectedCollection || '',

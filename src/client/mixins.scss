@@ -40,5 +40,20 @@ $colors: (
 	align-content: flex-start;
 	align-items: stretch;
 	flex: 1 0 auto;
-	box-sizing: border-box;
+	//box-sizing: border-box;
+}
+
+%icon-link {
+	display: flex;
+	font-size: 1.1em;
+	margin-right: 5px;
+	padding: 5px;
+
+	&:hover {
+		color: color(c2);
+	}
+	&:active {
+		color: color(c3);
+		background: #F5F5F5;
+	}
 }

@@ -13,7 +13,9 @@ import * as Constants from '../actions/constants';
  *      totalDocs: 0,
  *      currentPage: 0,
  *      isFetching: true|false,
- *      message: {message: '', type: ''}
+ *      message: {message: '', type: ''},
+ *      confirmation: {message: '', fn: <func>},
+ *      modalToShow: {name: '', payload: {}},
  * }
  */
 
@@ -153,6 +155,17 @@ function confirmation(state = null, action) {
 	return state;
 }
 
+function modalToShow(state = null, action) {
+	if (action.type === Constants.SHOW_MODAL) {
+		return {
+			name: action.name,
+			payload: action.payload,
+		};
+	}
+
+	return state;
+}
+
 const rootReducer = combineReducers({
 	databases,
 	selectedDb,
@@ -165,6 +178,7 @@ const rootReducer = combineReducers({
 	isFetching,
 	message,
 	confirmation,
+	modalToShow,
 });
 
 export default rootReducer;

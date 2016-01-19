@@ -31,7 +31,8 @@
     "redux-actions": "^0.9.0",
     "redux-thunk": "^1.0.0",
     "restify": "^4.0.3",
-    "throng": "^1.0.1"
+    "throng": "^1.0.1",
+    "validate-commit-msg": "^1.1.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
@@ -63,7 +64,17 @@
       "commit-msg": "validate-commit-msg"
     },
     "validate-commit-msg": {
-      "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert"]
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ]
     }
   }
 }

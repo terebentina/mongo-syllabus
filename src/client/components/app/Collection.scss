@@ -4,6 +4,21 @@ div.App-Collection {
 	@extend %flexbox-container;
 	padding-left: 1em;
 
+	& > header {
+		@extend %flexbox-container;
+		flex-flow: row nowrap;
+		align-items: center;
+
+		h2 {
+			display: inline;
+			margin-right: 1em;
+		}
+
+		a {
+			@extend %icon-link;
+		}
+	}
+
 	& > section {
 		@extend %flexbox-container;
 		margin-top: 4em;

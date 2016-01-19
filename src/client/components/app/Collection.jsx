@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { pacomoDecorator } from '../../utils/pacomo';
-import { searchDocs, fetchDocs } from '../../actions';
+import { searchDocs, fetchDocs, showModal } from '../../actions';
 import QueryBox from './collection/QueryBox.jsx';
 import Results from './collection/Results.jsx';
 
@@ -34,13 +34,23 @@ class Collection extends React.Component {
 		this.props.dispatch(fetchDocs(pageNum));
 	}
 
+	onRenameClick(e) {
+		e.preventDefault();
+		this.props.dispatch(showModal('CollectionRename'));
+	}
+
 	render() {
 		if (!this.props.selectedDb || !this.props.selectedCollection) {
 			return null;
 		}
 		return (
 			<div>
-				<h2>{`Collection: ${this.props.selectedCollection}`}</h2>
+				<header>
+					<h2>{`Collection: ${this.props.selectedCollection}`}</h2>
+					<a href="#" onClick={::this.onRenameClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
+					<a href="#"><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
+					<a href="#"><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
+				</header>
 				<QueryBox dispatch={this.props.dispatch} onSubmit={::this.onNewQuery} />
 				<Results results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={::this.onPageLoad} />
 			</div>

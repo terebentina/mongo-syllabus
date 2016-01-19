@@ -13,20 +13,7 @@
 			align-items: center;
 
 			& > a {
-				display: flex;
-				font-size: 1.1em;
-				margin-right: 5px;
-				padding: 5px;
-
-				&:hover {
-					color: color(c2);
-				}
-				&:active {
-					color: color(c3);
-					background: #F5F5F5;
-				}
-
-
+				@extend %icon-link;
 			}
 		}
 
