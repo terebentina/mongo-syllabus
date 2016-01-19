@@ -96,7 +96,7 @@ function qs(key, val) {
 }
 
 function buildUrl(url, params) {
-	if (!Object.keys(params).length) {
+	if (!params || !Object.keys(params).length) {
 		return url;
 	}
 	let linkedParams = [];
