@@ -75,6 +75,7 @@ function docs(state = [], action) {
 		case Constants.RECEIVE_DOCS:
 			return action.docs.results.slice();
 		case Constants.SELECT_DB:
+		case Constants.SELECT_COLLECTION:
 			return [];
 		case Constants.REMOVE_DOC:
 			const idx = _.findIndex(state, { _id: action.docId });
@@ -92,6 +93,7 @@ function totalDocs(state = 0, action) {
 		case Constants.RECEIVE_DOCS:
 			return action.docs.total;
 		case Constants.SELECT_DB:
+		case Constants.SELECT_COLLECTION:
 			return 0;
 		default:
 			return state;
