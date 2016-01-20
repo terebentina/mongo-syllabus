@@ -2,6 +2,7 @@
 
 .App-Results-docs {
 	@extend %flexbox-container;
+	flex: 0 0 auto;
 
 	article {
 		margin-bottom: 1em;

@@ -1,16 +1,18 @@
 @import "../../../../mixins";
 
 .App-Results-docs {
+
 	article {
 		width: 40vw;
 		@extend %flexbox-container;
 
 		& > header {
+			display: flex;
 			background: #E6E6E6;
 			padding: 3px 10px;
-			@extend %flexbox-container;
 			flex-flow: row;
 			align-items: center;
+			flex: 0 0 auto;
 
 			& > a {
 				@extend %icon-link;
