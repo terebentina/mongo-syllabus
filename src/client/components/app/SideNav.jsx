@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectDb, selectAndSearchDocs, fetchCollections } from '../../actions';
-import Tap from '../Tappable.jsx';
+import Link from '../Tappable.jsx';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import './SideNav.scss';
@@ -44,13 +44,13 @@ class SideNav extends React.Component {
 							<option value=""></option>
 							{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 						</select>
-						{this.props.selectedDb ? <a href=""><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a> : null}
+						{this.props.selectedDb ? <Link href=""><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></Link> : null}
 					</div>
 				</header>
 
 				<nav>
 					<h3>Collections</h3>
-					{this.props.collections.map((collection, i) => <Tap key={`col_${i}`} onClickTap={this.onCollectionSelect.bind(this, collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</Tap>)}
+					{this.props.collections.map((collection, i) => <Link key={`col_${i}`} onClickTap={this.onCollectionSelect.bind(this, collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</Link>)}
 				</nav>
 			</aside>
 		);

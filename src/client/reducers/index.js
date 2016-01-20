@@ -161,6 +161,8 @@ function modalToShow(state = null, action) {
 			modal: action.modal,
 			payload: action.payload,
 		};
+	} else if (action.type === Constants.HIDE_MODAL) {
+		return null;
 	}
 
 	return state;

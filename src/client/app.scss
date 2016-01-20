@@ -60,6 +60,12 @@ body,
 			flex: 1 0 auto;
 		}
 	}
+
+	label {
+		& > span:first-of-type {
+			margin-right: 5px;
+		}
+	}
 }
 
 //div,

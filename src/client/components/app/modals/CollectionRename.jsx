@@ -1,15 +1,27 @@
 import React from 'react';
-import mix from '../../../utils/mixins';
-import ModalMixin from '../mixins/Modal.jsx';
+import Link from '../../Tappable.jsx';
 
-class CollectionRename extends mix(React.Component).with(ModalMixin) {
-	//static propTypes = {
-	//};
+class CollectionRename extends React.Component {
+	static propTypes = {
+		doDestroy: React.PropTypes.func.isRequired,
+	};
 
-	modalContent() {
+	render() {
 		return (
-			<div className="modal create__entity">
-				modal content
+			<div>
+				<header>
+					<h3>Rename collection</h3>
+				</header>
+				<main>
+					<label>
+						<span>New name:</span>
+						<input type="text" />
+					</label>
+				</main>
+				<footer className="actions">
+					<Link onClickTap={this.props.doDestroy}>Cancel</Link>
+					<button type="submit">Save</button>
+				</footer>
 			</div>
 		);
 	}

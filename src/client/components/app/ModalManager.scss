@@ -8,16 +8,65 @@
 	top: 0;
 
 	.modal_wrapper {
-		@extend %flexbox-container;
+		flex: 1 0 auto;
 		align-items: center;
 		justify-content: center;
+
+		.modal {
+			position: relative; // for the close modal button
+			z-index: zIndex(modal);
+			border: 1px solid #E5E5E5;
+			background-color: #FFF;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+			min-width: 20vw;
+
+			& > a.close {
+				@extend %icon-link;
+				position: absolute;
+				right: 0;
+				top: 0;
+				padding: 0;
+				margin: 0;
+			}
+
+			header {
+				padding: 10px 20px;
+				margin-bottom: 5px;
+				border-bottom: 1px solid #efefef;
+
+				h3 {
+					margin: 0;
+				}
+			}
+
+			footer {
+				padding: 10px 20px;
+				margin-top: 5px;
+				border-top: 1px solid #efefef;
+				display: flex;
+				align-items: center;
+
+				&.actions {
+					justify-content: space-around;
+				}
+			}
+
+			main {
+				padding: 10px 20px;
+			}
+
+			& > div {
+				flex-flow: column nowrap;
+				width: 100%;
+
+			}
+		}
 	}
 
 	.backdrop {
 		position: fixed;
 		z-index: zIndex(modalBackdrop);
 		top: 0;
-
 		bottom: 0;
 		left: 0;
 		right: 0;
