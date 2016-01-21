@@ -1,5 +1,6 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
+import { connect } from 'react-redux';
 import { pacomoDecorator } from '../../../utils/pacomo';
 import Pagination from './results/Pagination.jsx';
 import Doc from './results/Doc.jsx';
@@ -14,6 +15,7 @@ class Results extends React.Component {
 		rpp: React.PropTypes.number.isRequired,
 		results: React.PropTypes.array.isRequired,
 		onPageLoadRequest: React.PropTypes.func.isRequired,
+		dispatch: React.PropTypes.func.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
@@ -23,7 +25,7 @@ class Results extends React.Component {
 			<section>
 				<Pagination total={this.props.total} currentPage={this.props.currentPage} rpp={this.props.rpp} onPageLoadRequest={this.props.onPageLoadRequest} />
 				<div className="docs">
-					{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} doc={doc} />)}
+					{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} doc={doc} dispatch={this.props.dispatch} />)}
 				</div>
 				<Pagination total={this.props.total} currentPage={this.props.currentPage} rpp={this.props.rpp} onPageLoadRequest={this.props.onPageLoadRequest} />
 			</section>
@@ -31,4 +33,4 @@ class Results extends React.Component {
 	}
 }
 
-export default Results;
+export default connect()(Results);

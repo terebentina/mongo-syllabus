@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
@@ -12,7 +11,6 @@ const beautyOpts = { indent_size: 2 };
 
 class Doc extends React.Component {
 	static propTypes = {
-		// exactly 1 child
 		doc: React.PropTypes.object.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
@@ -43,4 +41,4 @@ class Doc extends React.Component {
 	}
 }
 
-export default connect()(Doc);
+export default Doc;
