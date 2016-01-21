@@ -12,7 +12,8 @@ import ModalManager from './components/app/ModalManager.jsx';
 
 import './app.scss';
 
-class App extends React.Component {
+// named export here so we can test App output without redux
+export class App extends React.Component {
 	static propTypes = {
 		message: React.PropTypes.object,
 		selectedDb: React.PropTypes.string.isRequired,

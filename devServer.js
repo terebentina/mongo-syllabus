@@ -9,15 +9,15 @@ const app = restify.createServer({
 });
 
 // Start watching and bundling tests here
-//const testConfig = require('./webpack.config.test');
-//const testsCompiler = webpack(testConfig);
+const testConfig = require('./webpack.config.test');
+const testsCompiler = webpack(testConfig);
 
-//testsCompiler.watch({}, function(err) {
-//	if (err) {
-//		return console.log(err);
-//	}
-//	console.log('Test file bundled');
-//});
+testsCompiler.watch({}, function(err) {
+	if (err) {
+		return console.log(err);
+	}
+	console.log('Test file bundled');
+});
 
 const compiler = webpack(config);
 app.use(require('webpack-dev-middleware')(compiler, {
