@@ -34,6 +34,11 @@ function selectedCollection(state = '', action) {
 			return action.collection;
 		case Constants.SELECT_DB:
 			return '';
+		case Constants.RENAME_COLLECTION:
+			if (action.oldName === state) {
+				return action.newName;
+			}
+			return state;
 		default:
 			return state;
 	}
@@ -54,6 +59,12 @@ function collections(state = [], action) {
 			return action.collections.slice();
 		case Constants.SELECT_DB:
 			return [];
+		case Constants.RENAME_COLLECTION:
+			const idx = state.indexOf(action.oldName);
+			if (idx > -1) {
+				return [...state.slice(0, idx), action.newName, ...state.slice(idx + 1)];
+			}
+			return state;
 		default:
 			return state;
 	}

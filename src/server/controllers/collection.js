@@ -1,13 +1,19 @@
 //const restify = require('restify');
 const MongoClient = require('mongodb').MongoClient;
 const _ = require('lodash');
+const restify = require('restify');
 const url = 'mongodb://192.168.55.103:27017';
 
 const CollectionCtrl = {
+	/**
+	 * list all collections in a certain db
+	 * @param req
+	 * @param res
+	 * @param next
+	 */
 	index(req, res, next) {
-		// warning!!! req.params.db is not sanitized!!! @todo
+		// warning!!! req.params is not sanitized!!! @todo
 		const dbUrl = `${url}/${req.params.db}`;
-		console.log('dbUrl', dbUrl);
 		MongoClient.connect(dbUrl, function(err, db) {
 			if (err) {
 				console.log('err', err.stack);
@@ -19,6 +25,41 @@ const CollectionCtrl = {
 				db.close();
 				next();
 			}).catch(function(err2) {
+				db.close();
+				console.log('err', err2.stack);
+				next(err2);
+			});
+		});
+	},
+
+	/**
+	 * rename collection
+	 * @param req
+	 * @param res
+	 * @param next
+	 */
+	rename(req, res, next) {
+		// warning!!! req.params is not sanitized!!! @todo
+		const dbUrl = `${url}/${req.params.db}`;
+
+		console.log('req.body', req.body);
+		const newCollectionName = req.body.collection.trim();
+		if (!newCollectionName || newCollectionName.indexOf('$') != -1 || newCollectionName.indexOf('.') == 0 || newCollectionName.indexOf('.') == newCollectionName.length - 1 || newCollectionName.indexOf('..') != -1) {
+			return next(new restify.InvalidContentError('Invalid collection name'));
+		}
+
+		MongoClient.connect(dbUrl, function(err, db) {
+			if (err) {
+				console.log('err', err.stack);
+				return next(err);
+			}
+
+			db.renameCollection(req.params.collection, newCollectionName).then(function() {
+				db.close();
+				res.send(204, '');
+				next();
+			}).catch(function(err2) {
+				db.close();
 				console.log('err', err2.stack);
 				next(err2);
 			});

@@ -17,7 +17,8 @@ class ModalManager extends React.Component {
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
-	destroy() {
+	destroy(e) {
+		e.preventDefault();
 		this.props.dispatch(hideModal());
 	}
 

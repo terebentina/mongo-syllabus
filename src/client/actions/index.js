@@ -158,6 +158,18 @@ function confirm(message, fn) {
 	};
 }
 
+export function renameCollection(newName) {
+	return (dispatch, getState) => {
+		const state = getState();
+		return request.put(`/api/collections/${state.selectedDb}/${state.selectedCollection}`, { collection: newName })
+			.then(() => dispatch({ type: Constants.RENAME_COLLECTION, oldName: state.selectedCollection, newName }))
+			.catch((err) => {
+				console.log('err', err.stack);
+				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+			});
+	};
+}
+
 export function removeDoc(docId) {
 	return (dispatch, getState) => {
 		const state = getState();

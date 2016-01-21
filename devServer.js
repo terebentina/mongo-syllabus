@@ -32,7 +32,8 @@ app.use(require('webpack-hot-middleware')(compiler, {
 }));
 
 app.use(restify.queryParser());
-//app.use(restify.gzipResponse());
+app.use(restify.bodyParser());
+app.use(restify.gzipResponse());
 //app.use(restify.CORS({
 //	//origins: ['https://foo.com'],
 //	credentials: true,

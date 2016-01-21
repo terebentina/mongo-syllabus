@@ -9,6 +9,7 @@ export const REMOVE_DOC = 'REMOVE_DOC';
 export const SELECT_DB = 'SELECT_DB';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SELECT_COLLECTION = 'SELECT_COLLECTION';
+export const RENAME_COLLECTION = 'RENAME_COLLECTION';
 
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 export const HIDE_MESSAGE = 'HIDE_MESSAGE';
