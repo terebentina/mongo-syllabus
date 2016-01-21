@@ -1,6 +1,6 @@
 @import "../../../../mixins";
 
-.App-Pagination {
+.app .App-Pagination {
 	@extend %flexbox-container;
 	justify-content: flex-start;
 	flex-direction: row;

@@ -26,6 +26,18 @@ body,
 		display: flex;
 	}
 
+	a {
+		color: #551a8b;
+
+		&:hover {
+			color: color(c2);
+		}
+		&:active {
+			color: color(c3);
+			background: #F5F5F5;
+		}
+	}
+
 	& > header {
 		@extend %flexbox-container;
 		flex-wrap: nowrap;
