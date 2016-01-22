@@ -10,7 +10,6 @@ const PageMessage = React.createClass({
 	propTypes: {
 		message: React.PropTypes.object,
 		onHide: React.PropTypes.func.isRequired,
-		className: React.PropTypes.string,
 	},
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.message !== this.props.message && nextProps.message !== null) {

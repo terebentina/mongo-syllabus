@@ -6,7 +6,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import './SideNav.scss';
 
-class SideNav extends React.Component {
+export class SideNav extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,

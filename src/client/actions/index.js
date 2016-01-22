@@ -81,7 +81,6 @@ export function searchDocs() {
 export function fetchDocs(pageNum = 0) {
 	return (dispatch, getState) => {
 		const state = getState();
-		console.log('fetchDocs', pageNum);
 		if (pageNum != state.currentPage) {
 			dispatch(requestDocs());
 			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: pageNum, limit: state.filter.limit })

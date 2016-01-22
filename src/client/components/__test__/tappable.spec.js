@@ -12,14 +12,14 @@ function prepare(component) {
 	return renderer.getRenderOutput();
 }
 
-test('Components:Tappable', (assert) => {
+test('Components:Tappable', (t) => {
 	const onClickTap = () => {};
 	const component = prepare(<Tappable className="foo" onClickTap={onClickTap}>Link text</Tappable>);
-	assert.equal(component.type, 'a', 'renders an <a>');
-	assert.equal(component.props.className, 'foo', 'correct className is passed');
-	assert.equal(typeof component.props.onClick, 'function', 'onClick handler added');
-	assert.equal(typeof component.props.onTouchEnd, 'function', 'onTouchEnd handler added');
-	assert.equal(typeof component.props.onTouchStart, 'function', 'onTouchStart handler added');
-	assert.equal(component.props.children, 'Link text', 'proper text added');
-	assert.end();
+	t.equal(component.type, 'a', 'renders an <a>');
+	t.equal(component.props.className, 'foo', 'correct className is passed');
+	t.equal(typeof component.props.onClick, 'function', 'onClick handler added');
+	t.equal(typeof component.props.onTouchEnd, 'function', 'onTouchEnd handler added');
+	t.equal(typeof component.props.onTouchStart, 'function', 'onTouchStart handler added');
+	t.equal(component.props.children, 'Link text', 'proper text added');
+	t.end();
 });

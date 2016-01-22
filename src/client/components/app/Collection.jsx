@@ -9,7 +9,7 @@ import Results from './collection/Results.jsx';
 import './Collection.scss';
 
 @pacomoDecorator
-class Collection extends React.Component {
+export class Collection extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,

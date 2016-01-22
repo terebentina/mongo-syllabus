@@ -10,7 +10,7 @@ const Modals = {
 	CollectionRename,
 };
 
-class ModalManager extends React.Component {
+export class ModalManager extends React.Component {
 	static propTypes = {
 		modal: React.PropTypes.string.isRequired,
 		payload: React.PropTypes.any,

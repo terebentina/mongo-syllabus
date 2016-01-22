@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import shouldPureComponentUpdate from '../../../../node_modules/react-pure-render/function';
 
-class Confirm extends React.Component {
+export class Confirm extends React.Component {
 	static propTypes = {
 		// exactly 1 child
 		message: React.PropTypes.string,
