@@ -71,9 +71,9 @@ export function selectAndSearchDocs(collection) {
 	};
 }
 
-export function searchDocs() {
+export function searchDocs(obj = { query: '', limit: 30 }) {
 	return (dispatch) => {
-		dispatch(setDocsFilter());
+		dispatch(setDocsFilter(obj));
 		dispatch(fetchDocs());
 	};
 }
