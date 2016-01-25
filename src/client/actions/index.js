@@ -83,7 +83,7 @@ export function fetchDocs(pageNum = 0) {
 		const state = getState();
 		if (pageNum != state.currentPage) {
 			dispatch(requestDocs());
-			return request.get(`/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: pageNum, limit: state.filter.limit })
+			return request.get(`${Constants.API_URL}/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: pageNum, limit: state.filter.limit })
 				.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
 				.catch((err) => {
 					dispatch(receiveDocs(state.selectedCollection, []));
@@ -119,7 +119,7 @@ export function selectCollection(collection) {
 export function fetchCollections(db) {
 	return (dispatch) => {
 		dispatch(requestCollections(db));
-		return request.get(`/api/collections/${db}`)
+		return request.get(`${Constants.API_URL}/api/collections/${db}`)
 			.then(json => dispatch(receiveCollections(db, json)))
 			.catch((err) => {
 				dispatch(receiveCollections(db, []));
@@ -160,7 +160,7 @@ function confirm(message, fn) {
 export function renameCollection(newName) {
 	return (dispatch, getState) => {
 		const state = getState();
-		return request.put(`/api/collections/${state.selectedDb}/${state.selectedCollection}`, { collection: newName })
+		return request.put(`${Constants.API_URL}/api/collections/${state.selectedDb}/${state.selectedCollection}`, { collection: newName })
 			.then(() => dispatch({ type: Constants.RENAME_COLLECTION, oldName: state.selectedCollection, newName }))
 			.catch((err) => {
 				console.log('err', err.stack);
@@ -172,7 +172,7 @@ export function renameCollection(newName) {
 export function removeDoc(docId) {
 	return (dispatch, getState) => {
 		const state = getState();
-		return request.delete(`/api/docs/${state.selectedDb}/${state.selectedCollection}/${docId}`)
+		return request.delete(`${Constants.API_URL}/api/docs/${state.selectedDb}/${state.selectedCollection}/${docId}`)
 			.then(() => dispatch({ type: Constants.REMOVE_DOC, docId }))
 			.catch((err) => {
 				console.log('err', err.stack);

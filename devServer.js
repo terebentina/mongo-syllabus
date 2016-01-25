@@ -34,11 +34,11 @@ app.use(require('webpack-hot-middleware')(compiler, {
 app.use(restify.queryParser());
 app.use(restify.bodyParser());
 app.use(restify.gzipResponse());
-//app.use(restify.CORS({
-//	//origins: ['https://foo.com'],
-//	credentials: true,
-//	headers: ['X-Requested-With', 'Content-Type', 'Content-Range', 'Content-Disposition', 'Content-Description', 'P3P'],
-//}));
+app.use(restify.CORS({
+	//origins: ['https://foo.com'],
+	credentials: true,
+	headers: ['X-Requested-With', 'Content-Type', 'Content-Range', 'Content-Disposition', 'Content-Description', 'P3P'],
+}));
 
 routes.call(app);
 
