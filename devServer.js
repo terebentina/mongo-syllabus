@@ -4,7 +4,7 @@ const restify = require('restify');
 const routes = require('./src/server/config/routes');
 
 const app = restify.createServer({
-	name: 'Mongo GUI',
+	name: 'Mongo Syllabus',
 	version: '0.0.1',
 });
 
