@@ -7,12 +7,14 @@ $zindexes: (
 	header: 5,
 	modalBackdrop: 1000,
 	modal: 1001,
+	messages: 1002,
 );
 
 $colors: (
 	c1: #37474F,
 	c2: #EF3C79,
 	c3: #4DB6AC,
+	c4: #43AC6A,
 );
 
 @function zIndex($key) {
