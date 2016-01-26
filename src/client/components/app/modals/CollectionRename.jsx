@@ -5,14 +5,14 @@ import { renameCollection } from '../../../actions';
 
 class CollectionRename extends React.Component {
 	static propTypes = {
-		selectedCollection: React.PropTypes.string.isRequired,
+		payload: React.PropTypes.object.isRequired,
 		doDestroy: React.PropTypes.func.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
 	constructor(props) {
 		super(props);
-		this.state = { collectionName: this.props.selectedCollection };
+		this.state = { collectionName: this.props.payload.collection };
 	}
 
 	onChange(e) {
@@ -31,7 +31,7 @@ class CollectionRename extends React.Component {
 
 	save(e) {
 		e.preventDefault();
-		this.props.dispatch(renameCollection(this.state.collectionName));
+		this.props.dispatch(renameCollection(this.props.payload, this.state.collectionName));
 		this.props.doDestroy(e);
 	}
 

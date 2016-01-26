@@ -11,6 +11,8 @@ const beautyOpts = { indent_size: 2 };
 
 class Doc extends React.Component {
 	static propTypes = {
+		selectedDb: React.PropTypes.string.isRequired,
+		selectedCollection: React.PropTypes.string.isRequired,
 		doc: React.PropTypes.object.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
@@ -23,7 +25,7 @@ class Doc extends React.Component {
 
 	onDeleteClick(e) {
 		e.preventDefault();
-		this.props.dispatch(confirmAndRemoveDoc(this.props.doc._id));
+		this.props.dispatch(confirmAndRemoveDoc(this.props.selectedDb, this.props.selectedCollection, this.props.doc._id));
 	}
 
 	render() {

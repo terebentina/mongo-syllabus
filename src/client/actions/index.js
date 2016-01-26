@@ -139,12 +139,14 @@ export function hideMessage() {
 
 /**
  * this dispatches the confirmation which is handled by a component. If the user confirms, the component will call the function provided by this action which, in turn, dispatches remove
+ * @param db
+ * @param collection
  * @param docId
  * @returns {Function}
  */
-export function confirmAndRemoveDoc(docId) {
+export function confirmAndRemoveDoc(db, collection, docId) {
 	return (dispatch) => {
-		dispatch(confirm('Are you sure you want to delete this document?', removeDoc.bind(this, docId)));
+		dispatch(confirm('Are you sure you want to delete this document?', removeDoc.bind(this, db, collection, docId)));
 	};
 }
 
@@ -157,11 +159,10 @@ function confirm(message, fn) {
 	};
 }
 
-export function renameCollection(newName) {
-	return (dispatch, getState) => {
-		const state = getState();
-		return request.put(`${Constants.API_URL}/api/collections/${state.selectedDb}/${state.selectedCollection}`, { collection: newName })
-			.then(() => dispatch({ type: Constants.RENAME_COLLECTION, oldName: state.selectedCollection, newName }))
+export function renameCollection(oldData, newName) {
+	return (dispatch) => {
+		return request.put(`${Constants.API_URL}/api/collections/${oldData.db}/${oldData.collection}`, { collection: newName })
+			.then(() => dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName }))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
@@ -169,11 +170,34 @@ export function renameCollection(newName) {
 	};
 }
 
-export function removeDoc(docId) {
-	return (dispatch, getState) => {
-		const state = getState();
-		return request.delete(`${Constants.API_URL}/api/docs/${state.selectedDb}/${state.selectedCollection}/${docId}`)
+function removeDoc(db, collection, docId) {
+	return (dispatch) => {
+		return request.delete(`${Constants.API_URL}/api/docs/${db}/${collection}/${docId}`)
 			.then(() => dispatch({ type: Constants.REMOVE_DOC, docId }))
+			.catch((err) => {
+				console.log('err', err.stack);
+				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+			});
+	};
+}
+
+
+/**
+ * this dispatches the confirmation which is handled by a component. If the user confirms, the component will call the function provided by this action which, in turn, dispatches remove
+ * @param db
+ * @param collection
+ * @returns {Function}
+ */
+export function confirmAndDropCollection(db, collection) {
+	return (dispatch) => {
+		dispatch(confirm(`Are you sure you want to drop ${collection}?`, dropCollection.bind(this, db, collection)));
+	};
+}
+
+function dropCollection(db, collection) {
+	return (dispatch) => {
+		return request.delete(`${Constants.API_URL}/api/collections/${db}/${collection}`)
+			.then(() => dispatch({ type: Constants.DROP_COLLECTION, collection }))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
