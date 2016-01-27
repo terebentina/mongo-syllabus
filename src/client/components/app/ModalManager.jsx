@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { hideModal } from '../../actions/index';
 import CollectionRename from './modals/CollectionRename.jsx';
+import CollectionCreate from './modals/CollectionCreate.jsx';
 import Link from '../Tappable.jsx';
 
 import './ModalManager.scss';
 
 const Modals = {
 	CollectionRename,
+	CollectionCreate,
 };
 
 export class ModalManager extends React.Component {

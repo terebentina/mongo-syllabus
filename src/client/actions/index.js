@@ -19,7 +19,7 @@ function fetchDatabases() {
 			.then((json) => dispatch(receiveDatabases(json)))
 			.catch((err) => {
 				dispatch(receiveDatabases([]));
-				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
 	};
 }
@@ -87,7 +87,7 @@ export function fetchDocs(pageNum = 0) {
 				.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
 				.catch((err) => {
 					dispatch(receiveDocs(state.selectedCollection, []));
-					return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+					return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 				});
 		}
 	};
@@ -123,7 +123,7 @@ export function fetchCollections(db) {
 			.then(json => dispatch(receiveCollections(db, json)))
 			.catch((err) => {
 				dispatch(receiveCollections(db, []));
-				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
 	};
 }
@@ -159,6 +159,20 @@ function confirm(message, fn) {
 	};
 }
 
+export function createCollection(db, collectionName) {
+	return (dispatch) => {
+		return request.post(`${Constants.API_URL}/api/collections/${db}/${collectionName}`)
+			.then(() => {
+				dispatch({ type: Constants.CREATE_COLLECTION, collectionName });
+				dispatch(showMessage('Collection created'));
+			})
+			.catch((err) => {
+				console.log('err', err.stack);
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
+			});
+	};
+}
+
 export function renameCollection(oldData, newName) {
 	return (dispatch) => {
 		return request.put(`${Constants.API_URL}/api/collections/${oldData.db}/${oldData.collection}`, { collection: newName })
@@ -168,7 +182,7 @@ export function renameCollection(oldData, newName) {
 			})
 			.catch((err) => {
 				console.log('err', err.stack);
-				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
 	};
 }
@@ -179,7 +193,7 @@ function removeDoc(db, collection, docId) {
 			.then(() => dispatch({ type: Constants.REMOVE_DOC, docId }))
 			.catch((err) => {
 				console.log('err', err.stack);
-				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
 	};
 }
@@ -206,7 +220,7 @@ function dropCollection(db, collection) {
 			})
 			.catch((err) => {
 				console.log('err', err.stack);
-				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
 	};
 }

@@ -7,27 +7,27 @@
 	background-color: color(c1);
 	color: #eceff1;
 
-	& > header {
+	h3:first-of-type, h4 {
+		margin-top: 0;
+	}
+
+	.serverUri {
+		font-size: .9em;
+	}
+
+	& > div {
 		@extend %flexbox-container;
+		flex-flow: row wrap;
 		flex: 0 0 auto;
+		justify-content: space-between;
 
-		h3:first-of-type {
-			margin-top: 0;
-		}
-
-		.serverUri {
-			font-size: .9em;
-		}
-
-		& > div {
-			@extend %flexbox-container;
-			flex-flow: row wrap;
-			justify-content: space-between;
+		select {
+			flex: 0 1 50%;
 			color: #000;
+		}
 
-			select {
-				flex: 0 1 50%;
-			}
+		&.collections {
+			margin-top: 3em;
 		}
 	}
 
@@ -47,12 +47,16 @@
 			text-decoration: none;
 
 			&:hover {
-				background-color: #00BCD4;
+				background-color: rgba(00, 188, 212, 1) !important;
 				color: #37474F;
 			}
 
 			svg {
 				margin-right: 10px;
+			}
+
+			&.active {
+				background-color: rgba(255, 255, 255, .1);
 			}
 		}
 	}

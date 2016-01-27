@@ -6,6 +6,7 @@ const DocCtrl = require('./../controllers/doc');
 module.exports = function() {
 	this.get('/api/databases', DatabaseCtrl.index);
 	this.get('/api/collections/:db', CollectionCtrl.index);
+	this.post('/api/collections/:db/:collection', CollectionCtrl.create);
 	this.put('/api/collections/:db/:collection', CollectionCtrl.rename);
 	this.del('/api/collections/:db/:collection', CollectionCtrl.drop);
 	this.get('/api/docs/:db/:collection', DocCtrl.index);

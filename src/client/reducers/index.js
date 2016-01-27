@@ -61,6 +61,8 @@ function collections(state = [], action) {
 			return action.collections.slice();
 		case Constants.SELECT_DB:
 			return [];
+		case Constants.CREATE_COLLECTION:
+			return [...state, action.collectionName].sort();
 		case Constants.RENAME_COLLECTION:
 			idx = state.indexOf(action.oldName);
 			if (idx > -1) {

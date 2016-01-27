@@ -15,7 +15,7 @@ const DatabaseCtrl = {
 			}
 			const adminDb = db.admin();
 			adminDb.listDatabases().then(function(dbs) {
-				res.json(_.pluck(dbs.databases, 'name'));
+				res.json(_.map(dbs.databases, 'name'));
 				db.close();
 				next();
 			}).catch(function(err2) {

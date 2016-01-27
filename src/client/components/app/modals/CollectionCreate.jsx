@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Link from '../../Tappable.jsx';
-import { renameCollection } from '../../../actions';
+import { createCollection } from '../../../actions';
 
-class CollectionRename extends React.Component {
+class CollectionCreate extends React.Component {
 	static propTypes = {
 		payload: React.PropTypes.shape({
 			db: React.PropTypes.string,
-			collection: React.PropTypes.string,
 		}).isRequired,
 		doDestroy: React.PropTypes.func.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
@@ -15,7 +14,7 @@ class CollectionRename extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { collectionName: this.props.payload.collection };
+		this.state = { collectionName: '' };
 	}
 
 	onChange(e) {
@@ -34,7 +33,7 @@ class CollectionRename extends React.Component {
 
 	save(e) {
 		e.preventDefault();
-		this.props.dispatch(renameCollection(this.props.payload, this.state.collectionName));
+		this.props.dispatch(createCollection(this.props.payload.db, this.state.collectionName));
 		this.props.doDestroy(e);
 	}
 
@@ -42,11 +41,11 @@ class CollectionRename extends React.Component {
 		return (
 			<div>
 				<header>
-					<h3>Rename collection</h3>
+					<h3>Add collection</h3>
 				</header>
 				<main>
 					<label>
-						<span>New name:</span>
+						<span>Collection name:</span>
 						<input type="text" value={this.state.collectionName} onChange={::this.onChange} onKeyDown={::this.onKeyDown} autoFocus />
 					</label>
 				</main>
@@ -59,10 +58,4 @@ class CollectionRename extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		selectedCollection: state.selectedCollection || '',
-	};
-}
-
-export default connect(mapStateToProps)(CollectionRename);
+export default connect()(CollectionCreate);
