@@ -15,6 +15,7 @@ export const DROP_COLLECTION = 'DROP_COLLECTION';
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 export const HIDE_MESSAGE = 'HIDE_MESSAGE';
 export const MESSAGE_ERROR = 'error';
+export const MESSAGE_SUCCESS = 'success';
 
 export const CONFIRMATION = 'CONFIRMATION';
 

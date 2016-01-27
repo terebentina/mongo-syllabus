@@ -9,12 +9,12 @@
 	align-items: center;
 	justify-content: center;
 	padding: 1em;
-	color: #ffffff;
 
 	&-error {
 		background: linear-gradient(to right, rgba(255,207,207,0) 25%,rgba(255,207,207,1) 25%,rgba(255,207,207,1) 75%,rgba(255,207,207,0) 75%);
 		//background-color: #ffcfcf;
 		//border-color: #F6A1A1;
+		color: #666;
 	}
 
 	&-success {
@@ -22,5 +22,6 @@
 		background: linear-gradient(to right, rgba(67,172,106,0) 25%,rgba(67,172,106,1) 25%,rgba(67,172,106,1) 75%,rgba(67,172,106,0) 75%);
 		//background-color: color(c4);
 		//border-color: darken(color(c4), 50%);
+		color: #ffffff;
 	}
 }

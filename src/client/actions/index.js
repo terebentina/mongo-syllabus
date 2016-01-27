@@ -128,7 +128,7 @@ export function fetchCollections(db) {
 	};
 }
 
-export function showMessage(message, type) {
+export function showMessage(message, type = Constants.MESSAGE_SUCCESS) {
 	return { type: Constants.SHOW_MESSAGE, message: message, messageType: type };
 }
 
@@ -162,7 +162,10 @@ function confirm(message, fn) {
 export function renameCollection(oldData, newName) {
 	return (dispatch) => {
 		return request.put(`${Constants.API_URL}/api/collections/${oldData.db}/${oldData.collection}`, { collection: newName })
-			.then(() => dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName }))
+			.then(() => {
+				dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName });
+				dispatch(showMessage('Collection renamed'));
+			})
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
@@ -197,7 +200,10 @@ export function confirmAndDropCollection(db, collection) {
 function dropCollection(db, collection) {
 	return (dispatch) => {
 		return request.delete(`${Constants.API_URL}/api/collections/${db}/${collection}`)
-			.then(() => dispatch({ type: Constants.DROP_COLLECTION, collection }))
+			.then(() => {
+				dispatch({ type: Constants.DROP_COLLECTION, collection });
+				dispatch(showMessage('Collection dropped'));
+			})
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(err.statusText, Constants.MESSAGE_ERROR));
