@@ -8,6 +8,7 @@ div.App-Collection {
 		@extend %flexbox-container;
 		flex-flow: row nowrap;
 		align-items: center;
+		flex: 0 1 auto;
 
 		h2 {
 			display: inline;
