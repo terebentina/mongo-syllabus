@@ -33,6 +33,7 @@ function selectedCollection(state = '', action) {
 		case Constants.SELECT_COLLECTION:
 			return action.collection;
 		case Constants.SELECT_DB:
+		case Constants.DROP_COLLECTION:
 			return '';
 		case Constants.RENAME_COLLECTION:
 			if (action.oldName === state) {
@@ -54,15 +55,22 @@ function databases(state = [], action) {
 }
 
 function collections(state = [], action) {
+	let idx;
 	switch (action.type) {
 		case Constants.RECEIVE_COLLECTIONS:
 			return action.collections.slice();
 		case Constants.SELECT_DB:
 			return [];
 		case Constants.RENAME_COLLECTION:
-			const idx = state.indexOf(action.oldName);
+			idx = state.indexOf(action.oldName);
 			if (idx > -1) {
 				return [...state.slice(0, idx), action.newName, ...state.slice(idx + 1)];
+			}
+			return state;
+		case Constants.DROP_COLLECTION:
+			idx = state.indexOf(action.collection);
+			if (idx > -1) {
+				return [...state.slice(0, idx), ...state.slice(idx + 1)];
 			}
 			return state;
 		default:
@@ -77,6 +85,7 @@ function filter(state = DEFAULT_FILTER, action) {
 			return Object.assign({}, state, action.filter);
 		case Constants.SELECT_DB:
 		case Constants.SELECT_COLLECTION:
+		case Constants.DROP_COLLECTION:
 			return Object.assign({}, DEFAULT_FILTER);
 		default:
 			return state;
@@ -96,6 +105,8 @@ function docs(state = [], action) {
 				return [...state.slice(0, idx), ...state.slice(idx + 1)];
 			}
 			return state;
+		case Constants.DROP_COLLECTION:
+			return [];
 		default:
 			return state;
 	}
