@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var AUTOPREFIXER_PARAMS = 'browsers=last 2 version';
+var autoprefixer = require('autoprefixer');
 
 var babelConfig = {
 	stage: 0,
@@ -18,10 +18,11 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelConfig, include: path.join(__dirname, 'src/client') },
-			{ test: /\.scss$/, loader: 'style!css?sourceMap!autoprefixer?' + AUTOPREFIXER_PARAMS + '!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
-			{ test: /\.css$/, loader: 'style!css?sourceMap!autoprefixer?' + AUTOPREFIXER_PARAMS },
+			{ test: /\.scss$/, loader: 'style!css?sourceMap!postcss!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
+			{ test: /\.css$/, loader: 'style!css?sourceMap!postcss' },
 		],
 	},
+	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
 		modulesDirectories: ['src', 'node_modules'],

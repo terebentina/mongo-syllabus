@@ -8,7 +8,6 @@ const app = restify.createServer({
 	version: '0.0.1',
 });
 
-// Start watching and bundling tests here
 const testConfig = require('./webpack.config.test');
 const testsCompiler = webpack(testConfig);
 
@@ -23,6 +22,7 @@ const compiler = webpack(config);
 app.use(require('webpack-dev-middleware')(compiler, {
 	noInfo: true,
 	publicPath: config.output.publicPath,
+	stats: { colors: true },
 }));
 
 app.use(require('webpack-hot-middleware')(compiler, {

@@ -1,9 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var hotMiddlewareScript = 'webpack-hot-middleware/client';
-//var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000';
-
-var AUTOPREFIXER_PARAMS = 'browsers=last 2 version';
+var autoprefixer = require('autoprefixer');
 
 var babelConfig = {
 	stage: 0,
@@ -30,7 +27,7 @@ var babelConfig = {
 module.exports = {
 	context: __dirname,
 	entry: {
-		app: [path.resolve(__dirname, './src/client/index'), hotMiddlewareScript],
+		app: [path.resolve(__dirname, './src/client/index'), 'webpack-hot-middleware/client'],
 	},
 	output: {
 		path: path.join(__dirname, 'static'),
@@ -42,14 +39,16 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelConfig, include: path.join(__dirname, 'src/client') },
-			{ test: /\.scss$/, loader: 'style!css?sourceMap!autoprefixer?' + AUTOPREFIXER_PARAMS + '!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
-			{ test: /\.css$/, loader: 'style!css?sourceMap!autoprefixer?' + AUTOPREFIXER_PARAMS },
+			{ test: /\.scss$/, loader: 'style!css?sourceMap!postcss!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
+			{ test: /\.css$/, loader: 'style!css?sourceMap!postcss' },
 		],
 	},
+	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
 	target: 'web',
-	//devtool: 'eval',
-	devtool: '#cheap-module-eval-source-map',
+	devtool: 'eval',
+	//devtool: '#cheap-module-eval-source-map',
 	plugins: [
+		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
 	],
