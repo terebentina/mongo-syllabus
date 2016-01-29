@@ -1,6 +1,8 @@
+sudo: false
 language: node_js
 node_js:
   - "node"
+script: npm run travis
 
 env:
   - CXX=g++-4.8

@@ -7,7 +7,8 @@
     "start": "node devServer.js",
     "build": "webpack --progress --colors --config webpack.production.config.js",
     "clean": "rm -rf build/",
-    "test": "testem ci"
+    "test": "testem",
+    "travis": "testem ci"
   },
   "author": "Dan Caragea",
   "license": "MIT",
@@ -42,6 +43,7 @@
     "babel-plugin-react-transform": "^1.1.1",
     "blue-tape": "^0.1.10",
     "css-loader": "^0.21.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "ghooks": "^1.0.3",
     "node-sass": "^3.4.1",
     "postcss-loader": "^0.8.0",
