@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from '../../actions';
-import Link from '../Tappable.jsx';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import './SideNav.scss';
@@ -49,15 +48,15 @@ export class SideNav extends React.Component {
 						<option value=""></option>
 						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
-					{this.props.selectedDb ? <Link href=""><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></Link> : null}
+					{this.props.selectedDb ? <a href="#"><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a> : null}
 				</div>
 				<div className="collections">
 					<h4>Collections</h4>
-					<Link onClickTap={::this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></Link>
+					<a onClick={::this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
 				</div>
 
 				<nav>
-					{this.props.collections.map((collection, i) => <Link key={`col_${i}`} className={collection == this.props.selectedCollection ? 'active' : ''} onClickTap={this.onCollectionSelect.bind(this, collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</Link>)}
+					{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? 'active' : ''} onClick={this.onCollectionSelect.bind(this, collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
 				</nav>
 			</aside>
 		);

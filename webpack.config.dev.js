@@ -45,8 +45,7 @@ module.exports = {
 	},
 	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
 	target: 'web',
-	devtool: 'eval',
-	//devtool: '#cheap-module-eval-source-map',
+	devtool: 'eval-source-map',
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),

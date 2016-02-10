@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Link from '../../Tappable.jsx';
 import { renameCollection } from '../../../actions';
 
 class CollectionRename extends React.Component {
@@ -51,7 +50,7 @@ class CollectionRename extends React.Component {
 					</label>
 				</main>
 				<footer className="actions">
-					<Link onClickTap={this.props.doDestroy}>Cancel</Link>
+					<a onClick={this.props.doDestroy}>Cancel</a>
 					<button onClick={::this.save}>Save</button>
 				</footer>
 			</div>

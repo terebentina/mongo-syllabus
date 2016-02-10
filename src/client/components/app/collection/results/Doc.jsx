@@ -2,7 +2,6 @@ import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
-import Link from '../../../Tappable.jsx';
 import { confirmAndRemoveDoc } from '../../../../actions';
 
 import './Doc.scss';
@@ -32,8 +31,8 @@ class Doc extends React.Component {
 		return (
 			<article>
 				<header>
-					<Link onClickTap={::this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></Link>
-					<Link onClickTap={::this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></Link>
+					<a onClick={::this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={::this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
 				</header>
 				<div>
 					<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>

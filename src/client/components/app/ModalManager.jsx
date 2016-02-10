@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { hideModal } from '../../actions/index';
 import CollectionRename from './modals/CollectionRename.jsx';
 import CollectionCreate from './modals/CollectionCreate.jsx';
-import Link from '../Tappable.jsx';
 
 import './ModalManager.scss';
 
@@ -31,7 +30,7 @@ export class ModalManager extends React.Component {
 			<div id="modals">
 				<div className="modal_wrapper">
 					<div className="modal">
-						<Link className="close" onClickTap={::this.destroy}><svg className="icon-close"><use xlinkHref="#icon-close"></use></svg></Link>
+						<a className="close" onClick={::this.destroy}><svg className="icon-close"><use xlinkHref="#icon-close"></use></svg></a>
 						<Modal payload={this.props.payload} doDestroy={::this.destroy} />
 					</div>
 				</div>

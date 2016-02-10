@@ -1,7 +1,6 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { pacomoDecorator } from '../../../../utils/pacomo';
-import Tap from '../../../Tappable.jsx';
 
 import './Pagination.scss';
 
@@ -62,7 +61,7 @@ class Pagination extends React.Component {
 			if (this.props.currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
-				links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+				links.push(<a key={`pag_${i}`} onClick={this.onPageClick.bind(this, i - 1)}>{i}</a>);
 			}
 		}
 		if (useN3) {
@@ -72,7 +71,7 @@ class Pagination extends React.Component {
 			if (this.props.currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
-				links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+				links.push(<a key={`pag_${i}`} onClick={this.onPageClick.bind(this, i - 1)}>{i}</a>);
 			}
 		}
 		if (useN6) {
@@ -82,14 +81,14 @@ class Pagination extends React.Component {
 			if (this.props.currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
-				links.push(<Tap key={`pag_${i}`} onClickTap={this.onPageClick.bind(this, i - 1)}>{i}</Tap>);
+				links.push(<a key={`pag_${i}`} onClick={this.onPageClick.bind(this, i - 1)}>{i}</a>);
 			}
 		}
 
 		if (this.props.currentPage == totalPages - 1) {
 			links.push(<span key="next">&gt;</span>);
 		} else {
-			links.push(<Tap key="next" className="next" onClickTap={this.onPageClick.bind(this, this.props.currentPage + 1)}>&gt;</Tap>);
+			links.push(<a key="next" className="next" onClick={this.onPageClick.bind(this, this.props.currentPage + 1)}>&gt;</a>);
 		}
 
 		return (
