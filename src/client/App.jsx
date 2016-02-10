@@ -9,16 +9,17 @@ import SideNav from './components/app/SideNav.jsx';
 import PageMessage from './components/app/PageMessage.jsx';
 import Confirm from './components/app/Confirm.jsx';
 import ModalManager from './components/app/ModalManager.jsx';
+import { PopoverWrapper } from '@terebentina/react-popover';
 
 import './app.scss';
 
 // named export here so we can test App output without redux
 export class App extends React.Component {
 	static propTypes = {
+		modalToShow: React.PropTypes.object,
 		message: React.PropTypes.object,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
-		modalToShow: React.PropTypes.object,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
@@ -39,11 +40,11 @@ export class App extends React.Component {
 		}
 
 		return (
-			<div className="app">
+			<PopoverWrapper className="app">
 				<PageMessage message={this.props.message} onHide={() => this.props.dispatch(hideMessage())} />
 				<Confirm />
 				<header>
-					<span className="title col">Mongo Syllabus</span>
+					<span className="title">Mongo Syllabus</span>
 				</header>
 				<main>
 					<SideNav />
@@ -51,7 +52,7 @@ export class App extends React.Component {
 				</main>
 				<footer>footer</footer>
 				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.modal} payload={this.props.modalToShow.payload} /> : null}
-			</div>
+			</PopoverWrapper>
 		);
 	}
 }

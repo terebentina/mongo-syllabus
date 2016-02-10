@@ -13,6 +13,7 @@
   "author": "Dan Caragea",
   "license": "MIT",
   "dependencies": {
+    "@terebentina/react-popover": "^1.0.2",
     "axios": "^0.7.0",
     "babel-runtime": "^5.0.0",
     "classnames": "^2.2.0",
@@ -43,6 +44,7 @@
     "babel-plugin-react-transform": "^1.1.1",
     "blue-tape": "^0.1.10",
     "css-loader": "^0.21.0",
+    "enzyme": "^1.4.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "ghooks": "^1.0.3",
     "node-sass": "^3.4.1",

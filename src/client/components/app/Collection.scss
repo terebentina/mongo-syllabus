@@ -15,7 +15,7 @@ div.App-Collection {
 			margin-right: 1em;
 		}
 
-		a {
+		> a, a.popover__trigger {
 			@extend %icon-link;
 		}
 	}
