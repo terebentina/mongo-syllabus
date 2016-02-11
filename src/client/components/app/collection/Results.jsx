@@ -7,7 +7,6 @@ import Doc from './results/Doc.jsx';
 
 import './Results.scss';
 
-@pacomoDecorator
 class Results extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
@@ -35,4 +34,4 @@ class Results extends React.Component {
 	}
 }
 
-export default connect()(Results);
+export default connect()(pacomoDecorator(Results));

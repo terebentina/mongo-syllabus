@@ -9,7 +9,6 @@ import Popover from '@terebentina/react-popover';
 
 import './Collection.scss';
 
-@pacomoDecorator
 export class Collection extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
@@ -76,4 +75,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Collection);
+export default connect(mapStateToProps)(pacomoDecorator(Collection));

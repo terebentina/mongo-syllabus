@@ -7,7 +7,6 @@ import './Pagination.scss';
 const countOut = 2;
 const countIn = 2;
 
-@pacomoDecorator
 class Pagination extends React.Component {
 	static propTypes = {
 		total: React.PropTypes.number.isRequired,
@@ -99,4 +98,4 @@ class Pagination extends React.Component {
 	}
 }
 
-export default Pagination;
+export default pacomoDecorator(Pagination);

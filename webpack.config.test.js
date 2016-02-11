@@ -2,11 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
-var babelConfig = {
-	stage: 0,
-	optional: ['runtime'],
-};
-
 module.exports = {
 	entry: {
 		test: [path.join(__dirname, 'tests.bootstrap.js')],
@@ -17,7 +12,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx?$/, loader: 'babel', query: babelConfig, include: path.join(__dirname, 'src/client') },
+			{ test: /\.jsx?$/, loader: 'babel', include: path.join(__dirname, 'src/client') },
 			{ test: /\.scss$/, loader: 'style!css?sourceMap!postcss!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
 			{ test: /\.css$/, loader: 'style!css?sourceMap!postcss' },
 		],

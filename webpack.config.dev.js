@@ -2,28 +2,6 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
-var babelConfig = {
-	stage: 0,
-	optional: ['runtime'],
-	env: {
-		development: {
-			plugins: ['react-transform'],
-			extra: {
-				'react-transform': {
-					transforms: [{
-						transform: 'react-transform-hmr',
-						imports: ['react'],
-						locals: ['module'],
-					}, {
-						transform: 'react-transform-catch-errors',
-						imports: ['react', 'redbox-react'],
-					}],
-				},
-			},
-		},
-	},
-};
-
 module.exports = {
 	context: __dirname,
 	entry: {
@@ -38,9 +16,9 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx?$/, loader: 'babel', query: babelConfig, include: path.join(__dirname, 'src/client') },
-			{ test: /\.scss$/, loader: 'style!css?sourceMap!postcss!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
-			{ test: /\.css$/, loader: 'style!css?sourceMap!postcss' },
+			{ test: /\.jsx?$/, loader: 'babel', include: path.join(__dirname, 'src/client') },
+			{ test: /\.scss$/, loader: 'style!css?sourceMap!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
+			{ test: /\.css$/, loader: 'style!css?sourceMap' },
 		],
 	},
 	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],

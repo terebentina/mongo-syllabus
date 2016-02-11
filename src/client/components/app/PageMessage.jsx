@@ -6,7 +6,6 @@ import './PageMessage.scss';
 
 const duration = 4000;
 
-@pacomoDecorator
 class PageMessage extends React.Component {
 	static propTypes = {
 		message: React.PropTypes.object,
@@ -27,4 +26,4 @@ class PageMessage extends React.Component {
 	}
 }
 
-export default PageMessage;
+export default pacomoDecorator(PageMessage);
