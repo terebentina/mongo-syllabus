@@ -1,4 +1,5 @@
-@import "mixins";
+@import "./mixins";
+@import "../../node_modules/@terebentina/react-popover/lib/styles.css";
 
 * {
 	box-sizing: border-box;
@@ -18,8 +19,27 @@ body,
 	flex: 1 0 auto;
 }
 
+
+.row {
+	display: flex;
+	flex-flow: row nowrap;
+	align-content: flex-start;
+	flex: 1 0 auto;
+}
+
+.column {
+	display: flex;
+	flex-flow: column nowrap;
+	align-content: flex-start;
+	flex: 1 0 auto;
+}
+
+.centered {
+	justify-content: center;
+}
+
+
 .app {
-	@extend %flexbox-container;
 	min-height: 100vh;
 
 	div {
@@ -28,6 +48,7 @@ body,
 
 	a {
 		color: #551a8b;
+		cursor: pointer;
 
 		&:hover {
 			color: color(c2);
@@ -36,13 +57,14 @@ body,
 			color: color(c3);
 			background: #F5F5F5;
 		}
+
+		span, svg {
+			cursor: pointer;
+		}
 	}
 
 	& > header {
-		@extend %flexbox-container;
-		flex-wrap: nowrap;
-		flex: 0 0 auto;
-		height: 3em;
+		flex: 0 0 3em;
 		justify-content: center;
 		border: none;
 		z-index: zIndex(header);
@@ -57,14 +79,12 @@ body,
 	& > footer {
 		flex-grow: 0;
 		height: 3em;
-		@extend %flexbox-container;
 		align-items: center;
 		align-self: center;
 	}
 
 	& > main {
-		@extend %flexbox-container;
-		flex-direction: row;
+		flex: 1 0 0;
 		padding: 5px;
 		background-color: #F5F5F5;
 

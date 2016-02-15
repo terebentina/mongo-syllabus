@@ -29,6 +29,8 @@ export class App extends React.Component {
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
+	onHide = () => this.props.dispatch(hideMessage());
+
 	render() {
 		let content;
 		if (!this.props.selectedDb) {
@@ -40,17 +42,17 @@ export class App extends React.Component {
 		}
 
 		return (
-			<PopoverWrapper className="app">
-				<PageMessage message={this.props.message} onHide={() => this.props.dispatch(hideMessage())} />
+			<PopoverWrapper className="app column">
+				<PageMessage message={this.props.message} onHide={this.onHide} />
 				<Confirm />
-				<header>
+				<header className="column">
 					<span className="title">Mongo Syllabus</span>
 				</header>
-				<main>
+				<main className="row">
 					<SideNav />
 					{content}
 				</main>
-				<footer>footer</footer>
+				<footer className="column">2016 Dan Caragea</footer>
 				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.modal} payload={this.props.modalToShow.payload} /> : null}
 			</PopoverWrapper>
 		);

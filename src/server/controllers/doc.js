@@ -14,12 +14,11 @@ const DocCtrl = {
 		let query = {};
 		try {
 			if (req.query.query) {
-				console.log('req.query.query', req.query.query);
 				query = JSON.parse(req.query.query);
 			}
 		} catch (err) {
 			console.log('err', err.stack);
-			next(err);
+			return next(err);
 		}
 
 		const p = parseInt(req.query.p, 10) || 0;
@@ -27,7 +26,7 @@ const DocCtrl = {
 
 		const dbUrl = `${url}/${dbName}`;
 
-		MongoClient.connect(dbUrl, function(err, db) {
+		MongoClient.connect(dbUrl, (err, db) => {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
@@ -37,7 +36,7 @@ const DocCtrl = {
 			Promise.all([
 				collection.find(query).skip(p * limit).limit(limit).toArray(),
 				collection.count(query),
-			]).then(function(arr) {
+			]).then((arr) => {
 				const json = {
 					results: arr[0],
 					total: arr[1],
@@ -51,7 +50,7 @@ const DocCtrl = {
 				db.close();
 				res.json(json);
 				next();
-			}).catch(function(err2) {
+			}).catch((err2) => {
 				db.close();
 				console.log('err', err2.stack);
 				next(err2);
@@ -62,17 +61,17 @@ const DocCtrl = {
 	remove(req, res, next) {
 		// warning!!! req.params are not sanitized!!! @todo
 		const dbUrl = `${url}/${req.params.db}`;
-		MongoClient.connect(dbUrl, function(err, db) {
+		MongoClient.connect(dbUrl, (err, db) => {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
 			}
 			const collection = db.collection(req.params.collection);
-			collection.findOneAndDelete({ _id: new ObjectId(req.params.docId) }).then(function(result) {
+			collection.findOneAndDelete({ _id: new ObjectId(req.params.docId) }).then((/*result*/) => {
 				db.close();
 				res.send(204, '');
 				next();
-			}).catch(function(err2) {
+			}).catch((err2) => {
 				db.close();
 				console.log('err', err2.stack);
 				next(err2);

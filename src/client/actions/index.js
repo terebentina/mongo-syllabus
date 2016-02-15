@@ -38,7 +38,7 @@ function requestCollections(db) {
 function receiveCollections(db, json) {
 	return {
 		type: Constants.RECEIVE_COLLECTIONS,
-		db: db,
+		db,
 		collections: json,
 	};
 }
@@ -129,7 +129,7 @@ export function fetchCollections(db) {
 }
 
 export function showMessage(message, type = Constants.MESSAGE_SUCCESS) {
-	return { type: Constants.SHOW_MESSAGE, message: message, messageType: type };
+	return { type: Constants.SHOW_MESSAGE, message, messageType: type };
 }
 
 export function hideMessage() {

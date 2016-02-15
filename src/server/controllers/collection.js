@@ -14,17 +14,17 @@ const CollectionCtrl = {
 	index(req, res, next) {
 		// warning!!! req.params is not sanitized!!! @todo
 		const dbUrl = `${url}/${req.params.db}`;
-		MongoClient.connect(dbUrl, function(err, db) {
+		MongoClient.connect(dbUrl, (err, db) => {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
 			}
-			db.listCollections().toArray().then(function(colls) {
+			db.listCollections().toArray().then((colls) => {
 				const collections = _.map(colls, 'name');
 				res.json(collections);
 				db.close();
 				next();
-			}).catch(function(err2) {
+			}).catch((err2) => {
 				db.close();
 				console.log('err', err2.stack);
 				next(err2);
@@ -47,17 +47,17 @@ const CollectionCtrl = {
 			return next(new restify.InvalidContentError('Invalid collection name'));
 		}
 
-		MongoClient.connect(dbUrl, function(err, db) {
+		MongoClient.connect(dbUrl, (err, db) => {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
 			}
 
-			db.createCollection(collectionName).then(function() {
+			db.createCollection(collectionName).then(() => {
 				db.close();
 				res.send(204, '');
 				next();
-			}).catch(function(err2) {
+			}).catch((err2) => {
 				db.close();
 				console.log('err', err2.stack);
 				next(err2);
@@ -80,17 +80,17 @@ const CollectionCtrl = {
 			return next(new restify.InvalidContentError('Invalid collection name'));
 		}
 
-		MongoClient.connect(dbUrl, function(err, db) {
+		MongoClient.connect(dbUrl, (err, db) => {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
 			}
 
-			db.renameCollection(req.params.collection, newCollectionName).then(function() {
+			db.renameCollection(req.params.collection, newCollectionName).then(() => {
 				db.close();
 				res.send(204, '');
 				next();
-			}).catch(function(err2) {
+			}).catch((err2) => {
 				db.close();
 				console.log('err', err2.stack);
 				next(err2);
@@ -108,17 +108,17 @@ const CollectionCtrl = {
 		// warning!!! req.params is not sanitized!!! @todo
 		const dbUrl = `${url}/${req.params.db}`;
 
-		MongoClient.connect(dbUrl, function(err, db) {
+		MongoClient.connect(dbUrl, (err, db) => {
 			if (err) {
 				console.log('err', err.stack);
 				return next(err);
 			}
 
-			db.dropCollection(req.params.collection).then(function() {
+			db.dropCollection(req.params.collection).then(() => {
 				db.close();
 				res.send(204, '');
 				next();
-			}).catch(function(err2) {
+			}).catch((err2) => {
 				db.close();
 				console.log('err', err2.stack);
 				next(err2);
