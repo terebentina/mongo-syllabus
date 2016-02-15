@@ -18,21 +18,21 @@ class Doc extends React.Component {
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
-	onEditClick(e) {
+	onEditClick = (e) => {
 		e.preventDefault();
-	}
+	};
 
-	onDeleteClick(e) {
+	onDeleteClick = (e) => {
 		e.preventDefault();
 		this.props.dispatch(confirmAndRemoveDoc(this.props.selectedDb, this.props.selectedCollection, this.props.doc._id));
-	}
+	};
 
 	render() {
 		return (
 			<article>
 				<header>
-					<a onClick={::this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
-					<a onClick={::this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
+					<a onClick={this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
 				</header>
 				<div>
 					<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>

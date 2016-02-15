@@ -22,20 +22,20 @@ export class SideNav extends React.Component {
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
-	onDbSelect(e) {
+	onDbSelect = (e) => {
 		e.preventDefault();
 		this.props.dispatch(selectDb(e.target.value));
-	}
+	};
 
-	onCollectionSelect(collection, e) {
+	onCollectionSelect = (collection) => (e) => {
 		e.preventDefault();
 		this.props.dispatch(selectAndSearchDocs(collection));
-	}
+	};
 
-	onAddCollectionClick(e) {
+	onAddCollectionClick = (e) => {
 		e.preventDefault();
 		this.props.dispatch(showModal('CollectionCreate', { db: this.props.selectedDb }));
-	}
+	};
 
 	render() {
 		return (
@@ -44,7 +44,7 @@ export class SideNav extends React.Component {
 				<span className="serverUri">mongodb://192.168.55.103:27017</span>
 				<h3>Databases:</h3>
 				<div>
-					<select value={this.props.selectedDb} onChange={::this.onDbSelect}>
+					<select value={this.props.selectedDb} onChange={this.onDbSelect}>
 						<option value=""></option>
 						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
@@ -52,11 +52,11 @@ export class SideNav extends React.Component {
 				</div>
 				<div className="collections">
 					<h4>Collections</h4>
-					<a onClick={::this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
+					<a onClick={this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
 				</div>
 
 				<nav>
-					{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? 'active' : ''} onClick={this.onCollectionSelect.bind(this, collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
+					{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? 'active' : ''} onClick={this.onCollectionSelect(collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
 				</nav>
 			</aside>
 		);

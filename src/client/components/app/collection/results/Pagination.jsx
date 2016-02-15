@@ -17,10 +17,10 @@ class Pagination extends React.Component {
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
-	onPageClick(pageNum, e) {
+	onPageClick = (pageNum) => (e) => {
 		e.preventDefault();
 		this.props.onPageLoadRequest(pageNum);
-	}
+	};
 
 	render() {
 		if (!this.props.total) {
@@ -52,7 +52,7 @@ class Pagination extends React.Component {
 		if (this.props.currentPage == 0) {
 			links.push(<span key="prev" className="previous">&lt;</span>);
 		} else {
-			links.push(<Tap key="prev" className="previous" onClickTap={this.onPageClick.bind(this, this.props.currentPage - 1)}>&lt;</Tap>);
+			links.push(<a key="prev" className="previous" onClick={this.onPageClick(this.props.currentPage - 1)}>&lt;</a>);
 		}
 
 		// Generate links data in accordance with calculated numbers
@@ -60,7 +60,7 @@ class Pagination extends React.Component {
 			if (this.props.currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
-				links.push(<a key={`pag_${i}`} onClick={this.onPageClick.bind(this, i - 1)}>{i}</a>);
+				links.push(<a key={`pag_${i}`} onClick={this.onPageClick(i - 1)}>{i}</a>);
 			}
 		}
 		if (useN3) {
@@ -70,7 +70,7 @@ class Pagination extends React.Component {
 			if (this.props.currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
-				links.push(<a key={`pag_${i}`} onClick={this.onPageClick.bind(this, i - 1)}>{i}</a>);
+				links.push(<a key={`pag_${i}`} onClick={this.onPageClick(i - 1)}>{i}</a>);
 			}
 		}
 		if (useN6) {
@@ -80,14 +80,14 @@ class Pagination extends React.Component {
 			if (this.props.currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
-				links.push(<a key={`pag_${i}`} onClick={this.onPageClick.bind(this, i - 1)}>{i}</a>);
+				links.push(<a key={`pag_${i}`} onClick={this.onPageClick(i - 1)}>{i}</a>);
 			}
 		}
 
 		if (this.props.currentPage == totalPages - 1) {
 			links.push(<span key="next">&gt;</span>);
 		} else {
-			links.push(<a key="next" className="next" onClick={this.onPageClick.bind(this, this.props.currentPage + 1)}>&gt;</a>);
+			links.push(<a key="next" className="next" onClick={this.onPageClick(this.props.currentPage + 1)}>&gt;</a>);
 		}
 
 		return (
