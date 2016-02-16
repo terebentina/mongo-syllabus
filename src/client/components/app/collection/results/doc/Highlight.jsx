@@ -26,9 +26,9 @@ class Highlight extends React.Component {
 
 	render() {
 		return (
-			<code ref="code" className={this.props.className}>
+			<pre ref="code" className={this.props.className}>
 				{this.props.children}
-			</code>
+			</pre>
 		);
 	}
 }
