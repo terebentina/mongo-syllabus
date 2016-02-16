@@ -2,7 +2,7 @@ import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
-import { confirmAndRemoveDoc } from '../../../../actions';
+import { confirmAndRemoveDoc } from '../../../../../actions';
 
 import './Doc.scss';
 

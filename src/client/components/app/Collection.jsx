@@ -20,6 +20,8 @@ export class Collection extends React.Component {
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
+	state = { viewMode: 'json' };
+
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	onNewQuery = (filter) => {
@@ -44,25 +46,30 @@ export class Collection extends React.Component {
 		e.preventDefault();
 	};
 
+	setViewMode = (mode) => (e) => {
+		e.preventDefault();
+		this.setState({ viewMode: mode });
+	};
+
 	render() {
 		if (!this.props.selectedDb || !this.props.selectedCollection) {
 			return null;
 		}
 		return (
-			<div>
-				<header>
+			<div className="App-Collection column">
+				<header className="row">
 					<h2>{`Collection: ${this.props.selectedCollection}`}</h2>
 					<a onClick={this.onInfoClick}><svg className="icon-info"><use xlinkHref="#icon-info"></use></svg></a>
 					<a onClick={this.onRenameClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
 					<a onClick={this.onDropClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
 					<a href="#"><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
 					<Popover className="menu" position="bottom" trigger={<svg className="icon-visibility"><use xlinkHref="#icon-visibility"></use></svg>}>
-						<a href="#">as Json</a>
-						<a href="#">as table</a>
+						<a href="" onClick={this.setViewMode('json')}>as Json</a>
+						<a href="" onClick={this.setViewMode('table')}>as table</a>
 					</Popover>
 				</header>
 				<QueryBox dispatch={this.props.dispatch} onSubmit={this.onNewQuery} />
-				<Results selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={this.onPageLoad} />
+				<Results viewMode={this.state.viewMode} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={this.onPageLoad} />
 			</div>
 		);
 	}
@@ -81,4 +88,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(pacomoDecorator(Collection));
+export default connect(mapStateToProps)(Collection);

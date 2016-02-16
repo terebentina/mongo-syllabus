@@ -1,10 +1,13 @@
-@import "../../../../mixins";
+@import "../../../../../mixins";
 
-.App-Results-docs {
+.App-Results .docs {
+	@extend %flexbox-container;
+	flex: 0 0 auto;
 
 	article {
 		width: 50vw;
 		@extend %flexbox-container;
+		margin-bottom: 1em;
 
 		& > header {
 			display: flex;

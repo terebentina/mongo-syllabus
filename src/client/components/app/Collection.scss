@@ -1,12 +1,9 @@
 @import "../../mixins";
 
 div.App-Collection {
-	@extend %flexbox-container;
 	padding-left: 1em;
 
 	& > header {
-		@extend %flexbox-container;
-		flex-flow: row nowrap;
 		align-items: center;
 		flex: 0 1 auto;
 
