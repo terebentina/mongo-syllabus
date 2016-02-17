@@ -10,6 +10,7 @@ class Doc extends React.Component {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		doc: React.PropTypes.object.isRequired,
+		types: React.PropTypes.object.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
@@ -28,24 +29,28 @@ class Doc extends React.Component {
 		return (
 			<tr>
 				<td></td>
-				{Object.keys(this.props.doc).map((prop) => <td key={prop}>{formatValue(this.props.doc[prop])}</td>)}
+				{Object.keys(this.props.types).map((prop) => <td key={prop} className={this.props.types[prop]}>{formatValue(this.props.doc[prop], this.props.types[prop])}</td>)}
 			</tr>
 		);
 	}
 }
 
-function formatValue(val) {
-	const type = getPropertyType(val);
+function formatValue(val, type) {
+	if (typeof val == 'undefined') {
+		return <div className="undefined">&nbsp;</div>;
+	}
 	if (type == 'array') {
-		return `Array[${val.length}]`;
+		const len = val.length;
+		return `[${len ? len : ' '}]`;
 	} else if (type == 'object') {
-		return `Object{${Object.keys(val).length}}`;
-	} else if (type == 'objectId') {
-		return `ObjectID(${val})`;
+		const len = Object.keys(val).length;
+		return `{${len ? len : ' '}}`;
+	//} else if (type == 'objectId') {
+	//	return `oid(${val})`;
 	} else if (type == 'boolean') {
 		return val ? 'true' : 'false';
-	} else if (type == 'string') {
-		return val ? val : '""';
+	//} else if (type == 'string') {
+	//	return val ? val : '""';
 	}
 	return val;
 }
