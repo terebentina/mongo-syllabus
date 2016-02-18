@@ -192,6 +192,14 @@ function modalToShow(state = null, action) {
 	return state;
 }
 
+function viewMode(state = 'json', action) {
+	if (action.type == Constants.SET_VIEW_MODE) {
+		return action.mode;
+	}
+
+	return state;
+}
+
 const rootReducer = combineReducers({
 	databases,
 	selectedDb,
@@ -205,6 +213,7 @@ const rootReducer = combineReducers({
 	message,
 	confirmation,
 	modalToShow,
+	viewMode,
 });
 
 export default rootReducer;

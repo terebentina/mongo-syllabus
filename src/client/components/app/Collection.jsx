@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { pacomoDecorator } from '../../utils/pacomo';
-import { searchDocs, fetchDocs, showModal, confirmAndDropCollection } from '../../actions';
+import { searchDocs, fetchDocs, showModal, confirmAndDropCollection, setViewMode } from '../../actions';
 import QueryBox from './collection/QueryBox.jsx';
 import Results from './collection/Results.jsx';
 import Popover from '@terebentina/react-popover';
@@ -11,6 +10,7 @@ import './Collection.scss';
 
 export class Collection extends React.Component {
 	static propTypes = {
+		viewMode: React.PropTypes.string.isRequired,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		filter: React.PropTypes.object.isRequired,
@@ -19,8 +19,6 @@ export class Collection extends React.Component {
 		currentPage: React.PropTypes.number.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
-
-	state = { viewMode: 'json' };
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
@@ -48,7 +46,7 @@ export class Collection extends React.Component {
 
 	setViewMode = (mode) => (e) => {
 		e.preventDefault();
-		this.setState({ viewMode: mode });
+		this.props.dispatch(setViewMode(mode));
 	};
 
 	render() {
@@ -69,7 +67,7 @@ export class Collection extends React.Component {
 					</Popover>
 				</header>
 				<QueryBox dispatch={this.props.dispatch} onSubmit={this.onNewQuery} />
-				<Results viewMode={this.state.viewMode} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={this.onPageLoad} />
+				<Results viewMode={this.props.viewMode} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={this.onPageLoad} />
 			</div>
 		);
 	}
@@ -85,6 +83,7 @@ function mapStateToProps(state) {
 		docs: state.docs || emptyArr,
 		totalDocs: state.totalDocs || 0,
 		currentPage: state.currentPage || 0,
+		viewMode: state.viewMode || 'json',
 	};
 }
 

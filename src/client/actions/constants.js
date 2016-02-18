@@ -13,6 +13,8 @@ export const CREATE_COLLECTION = 'CREATE_COLLECTION';
 export const RENAME_COLLECTION = 'RENAME_COLLECTION';
 export const DROP_COLLECTION = 'DROP_COLLECTION';
 
+export const SET_VIEW_MODE = 'SET_VIEW_MODE';
+
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 export const HIDE_MESSAGE = 'HIDE_MESSAGE';
 export const MESSAGE_ERROR = 'error';

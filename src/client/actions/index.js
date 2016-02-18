@@ -160,8 +160,8 @@ function confirm(message, fn) {
 }
 
 export function createCollection(db, collectionName) {
-	return (dispatch) => {
-		return request.post(`${Constants.API_URL}/api/collections/${db}/${collectionName}`)
+	return (dispatch) =>
+		request.post(`${Constants.API_URL}/api/collections/${db}/${collectionName}`)
 			.then(() => {
 				dispatch({ type: Constants.CREATE_COLLECTION, collectionName });
 				dispatch(showMessage('Collection created'));
@@ -170,12 +170,11 @@ export function createCollection(db, collectionName) {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
-	};
 }
 
 export function renameCollection(oldData, newName) {
-	return (dispatch) => {
-		return request.put(`${Constants.API_URL}/api/collections/${oldData.db}/${oldData.collection}`, { collection: newName })
+	return (dispatch) =>
+		request.put(`${Constants.API_URL}/api/collections/${oldData.db}/${oldData.collection}`, { collection: newName })
 			.then(() => {
 				dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName });
 				dispatch(showMessage('Collection renamed'));
@@ -184,18 +183,16 @@ export function renameCollection(oldData, newName) {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
-	};
 }
 
 function removeDoc(db, collection, docId) {
-	return (dispatch) => {
-		return request.delete(`${Constants.API_URL}/api/docs/${db}/${collection}/${docId}`)
+	return (dispatch) =>
+		request.delete(`${Constants.API_URL}/api/docs/${db}/${collection}/${docId}`)
 			.then(() => dispatch({ type: Constants.REMOVE_DOC, docId }))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
-	};
 }
 
 
@@ -212,8 +209,8 @@ export function confirmAndDropCollection(db, collection) {
 }
 
 function dropCollection(db, collection) {
-	return (dispatch) => {
-		return request.delete(`${Constants.API_URL}/api/collections/${db}/${collection}`)
+	return (dispatch) =>
+		request.delete(`${Constants.API_URL}/api/collections/${db}/${collection}`)
 			.then(() => {
 				dispatch({ type: Constants.DROP_COLLECTION, collection });
 				dispatch(showMessage('Collection dropped'));
@@ -222,7 +219,6 @@ function dropCollection(db, collection) {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
 			});
-	};
 }
 
 export function showModal(modal, payload) {
@@ -237,5 +233,12 @@ export function hideModal() {
 	document.documentElement.classList.remove('modal_open');
 	return {
 		type: Constants.HIDE_MODAL,
+	};
+}
+
+export function setViewMode(mode) {
+	return {
+		type: Constants.SET_VIEW_MODE,
+		mode,
 	};
 }
