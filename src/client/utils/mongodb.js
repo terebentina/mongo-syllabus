@@ -5,14 +5,16 @@ export function typesFromResults(docs) {
 	docs.forEach((doc) => {
 		_.each(doc, (v, k) => {
 			if (!types[k] || types[k] == 'null') {
-				types[k] = getPropertyType(v);
+				types[k] = getType(v);
 			}
 		});
 	});
 	return types;
 }
 
-export function getPropertyType(prop) {
+const dateStringTest = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{1,3}Z$/;
+
+export function getType(prop) {
 	if (prop === null || prop === undefined) {
 		return 'null';
 	}
@@ -26,18 +28,22 @@ export function getPropertyType(prop) {
 	if (isObjectId(prop)) {
 		return 'objectId';
 	}
-	if (_.isString(prop)) {
-		return 'string';
-	}
 	if (_.isArray(prop)) {
 		return 'array';
 	}
-	// it'll never be a date here
+	if (_.isObject(prop)) {
+		return 'object';
+	}
+	// it'll never be a date here because json not bson
 	if (_.isDate(prop)) {
 		return 'date';
 	}
-	if (_.isObject(prop)) {
-		return 'object';
+	// keep this above the isString check
+	if (dateStringTest.test(prop)) {
+		return 'date';
+	}
+	if (_.isString(prop)) {
+		return 'string';
 	}
 }
 
