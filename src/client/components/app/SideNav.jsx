@@ -18,7 +18,7 @@ export class SideNav extends React.Component {
 		if (nextProps.selectedDb !== this.props.selectedDb) {
 			nextProps.dispatch(fetchCollections(nextProps.selectedDb));
 		}
-	}
+	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 

@@ -12,16 +12,13 @@ class CollectionRename extends React.Component {
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
-	constructor(props) {
-		super(props);
-		this.state = { collectionName: this.props.payload.collection };
-	}
+	state = { collectionName: this.props.payload.collection };
 
-	onChange(e) {
+	onChange = (e) => {
 		this.setState({ collectionName: e.target.value });
-	}
+	};
 
-	onKeyDown(e) {
+	onKeyDown = (e) => {
 		if (e.keyCode == 13) {
 			// on enter
 			this.save(e);
@@ -29,13 +26,13 @@ class CollectionRename extends React.Component {
 			// on esc
 			this.props.doDestroy(e);
 		}
-	}
+	};
 
-	save(e) {
+	save = (e) => {
 		e.preventDefault();
 		this.props.dispatch(renameCollection(this.props.payload, this.state.collectionName));
 		this.props.doDestroy(e);
-	}
+	};
 
 	render() {
 		return (
@@ -46,12 +43,12 @@ class CollectionRename extends React.Component {
 				<main>
 					<label>
 						<span>New name:</span>
-						<input type="text" value={this.state.collectionName} onChange={::this.onChange} onKeyDown={::this.onKeyDown} autoFocus />
+						<input type="text" value={this.state.collectionName} onChange={this.onChange} onKeyDown={this.onKeyDown} autoFocus />
 					</label>
 				</main>
 				<footer className="actions">
 					<a onClick={this.props.doDestroy}>Cancel</a>
-					<button onClick={::this.save}>Save</button>
+					<button onClick={this.save}>Save</button>
 				</footer>
 			</div>
 		);

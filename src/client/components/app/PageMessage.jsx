@@ -16,7 +16,7 @@ class PageMessage extends React.Component {
 		if (nextProps.message !== this.props.message && nextProps.message !== null) {
 			setTimeout(this.props.onHide, duration);
 		}
-	}
+	};
 
 	render() {
 		if (this.props.message) {

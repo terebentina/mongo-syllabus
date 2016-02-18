@@ -16,13 +16,13 @@ class Highlight extends React.Component {
 
 	componentDidMount = () => {
 		hightlight(this.refs.code);
-	}
+	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	componentDidUpdate = () => {
 		hightlight(this.refs.code);
-	}
+	};
 
 	render() {
 		return (
