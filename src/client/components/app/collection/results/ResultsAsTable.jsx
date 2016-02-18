@@ -15,15 +15,15 @@ class ResultsAsTable extends React.Component {
 
 	state = { types: {} };
 
-	componentWillMount() {
+	componentWillMount = () => {
 		this.setState({ types: typesFromResults(this.props.results) });
-	}
+	};
 
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.results != this.props.results) {
 			this.setState({ types: typesFromResults(nextProps.results) });
 		}
-	}
+	};
 
 	render() {
 		return (

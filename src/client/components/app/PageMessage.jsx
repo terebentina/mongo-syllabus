@@ -12,7 +12,7 @@ class PageMessage extends React.Component {
 		onHide: React.PropTypes.func.isRequired,
 	};
 
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.message !== this.props.message && nextProps.message !== null) {
 			setTimeout(this.props.onHide, duration);
 		}

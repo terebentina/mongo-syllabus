@@ -14,13 +14,13 @@ class Highlight extends React.Component {
 		className: React.PropTypes.string.isRequired,
 	};
 
-	componentDidMount() {
+	componentDidMount = () => {
 		hightlight(this.refs.code);
 	}
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
-	componentDidUpdate() {
+	componentDidUpdate = () => {
 		hightlight(this.refs.code);
 	}
 

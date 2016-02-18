@@ -14,7 +14,7 @@ export class SideNav extends React.Component {
 		dispatch: React.PropTypes.func.isRequired,
 	};
 
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.selectedDb !== this.props.selectedDb) {
 			nextProps.dispatch(fetchCollections(nextProps.selectedDb));
 		}
