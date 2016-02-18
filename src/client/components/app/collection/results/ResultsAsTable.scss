@@ -1,51 +1,16 @@
 .table {
-	font-size: 90%;
+	margin-bottom: 1em;
 
-	tr {
-		border: 1px solid #ddd;
-		border-right: none;
-	}
-	td {
-		max-width: 10vw;
-		overflow: hidden;
-		border-right: 1px solid #ddd;
-		padding: 5px;
-		vertical-align: top;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-
-		.undefined {
-			background-color: #ddd;
-			width: 100%;
+	thead {
+		tr {
+			border: 1px solid #ddd;
+			border-right: none;
 		}
 
-		&.boolean {
-			text-align: center;
-			font-style: italic;
-			color: #551a8b;
+		th {
+			padding: 5px;
+			border-right: 1px solid #ddd;
+			font-size: 80%;
 		}
-
-		&.number {
-			text-align: right;
-			color: darkblue;
-		}
-
-		&.array, &.object {
-			text-align: center;
-			color: darkgreen;
-		}
-
-		&.string {
-			color: #555555;
-		}
-
-		&.objectId {
-			color: #e74c3c;
-		}
-	}
-
-	th {
-		padding: 5px;
-		border-right: 1px solid #ddd;
 	}
 }

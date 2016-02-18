@@ -1,9 +1,8 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { confirmAndRemoveDoc } from '../../../../../actions';
-import { getPropertyType } from '../../../../../utils/mongodb';
 
-//import './Doc.scss';
+import './Doc.scss';
 
 class Doc extends React.Component {
 	static propTypes = {
@@ -28,7 +27,10 @@ class Doc extends React.Component {
 	render() {
 		return (
 			<tr>
-				<td></td>
+				<td className="actions">
+					<a onClick={this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
+				</td>
 				{Object.keys(this.props.types).map((prop) => <td key={prop} className={this.props.types[prop]}>{formatValue(this.props.doc[prop], this.props.types[prop])}</td>)}
 			</tr>
 		);

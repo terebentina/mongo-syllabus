@@ -1,0 +1,58 @@
+@import "../../../../../mixins";
+
+.table {
+	.actions {
+		display: flex;
+		flex-flow: row nowrap;
+		flex-shrink: 0;
+		font-size: 100%;
+
+		a {
+			@extend %icon-link;
+		}
+	}
+
+	tr {
+		border: 1px solid #ddd;
+		border-right: none;
+	}
+
+	td {
+		font-size: 80%;
+		max-width: 10vw;
+		overflow: hidden;
+		border-right: 1px solid #ddd;
+		padding: 5px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+
+		.undefined {
+			background-color: #ddd;
+			width: 100%;
+		}
+
+		&.boolean {
+			text-align: center;
+			font-style: italic;
+			color: #551a8b;
+		}
+
+		&.number {
+			text-align: right;
+			color: #905;
+		}
+
+		&.array, &.object {
+			text-align: center;
+			color: #999;
+		}
+
+		&.string {
+			color: #690;
+		}
+
+		&.objectId {
+			color: #e74c3c;
+		}
+	}
+}
