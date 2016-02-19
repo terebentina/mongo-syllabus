@@ -2,10 +2,10 @@
   "name": "mongo-syllabus",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "node devServer.js",
-    "build": "webpack --progress --colors --config webpack.production.config.js",
+    "build": "webpack --progress --colors --config webpack.config.prod.js",
     "clean": "rm -rf build/",
     "test": "testem",
     "travis": "testem ci"

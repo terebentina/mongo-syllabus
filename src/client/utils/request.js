@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 export default {
 	get(url, params) {
-		return axios.get(url, { params: params }).then((response) => response.data);
+		return axios.get(url, { params }).then((response) => response.data);
 	},
 
 	put(url, params) {
