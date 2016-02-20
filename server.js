@@ -1,35 +1,38 @@
 const webpack = require('webpack');
-const config = require('./webpack.config.dev');
 const restify = require('restify');
 const routes = require('./src/server/config/routes');
+//const config = require('./mongos.json');
 
 const app = restify.createServer({
 	name: 'Mongo Syllabus',
 	version: '0.0.1',
 });
 
-const testConfig = require('./webpack.config.test');
-const testsCompiler = webpack(testConfig);
+if (process.env.NODE_ENV == 'development') {
+	const devConfig = require('./webpack.config.dev');
+	const testConfig = require('./webpack.config.test');
+	const testsCompiler = webpack(testConfig);
 
-testsCompiler.watch({}, function(err) {
-	if (err) {
-		return console.log(err);
-	}
-	console.log('Test file bundled');
-});
+	testsCompiler.watch({}, (err) => {
+		if (err) {
+			return console.log(err);
+		}
+		console.log('Test file bundled');
+	});
 
-const compiler = webpack(config);
-app.use(require('webpack-dev-middleware')(compiler, {
-	noInfo: true,
-	publicPath: config.output.publicPath,
-	stats: { colors: true },
-}));
+	const compiler = webpack(devConfig);
+	app.use(require('webpack-dev-middleware')(compiler, {
+		noInfo: true,
+		publicPath: devConfig.output.publicPath,
+		stats: { colors: true },
+	}));
 
-app.use(require('webpack-hot-middleware')(compiler, {
-	log: console.log,
-	path: '/__webpack_hmr',
-	heartbeat: 10 * 1000,
-}));
+	app.use(require('webpack-hot-middleware')(compiler, {
+		log: console.log,
+		path: '/__webpack_hmr',
+		heartbeat: 10 * 1000,
+	}));
+}
 
 app.use(restify.queryParser());
 app.use(restify.bodyParser());
@@ -42,12 +45,12 @@ app.use(restify.CORS({
 
 routes.call(app);
 
-app.on('after', function after(req, res/*, route, next*/) {
+app.on('after', (req, res/*, route, next*/) => {
 	//req.log.info(req.url + ' ' + res.statusCode);
-	console.log(new Date(), req.method + ' ' + req.url, res.statusCode);
+	console.log(new Date(), `${req.method} ${req.url}`, res.statusCode);
 });
 
-app.listen(3000, function listen() {
+app.listen(process.env.PORT || 3000, process.env.HOSTNAME || '0.0.0.0', () => {
 	console.log('%s listening at %s', app.name, app.url);
 });
 

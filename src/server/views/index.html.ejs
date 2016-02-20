@@ -3,10 +3,17 @@
 <head>
 	<title>Mongo Syllabus</title>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Mongo Syllabus">
+	<% for (var i = 0; i < styles.length; i++) { %>
+	<link rel="stylesheet" href="<%=styles[i]%>">
+	<% } %>
 </head>
 <body>
 	<div id="root"></div>
-	<script src="static/app.js"></script>
+	<script src="/static/app.js"></script>
 	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<defs>
 			<symbol id="icon-playlist_play" viewBox="0 0 1024 1024">

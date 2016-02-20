@@ -1,4 +1,10 @@
+'use strict';
+
 const restify = require('restify');
+const path = require('path');
+const ejs = require('ejs');
+const fs = require('fs');
+
 const DatabaseCtrl = require('./../controllers/database');
 const CollectionCtrl = require('./../controllers/collection');
 const DocCtrl = require('./../controllers/doc');
@@ -12,8 +18,35 @@ module.exports = function() {
 	this.get('/api/docs/:db/:collection', DocCtrl.index);
 	this.del('/api/docs/:db/:collection/:docId', DocCtrl.remove);
 
-	this.get(/\/.*/, restify.serveStatic({
-		directory: './',
+	if (process.env.NODE_ENV == 'development') {
+		// restify needs the route defined, even if it won't serve it itself (this is handled by a webpack plugin) otherwise we get a 406 and no chance for the plugin to handle the route
+		this.get(/__webpack_hmr/, restify.serveStatic({
+			directory: './static',
+		}));
+	}
+
+	this.get('/', (req, res, next) => {
+		const params = {
+			styles: [],
+			nodeEnv: process.env.NODE_ENV,
+		};
+		if (process.env.NODE_ENV != 'development') {
+			params.styles = ['/static/app.css'];
+		}
+
+		ejs.renderFile(path.resolve(__dirname, '../views/index.html.ejs'), params, (err, data) => {
+			if (err) {
+				return next(err);
+			}
+			res.setHeader('Content-Type', 'text/html');
+			res.writeHead(200);
+			res.end(data);
+			next();
+		});
+	});
+
+	this.get(/\/static\/?.*/, restify.serveStatic({
+		directory: path.join(__dirname, '../../../'),
 		default: 'index.html',
 	}));
 };

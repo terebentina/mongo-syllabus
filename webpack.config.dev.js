@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 
 module.exports = {
 	context: __dirname,
@@ -21,7 +20,6 @@ module.exports = {
 			{ test: /\.css$/, loader: 'style!css?sourceMap' },
 		],
 	},
-	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
 	target: 'web',
 	devtool: 'eval-source-map',
 	plugins: [
