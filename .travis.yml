@@ -7,6 +7,7 @@ script: npm run travis
 
 env:
   - CXX=g++-4.8
+  - NODE_ENV=production
 
 addons:
   apt:

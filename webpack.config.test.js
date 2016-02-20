@@ -1,6 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
 
+const babelQuery = {
+	presets: ['es2015', 'stage-0', 'react'],
+};
+
 module.exports = {
 	entry: {
 		test: [path.join(__dirname, 'tests.bootstrap.js')],
@@ -11,7 +15,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx?$/, loader: 'babel', include: path.join(__dirname, 'src/client') },
+			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
 			{ test: /\.scss$/, loader: 'style!css?sourceMap!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
 			{ test: /\.css$/, loader: 'style!css?sourceMap' },
 		],

@@ -3,6 +3,10 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const babelQuery = {
+	presets: ['es2015', 'stage-0', 'react'],
+};
+
 module.exports = {
 	context: __dirname,
 	entry: {
@@ -17,7 +21,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx?$/, loader: 'babel', include: path.join(__dirname, 'src/client') },
+			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
 			{ test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!sass') },
 			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css') },
 		],
