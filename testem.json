@@ -1,5 +1,6 @@
 {
   "framework": "tap",
   "src_files": ["static/test.js"],
-  "launch_in_dev": [ "chrome" ]
+  "launch_in_dev": [ "chrome" ],
+  "launch_in_ci": [ "node", "chrome" ]
 }

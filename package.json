@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node devServer.js",
     "build": "webpack --progress --colors --config webpack.config.prod.js",
+    "postinstall": "npm run build",
     "clean": "rm -rf build/",
     "test": "testem",
     "travis": "testem ci"
