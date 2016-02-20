@@ -9,7 +9,8 @@
     "postinstall": "npm run build",
     "clean": "rm -rf build/",
     "test": "testem",
-    "travis": "testem ci --launch node,PhantomJS"
+    "build-tests": "webpack --config webpack.config.test.js",
+    "travis": "testem ci"
   },
   "author": "Dan Caragea",
   "license": "MIT",
