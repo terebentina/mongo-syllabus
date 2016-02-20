@@ -9,7 +9,7 @@
     "postinstall": "npm run build",
     "clean": "rm -rf build/",
     "test": "testem",
-    "travis": "testem ci"
+    "travis": "testem ci --launch node,PhantomJS"
   },
   "author": "Dan Caragea",
   "license": "MIT",
