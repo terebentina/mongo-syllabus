@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
 
 module.exports = {
 	entry: {
@@ -13,11 +12,10 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', include: path.join(__dirname, 'src/client') },
-			{ test: /\.scss$/, loader: 'style!css?sourceMap!postcss!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
-			{ test: /\.css$/, loader: 'style!css?sourceMap!postcss' },
+			{ test: /\.scss$/, loader: 'style!css?sourceMap!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
+			{ test: /\.css$/, loader: 'style!css?sourceMap' },
 		],
 	},
-	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
 		modulesDirectories: ['src', 'node_modules'],
