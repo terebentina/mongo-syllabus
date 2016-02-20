@@ -2,6 +2,8 @@ sudo: false
 language: node_js
 node_js:
   - "node"
+install:
+- npm install -g webpack
 before_script: npm run build-tests
 script: npm run travis
 
@@ -14,5 +16,5 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
-  firefox: 44.0
+  firefox: latest
 
