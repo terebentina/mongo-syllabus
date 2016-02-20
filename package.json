@@ -4,12 +4,12 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node devServer.js",
-    "build": "webpack --progress --colors --config webpack.config.prod.js",
+    "start": "node server.js",
+    "build": "node_modules/.bin/webpack --progress --colors --config webpack.config.prod.js",
     "postinstall": "npm run build",
     "clean": "rm -rf build/",
     "test": "testem",
-    "build-tests": "webpack --config webpack.config.test.js",
+    "build-tests": "node_modules/.bin/webpack --config webpack.config.test.js",
     "travis": "testem ci"
   },
   "author": "Dan Caragea",
