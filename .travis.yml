@@ -4,6 +4,7 @@ node_js:
   - "node"
 before_install:
 - npm install -g webpack
+- npm i
 before_script: npm run build-tests
 script: npm run travis
 
@@ -14,8 +15,9 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - google-chrome
     packages:
       - g++-4.8
+      - google-chrome-stable
   firefox: latest
-  google-chrome: latest
 
