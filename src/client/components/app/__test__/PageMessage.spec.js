@@ -18,7 +18,7 @@ test('Components:PageMessage', (t) => {
 
 	component = prepare(<PageMessage message={{ message: 'foo', type: 'bar' }} onHide={() => {}} />);
 	t.equal(component.type, 'div', 'renders a <div>');
-	t.equal(component.props.className, 'bar', 'correct className is passed');
+	t.equal(component.props.className.trim(), 'App-PageMessage App-PageMessage-bar', 'correct className is passed');
 	t.equal(component.props.children, 'foo', 'message is displayed');
 	t.end();
 });
