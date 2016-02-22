@@ -7,8 +7,10 @@ import './SideNav.scss';
 
 export class SideNav extends React.Component {
 	static propTypes = {
+		selectedServer: React.PropTypes.number.isRequired,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
+		servers: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		dispatch: React.PropTypes.func.isRequired,
@@ -41,7 +43,9 @@ export class SideNav extends React.Component {
 		return (
 			<aside>
 				<h3>Server:</h3>
-				<span className="serverUri">mongodb://192.168.55.103:27017</span>
+				<select value={this.props.selectedServer} onChange={this.onServerSelect}>
+					{this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)}
+				</select>
 				<h3>Databases:</h3>
 				<div>
 					<select value={this.props.selectedDb} onChange={this.onDbSelect}>
@@ -64,8 +68,8 @@ export class SideNav extends React.Component {
 }
 
 function mapStateToProps(state) {
-	const { selectedDb, databases, selectedCollection, collections } = state || { selectedDb: '', databases: [], selectedCollection: '', collections: [] };
-	return { selectedDb, databases, selectedCollection, collections };
+	const { selectedServer, servers, selectedDb, databases, selectedCollection, collections } = state || { selectedServer: -1, servers: [], selectedDb: '', databases: [], selectedCollection: '', collections: [] };
+	return { selectedServer, servers, selectedDb, databases, selectedCollection, collections };
 }
 
 export default connect(mapStateToProps)(SideNav);

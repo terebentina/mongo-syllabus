@@ -3,11 +3,11 @@
 const restify = require('restify');
 const path = require('path');
 const ejs = require('ejs');
-const fs = require('fs');
 
-const DatabaseCtrl = require('./../controllers/database');
-const CollectionCtrl = require('./../controllers/collection');
-const DocCtrl = require('./../controllers/doc');
+const DatabaseCtrl = require('../controllers/database');
+const CollectionCtrl = require('../controllers/collection');
+const DocCtrl = require('../controllers/doc');
+const mongoServers = require('../../../servers.json');
 
 module.exports = function() {
 	this.get('/api/databases', DatabaseCtrl.index);
@@ -29,10 +29,13 @@ module.exports = function() {
 		const params = {
 			styles: [],
 			nodeEnv: process.env.NODE_ENV,
+			servers: [],
 		};
 		if (process.env.NODE_ENV != 'development') {
 			params.styles = ['/static/app.css'];
 		}
+
+		params.servers = mongoServers.map((server, i) => ({ id: i, name: server.name }));
 
 		ejs.renderFile(path.resolve(__dirname, '../views/index.html.ejs'), params, (err, data) => {
 			if (err) {

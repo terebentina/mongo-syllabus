@@ -1,0 +1,10 @@
+/.idea
+/.vscode
+/.sass-cache
+/src/client
+/tools
+/.babelrc
+/.eslintrc
+/webpack.config.dev.js
+/webpack.config.prod.js
+/webpack.config.test.js

@@ -4,3 +4,4 @@ npm-debug.log
 static
 /.idea
 /.vscode
+/servers.json
