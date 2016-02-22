@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const restify = require('restify');
 const routes = require('./src/server/config/routes');
-//const config = require('./mongos.json');
 
 const app = restify.createServer({
 	name: 'Mongo Syllabus',
