@@ -22,7 +22,7 @@ module.exports = {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
 			{ test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css!sass') },
-			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css') },
+			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss') },
 		],
 	},
 	devtool: false,
