@@ -11,7 +11,7 @@ import Confirm from './components/app/Confirm.jsx';
 import ModalManager from './components/app/ModalManager.jsx';
 import { PopoverWrapper } from '@terebentina/react-popover';
 
-import './app.scss';
+import styles from './app.css';
 
 // named export here so we can test App output without redux
 export class App extends React.Component {
@@ -42,17 +42,17 @@ export class App extends React.Component {
 		}
 
 		return (
-			<PopoverWrapper className="app column">
+			<PopoverWrapper className={styles.app}>
 				<PageMessage message={this.props.message} onHide={this.onHide} />
 				<Confirm />
-				<header className="column">
-					<span className="title">Mongo Syllabus</span>
+				<header className={styles.header}>
+					<span>Mongo Syllabus</span>
 				</header>
-				<main className="row">
+				<main className={styles.main}>
 					<SideNav />
 					{content}
 				</main>
-				<footer className="column">2016 Dan Caragea</footer>
+				<footer className={styles.footer}>2016 Dan Caragea</footer>
 				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.modal} payload={this.props.modalToShow.payload} /> : null}
 			</PopoverWrapper>
 		);

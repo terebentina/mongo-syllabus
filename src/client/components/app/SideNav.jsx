@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from '../../actions';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import './SideNav.scss';
+import styles from './SideNav.css';
 
 export class SideNav extends React.Component {
 	static propTypes = {
@@ -24,6 +24,10 @@ export class SideNav extends React.Component {
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
+	onServerSelect = (e) => {
+		e.preventDefault();
+	};
+
 	onDbSelect = (e) => {
 		e.preventDefault();
 		this.props.dispatch(selectDb(e.target.value));
@@ -41,35 +45,45 @@ export class SideNav extends React.Component {
 
 	render() {
 		return (
-			<aside>
-				<h3>Server:</h3>
-				<select value={this.props.selectedServer} onChange={this.onServerSelect}>
-					{this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)}
-				</select>
-				<h3>Databases:</h3>
-				<div>
-					<select value={this.props.selectedDb} onChange={this.onDbSelect}>
+			<aside className={styles.sideNav}>
+				<div className={styles.servers}>
+					<h3 className={styles.h3}>Server:</h3>
+					<select className={styles.select} value={this.props.selectedServer} onChange={this.onServerSelect}>
+						{this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)}
+					</select>
+				</div>
+
+				<div className={styles.databases}>
+					<h3 className={styles.h3}>Databases:</h3>
+					<select className={styles.select} value={this.props.selectedDb} onChange={this.onDbSelect}>
 						<option value=""></option>
 						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
-					{this.props.selectedDb ? <a href="#"><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a> : null}
-				</div>
-				<div className="collections">
-					<h4>Collections</h4>
-					<a onClick={this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
+					{this.props.selectedDb ? <a href="#"><svg className={styles.iconSettings}><use xlinkHref="#icon-settings"></use></svg></a> : null}
 				</div>
 
-				<nav>
-					{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? 'active' : ''} onClick={this.onCollectionSelect(collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
-				</nav>
+				<div className={styles.collections}>
+					<h4 className={styles.h4}>Collections</h4>
+					<a onClick={this.onAddCollectionClick}><svg className={styles.iconAdd}><use xlinkHref="#icon-add"></use></svg></a>
+					<nav className={styles.nav}>
+						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? 'collection--active' : 'collection'} onClick={this.onCollectionSelect(collection)}><svg className={styles.iconApps}><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
+					</nav>
+				</div>
 			</aside>
 		);
 	}
 }
 
+const EMPTY_ARR = [];
 function mapStateToProps(state) {
-	const { selectedServer, servers, selectedDb, databases, selectedCollection, collections } = state || { selectedServer: -1, servers: [], selectedDb: '', databases: [], selectedCollection: '', collections: [] };
-	return { selectedServer, servers, selectedDb, databases, selectedCollection, collections };
+	return {
+		selectedServer: state.selectedServer || -1,
+		servers: state.servers || EMPTY_ARR,
+		selectedDb: state.selectedDb || '',
+		databases: state.databases || EMPTY_ARR,
+		selectedCollection: state.selectedCollection || '',
+		collections: state.collections || EMPTY_ARR,
+	};
 }
 
 export default connect(mapStateToProps)(SideNav);

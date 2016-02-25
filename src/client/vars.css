@@ -1,0 +1,11 @@
+@value color1: #37474F;
+@value color2: #EF3C79;
+@value color3: #4DB6AC;
+@value color4: #43AC6A;
+
+@value zBase: 1;
+@value zHeader: 5;
+@value zPopover: 10;
+@value zModalBackdrop: 1000;
+@value zModal: 1001;
+@value zMessages: 1002;

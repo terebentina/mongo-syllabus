@@ -1,0 +1,39 @@
+@value zHeader from './vars.css';
+
+.app {
+	composes: column from './utils.css';
+	min-height: 100vh;
+}
+
+.header {
+	composes: column from './utils.css';
+	flex: 0 0 3em;
+	justify-content: center;
+	border: none;
+	z-index: zHeader;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	color: #757575;
+	background-color: #F5F5F5;
+	padding: 0 0 0 40px;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.footer {
+	composes: column from './utils.css';
+	flex-grow: 0;
+	height: 3em;
+	align-items: center;
+	align-self: center;
+}
+
+.main {
+	composes: row from './utils.css';
+	flex: 1 0 auto;
+	padding: 5px;
+	background-color: #F5F5F5;
+}
+
+.main > div {
+	flex: 1 0 auto;
+}

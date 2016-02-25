@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
+var postcssFunctions = require('postcss-functions');
+var cssFunctions = require('./src/css');
 
 const babelQuery = {
 	presets: ['es2015', 'stage-0', 'react', 'react-hmre'],
@@ -25,7 +27,10 @@ module.exports = {
 			{ test: /\.css$/, loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss' },
 		],
 	},
-	postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
+	postcss: [
+		/*autoprefixer({ browsers: ['last 2 versions'] }),*/
+		postcssFunctions(cssFunctions),
+	],
 	target: 'web',
 	devtool: 'eval-source-map',
 	plugins: [

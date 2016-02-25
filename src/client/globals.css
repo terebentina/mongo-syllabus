@@ -1,0 +1,70 @@
+@value color1, color2, color3 from './vars.css';
+
+* {
+	box-sizing: border-box;
+}
+
+svg {
+	display: inline-block;
+	width: 1.4em;
+	height: 1.4em;
+	fill: currentcolor;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#root {
+	display: flex;
+	flex-direction: row;
+	flex: 1 0 auto;
+}
+
+#root div {
+	display: flex;
+}
+
+#root a {
+	color: #551a8b;
+	cursor: pointer;
+}
+
+#root a:hover {
+	color: color2;
+}
+
+#root a:active {
+	color: color3;
+	background: #F5F5F5;
+}
+
+#root a span,
+#root a svg {
+	cursor: pointer;
+}
+
+#root label span:first-of-type {
+	margin-right: 5px;
+}
+
+.popover[class*="menu"] .popover__content {
+	border-radius: 3px;
+	min-width: 7em;
+	flex-flow: column nowrap;
+	background-color: color1;
+	color: #eceff1;
+}
+
+.popover[class*="menu"] .popover__content a {
+	color: rgba(255, 255, 255, 0.56);
+	padding: .5em 1em;
+	margin: 0;
+	text-decoration: none;
+}
+
+.popover[class*="menu"] .popover__content a:hover {
+	background-color: rgba(00, 188, 212, 1) !important;
+	color: #37474F;
+}

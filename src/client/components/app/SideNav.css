@@ -1,0 +1,72 @@
+@value color1 from '../../vars.css';
+
+.flexB {
+	composes: flexbox-container from '../../utils.css';
+}
+
+.sideNav {
+	composes: flexB;
+	flex: 0 1 250px;
+	padding: 15px;
+	background-color: color1;
+	color: #eceff1;
+}
+
+.h3:first-of-type,
+.h4 {
+	margin-top: 0;
+}
+
+.serverUri {
+	font-size: .9em;
+}
+
+.servers,
+.databases,
+.collections {
+	composes: flexB;
+	flex-flow: row wrap;
+	flex: 0 0 auto;
+	justify-content: space-between;
+}
+
+.collections {
+	margin-top: 3em;
+}
+
+.select {
+	flex: 0 1 50%;
+	color: #000;
+	margin-left: auto;
+}
+
+.nav {
+	composes: flexB;
+	flex-flow: column nowrap;
+}
+
+.collection {
+	display: flex;
+	color: rgba(255, 255, 255, 0.56);
+	flex-direction: row;
+	flex-shrink: 0;
+	align-items: center;
+	font-weight: 500;
+	padding: 5px 0;
+	margin: 0;
+	text-decoration: none;
+}
+
+.collection:hover {
+	background-color: rgba(00, 188, 212, 1) !important;
+	color: #37474F;
+}
+
+svg {
+	margin-right: 10px;
+}
+
+.collection--active {
+	composes: collection;
+	background-color: rgba(255, 255, 255, .1);
+}
