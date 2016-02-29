@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { fetchDatabasesIfNeeded, hideMessage } from './actions';
 import Dashboard from './components/app/Dashboard.jsx';
@@ -20,16 +21,16 @@ export class App extends React.Component {
 		message: React.PropTypes.object,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
-		dispatch: React.PropTypes.func.isRequired,
+		actions: React.PropTypes.object.isRequired,
 	};
 
 	componentDidMount() {
-		this.props.dispatch(fetchDatabasesIfNeeded());
+		this.props.actions.fetchDatabasesIfNeeded();
 	}
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
-	onHide = () => this.props.dispatch(hideMessage());
+	onHide = () => this.props.actions.hideMessage();
 
 	render() {
 		let content;
@@ -68,4 +69,10 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(App);
+function mapActionsToProps(dispatch) {
+	return {
+		actions: bindActionCreators({ fetchDatabasesIfNeeded, hideMessage }, dispatch),
+	};
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(App);
