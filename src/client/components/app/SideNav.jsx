@@ -49,6 +49,7 @@ export class SideNav extends React.Component {
 				<div className={styles.servers}>
 					<h3 className={styles.h3}>Server:</h3>
 					<select className={styles.select} value={this.props.selectedServer} onChange={this.onServerSelect}>
+						<option value=""></option>
 						{this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)}
 					</select>
 				</div>

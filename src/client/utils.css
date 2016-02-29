@@ -23,7 +23,6 @@
 	align-content: flex-start;
 	align-items: stretch;
 	flex: 1 0 auto;
-	//box-sizing: border-box;
 }
 
 .icon-link {

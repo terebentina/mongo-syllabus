@@ -26,26 +26,26 @@ body {
 	display: flex;
 }
 
-#root a {
+a {
 	color: #551a8b;
 	cursor: pointer;
 }
 
-#root a:hover {
+a:hover {
 	color: color2;
 }
 
-#root a:active {
+a:active {
 	color: color3;
 	background: #F5F5F5;
 }
 
-#root a span,
-#root a svg {
+a span,
+a svg {
 	cursor: pointer;
 }
 
-#root label span:first-of-type {
+label span:first-of-type {
 	margin-right: 5px;
 }
 

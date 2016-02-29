@@ -1,11 +1,7 @@
 @value color1 from '../../vars.css';
 
-.flexB {
-	composes: flexbox-container from '../../utils.css';
-}
-
 .sideNav {
-	composes: flexB;
+	composes: flexbox-container from '../../utils.css';
 	flex: 0 1 250px;
 	padding: 15px;
 	background-color: color1;
@@ -24,7 +20,7 @@
 .servers,
 .databases,
 .collections {
-	composes: flexB;
+	composes: flexbox-container from '../../utils.css';
 	flex-flow: row wrap;
 	flex: 0 0 auto;
 	justify-content: space-between;
@@ -41,7 +37,7 @@
 }
 
 .nav {
-	composes: flexB;
+	composes: flexbox-container from '../../utils.css';
 	flex-flow: column nowrap;
 }
 
