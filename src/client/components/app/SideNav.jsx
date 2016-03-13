@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from '../../actions';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import styles from './SideNav.css';
+import styles from './SideNav.scss';
 
 export class SideNav extends React.Component {
 	static propTypes = {
