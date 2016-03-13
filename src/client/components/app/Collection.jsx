@@ -6,7 +6,7 @@ import QueryBox from './collection/QueryBox.jsx';
 import Results from './collection/Results.jsx';
 import Popover from '@terebentina/react-popover';
 
-import styles from './Collection.css';
+import styles from './Collection.scss';
 
 export class Collection extends React.Component {
 	static propTypes = {

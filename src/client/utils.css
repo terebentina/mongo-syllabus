@@ -31,3 +31,19 @@
 	margin-right: 5px;
 	padding: 5px;
 }
+
+@define-extend flexbox-container {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-content: flex-start;
+	align-items: stretch;
+	flex: 1 0 auto;
+}
+
+@define-extend icon-link {
+	display: flex;
+	font-size: 1.1em;
+	margin-right: 5px;
+	padding: 5px;
+}

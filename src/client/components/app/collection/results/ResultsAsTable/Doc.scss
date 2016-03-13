@@ -1,4 +1,5 @@
-@import "../../../../../mixins";
+@import "../../../../../vars.scss";
+@import "../../../../../utils.css";
 
 .table {
 	.actions {
@@ -8,7 +9,7 @@
 		font-size: 100%;
 
 		a {
-			@extend %icon-link;
+			@extend icon-link;
 		}
 	}
 

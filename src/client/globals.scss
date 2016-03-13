@@ -1,4 +1,4 @@
-@value color1, color2, color3 from './vars.css';
+@import './vars.scss';
 
 * {
 	box-sizing: border-box;
@@ -32,11 +32,11 @@ a {
 }
 
 a:hover {
-	color: color2;
+	color: $color2;
 }
 
 a:active {
-	color: color3;
+	color: $color3;
 	background: #F5F5F5;
 }
 
@@ -53,7 +53,7 @@ label span:first-of-type {
 	border-radius: 3px;
 	min-width: 7em;
 	flex-flow: column nowrap;
-	background-color: color1;
+	background-color: $color1;
 	color: #eceff1;
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import Prism from 'prismjs';
-import shouldPureComponentUpdate from '../../../../../../../../node_modules/react-pure-render/function';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import '../../../../../../../../node_modules/prismjs/themes/prism.css';
+import './Highlight.scss';
 
 function hightlight(elem) {
 	Prism.highlightElement(elem, false);

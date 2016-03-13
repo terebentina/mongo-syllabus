@@ -11,7 +11,7 @@ import Confirm from './components/app/Confirm.jsx';
 import ModalManager from './components/app/ModalManager.jsx';
 import { PopoverWrapper } from '@terebentina/react-popover';
 
-import styles from './app.css';
+import styles from './app.scss';
 
 // named export here so we can test App output without redux
 export class App extends React.Component {

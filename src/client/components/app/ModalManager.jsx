@@ -4,7 +4,7 @@ import { hideModal } from '../../actions/index';
 import CollectionRename from './modals/CollectionRename.jsx';
 import CollectionCreate from './modals/CollectionCreate.jsx';
 
-import './ModalManager.scss';
+import styles from './ModalManager.scss';
 
 const Modals = {
 	CollectionRename,
@@ -28,13 +28,13 @@ export class ModalManager extends React.Component {
 
 		return (
 			<div id="modals">
-				<div className="modal_wrapper">
-					<div className="modal">
-						<a className="close" onClick={this.destroy}><svg className="icon-close"><use xlinkHref="#icon-close"></use></svg></a>
+				<div className={styles.modal_wrapper}>
+					<div className={styles.modal}>
+						<a className={styles.close} onClick={this.destroy}><svg className={styles.iconClose}><use xlinkHref="#icon-close"></use></svg></a>
 						<Modal payload={this.props.payload} doDestroy={this.destroy} />
 					</div>
 				</div>
-				<div className="backdrop"></div>
+				<div className={styles.backdrop}></div>
 			</div>
 		);
 	}

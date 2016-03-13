@@ -1,12 +1,13 @@
-@import "../../../../../mixins";
+@import "../../../../../vars.scss";
+@import "../../../../../utils.css";
 
 .App-Results .docs {
-	@extend %flexbox-container;
+	@extend flexbox-container;
 	flex: 0 0 auto;
 
 	article {
 		width: 50vw;
-		@extend %flexbox-container;
+		@extend flexbox-container;
 		margin-bottom: 1em;
 
 		& > header {
@@ -18,7 +19,7 @@
 			flex: 0 0 auto;
 
 			& > a {
-				@extend %icon-link;
+				@extend icon-link;
 			}
 		}
 

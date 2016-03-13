@@ -1,11 +1,11 @@
-@import "../../mixins";
+@import "../../vars.scss";
 
 .App-PageMessage {
 	position: fixed;
 	left: 0;
 	right: 0;
 	top: 0;
-	z-index: zIndex(messages);
+	z-index: $zMessages;
 	align-items: center;
 	justify-content: center;
 	padding: 1em;

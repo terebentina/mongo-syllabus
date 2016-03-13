@@ -1,7 +1,7 @@
 :global {
-	@import "./globals.css";
 	@import '../../node_modules/normalize.css/normalize.css';
 	@import '../../node_modules/@terebentina/react-popover/lib/styles.css';
+	@import "./globals.scss";
 }
 
 @import "./vars.scss";
