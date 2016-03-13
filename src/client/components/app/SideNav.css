@@ -8,9 +8,16 @@
 	color: #eceff1;
 }
 
-.h3:first-of-type,
+.h3,
 .h4 {
 	margin-top: 0;
+	margin-bottom: .5em;
+	flex: 1 0 100%;
+}
+
+.select {
+	flex: 0 1 50%;
+	color: #000;
 }
 
 .serverUri {
@@ -24,16 +31,11 @@
 	flex-flow: row wrap;
 	flex: 0 0 auto;
 	justify-content: space-between;
+	margin-bottom: 1.5em;
 }
 
-.collections {
-	margin-top: 3em;
-}
-
-.select {
-	flex: 0 1 50%;
-	color: #000;
-	margin-left: auto;
+.collections .h3 {
+	flex: 1 0 80%;
 }
 
 .nav {
@@ -58,11 +60,11 @@
 	color: #37474F;
 }
 
-svg {
-	margin-right: 10px;
-}
-
-.collection--active {
+.collectionActive {
 	composes: collection;
 	background-color: rgba(255, 255, 255, .1);
+}
+
+svg {
+	margin-right: 10px;
 }

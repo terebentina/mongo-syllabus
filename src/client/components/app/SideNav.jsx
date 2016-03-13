@@ -50,7 +50,7 @@ export class SideNav extends React.Component {
 					<h3 className={styles.h3}>Server:</h3>
 					<select className={styles.select} value={this.props.selectedServer} onChange={this.onServerSelect}>
 						<option value=""></option>
-						{this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)}
+						{/*this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)*/}
 					</select>
 				</div>
 
@@ -64,10 +64,10 @@ export class SideNav extends React.Component {
 				</div>
 
 				<div className={styles.collections}>
-					<h4 className={styles.h4}>Collections</h4>
+					<h3 className={styles.h3}>Collections</h3>
 					<a onClick={this.onAddCollectionClick}><svg className={styles.iconAdd}><use xlinkHref="#icon-add"></use></svg></a>
 					<nav className={styles.nav}>
-						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? 'collection--active' : 'collection'} onClick={this.onCollectionSelect(collection)}><svg className={styles.iconApps}><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
+						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg className={styles.iconApps}><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
 					</nav>
 				</div>
 			</aside>
@@ -77,6 +77,7 @@ export class SideNav extends React.Component {
 
 const EMPTY_ARR = [];
 function mapStateToProps(state) {
+	console.log('state.servers', state.servers);
 	return {
 		selectedServer: state.selectedServer || -1,
 		servers: state.servers || EMPTY_ARR,

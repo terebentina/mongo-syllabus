@@ -50,7 +50,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "ghooks": "^1.0.3",
     "node-sass": "^3.4.1",
-    "postcss-functions": "^2.1.0",
+    "postcss-color-function": "^2.0.0",
     "postcss-loader": "^0.8.1",
     "postcss-modules-values": "^1.1.1",
     "react-addons-test-utils": "^0.14.1",
