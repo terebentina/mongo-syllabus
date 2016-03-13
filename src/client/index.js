@@ -4,10 +4,6 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import App from './App.jsx';
 
-import 'normalize.css';
-import '../../node_modules/@terebentina/react-popover/lib/styles.css';
-import './globals.css';
-
 const store = configureStore();
 
 ReactDOM.render((

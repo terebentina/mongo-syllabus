@@ -1,4 +1,10 @@
-@value zHeader from './vars.css';
+:global {
+	@import "globals.css";
+	@import '../../node_modules/normalize.css/normalize.css';
+	@import '../../node_modules/@terebentina/react-popover/lib/styles.css';
+}
+
+@import "vars.scss";
 
 .app {
 	composes: column from './utils.css';

@@ -61,7 +61,7 @@ export class Collection extends React.Component {
 					<a className={styles.iconLink} onClick={this.onRenameClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
 					<a className={styles.iconLink} onClick={this.onDropClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
 					<a className={styles.iconLink} href="#"><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
-					<Popover className={styles.menu} position="bottom" trigger={<svg className="icon-visibility"><use xlinkHref="#icon-visibility"></use></svg>}>
+					<Popover className="menu" position="bottom" trigger={<svg className="icon-visibility"><use xlinkHref="#icon-visibility"></use></svg>}>
 						<a href="" onClick={this.setViewMode('json')}>as Json</a>
 						<a href="" onClick={this.setViewMode('table')}>as table</a>
 					</Popover>

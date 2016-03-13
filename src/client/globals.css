@@ -49,7 +49,7 @@ label span:first-of-type {
 	margin-right: 5px;
 }
 
-.popover[class*="menu"] .popover__content {
+.popover.menu .popover__content {
 	border-radius: 3px;
 	min-width: 7em;
 	flex-flow: column nowrap;
@@ -57,14 +57,14 @@ label span:first-of-type {
 	color: #eceff1;
 }
 
-.popover[class*="menu"] .popover__content a {
+.popover.menu .popover__content a {
 	color: rgba(255, 255, 255, 0.56);
 	padding: .5em 1em;
 	margin: 0;
 	text-decoration: none;
 }
 
-.popover[class*="menu"] .popover__content a:hover {
+.popover.menu .popover__content a:hover {
 	background-color: rgba(00, 188, 212, 1) !important;
 	color: #37474F;
 }
