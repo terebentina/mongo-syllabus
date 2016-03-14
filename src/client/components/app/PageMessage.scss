@@ -1,6 +1,6 @@
 @import "../../vars.scss";
 
-.App-PageMessage {
+.page-message {
 	position: fixed;
 	left: 0;
 	right: 0;
@@ -9,20 +9,22 @@
 	align-items: center;
 	justify-content: center;
 	padding: 1em;
+}
 
-	&-error {
-		// haha, abusing gradients for fun and profit.
-		background: linear-gradient(to right, rgba(240,65,36,0) 25%, rgba(240,65,36,1) 25%, rgba(240,65,36,1) 75%, rgba(240,65,36,0) 75%);
-		//background-color: #F04124;
-		//border-color: #F6A1A1;
-		color: #fff;
-	}
+.page-message--error {
+	composes: page-message;
+	// haha, abusing gradients for fun and profit.
+	background: linear-gradient(to right, rgba(240,65,36,0) 25%, rgba(240,65,36,1) 25%, rgba(240,65,36,1) 75%, rgba(240,65,36,0) 75%);
+	//background-color: #F04124;
+	//border-color: #F6A1A1;
+	color: #fff;
+}
 
-	&-success {
-		// haha, abusing gradients for fun and profit.
-		background: linear-gradient(to right, rgba(67,172,106,0) 25%, rgba(67,172,106,1) 25%, rgba(67,172,106,1) 75%, rgba(67,172,106,0) 75%);
-		//background-color: color(c4);
-		//border-color: darken(color(c4), 50%);
-		color: #fff;
-	}
+.page-message--success {
+	composes: page-message;
+	// haha, abusing gradients for fun and profit.
+	background: linear-gradient(to right, rgba(67,172,106,0) 25%, rgba(67,172,106,1) 25%, rgba(67,172,106,1) 75%, rgba(67,172,106,0) 75%);
+	//background-color: color(c4);
+	//border-color: darken(color(c4), 50%);
+	color: #fff;
 }

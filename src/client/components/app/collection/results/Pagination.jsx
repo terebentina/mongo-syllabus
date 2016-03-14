@@ -1,8 +1,7 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { pacomoDecorator } from '../../../../utils/pacomo';
 
-import './Pagination.scss';
+import styles from './Pagination.scss';
 
 const countOut = 2;
 const countIn = 2;
@@ -50,9 +49,9 @@ class Pagination extends React.Component {
 		const links = [];
 
 		if (this.props.currentPage == 0) {
-			links.push(<span key="prev" className="previous">&lt;</span>);
+			links.push(<span key="prev" className={styles.previous}>&lt;</span>);
 		} else {
-			links.push(<a key="prev" className="previous" onClick={this.onPageClick(this.props.currentPage - 1)}>&lt;</a>);
+			links.push(<a key="prev" className={styles.previous} onClick={this.onPageClick(this.props.currentPage - 1)}>&lt;</a>);
 		}
 
 		// Generate links data in accordance with calculated numbers
@@ -87,15 +86,15 @@ class Pagination extends React.Component {
 		if (this.props.currentPage == totalPages - 1) {
 			links.push(<span key="next">&gt;</span>);
 		} else {
-			links.push(<a key="next" className="next" onClick={this.onPageClick(this.props.currentPage + 1)}>&gt;</a>);
+			links.push(<a key="next" className={styles.next} onClick={this.onPageClick(this.props.currentPage + 1)}>&gt;</a>);
 		}
 
 		return (
-			<div>
+			<div className={styles.pagination}>
 				{links}
 			</div>
 		);
 	}
 }
 
-export default pacomoDecorator(Pagination);
+export default Pagination;

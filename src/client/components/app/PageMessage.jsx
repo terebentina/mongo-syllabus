@@ -1,8 +1,7 @@
 import React from 'react';
-import { pacomoDecorator } from '../../utils/pacomo';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import './PageMessage.scss';
+import styles from './PageMessage.scss';
 
 const duration = 4000;
 
@@ -20,10 +19,10 @@ class PageMessage extends React.Component {
 
 	render() {
 		if (this.props.message) {
-			return <div className={this.props.message.type}>{this.props.message.message}</div>;
+			return <div className={styles[`page-message--${this.props.message.type}`]}>{this.props.message.message}</div>;
 		}
 		return false;
 	}
 }
 
-export default pacomoDecorator(PageMessage);
+export default PageMessage;

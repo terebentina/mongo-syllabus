@@ -3,7 +3,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import { searchDocs, showMessage } from '../../../actions';
 import * as Constants from '../../../actions/constants';
 
-import './QueryBox.scss';
+import styles from './QueryBox.scss';
 
 class QueryBox extends React.Component {
 	static propTypes = {
@@ -38,7 +38,7 @@ class QueryBox extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.sendQuery} className="querybox">
+			<form onSubmit={this.sendQuery} className={styles.querybox}>
 				<header>Filter:</header>
 				<textarea ref="query" value={this.state.query} onChange={this.onChange} />
 				<select value={this.state.limit} onChange={this.onChangeLimit}>

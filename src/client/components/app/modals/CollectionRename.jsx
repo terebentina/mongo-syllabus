@@ -46,7 +46,7 @@ class CollectionRename extends React.Component {
 						<input type="text" value={this.state.collectionName} onChange={this.onChange} onKeyDown={this.onKeyDown} autoFocus />
 					</label>
 				</main>
-				<footer className={styles.actions}>
+				<footer className="actions">
 					<a onClick={this.props.doDestroy}>Cancel</a>
 					<button onClick={this.save}>Save</button>
 				</footer>

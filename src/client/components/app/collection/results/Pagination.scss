@@ -1,7 +1,7 @@
 @import "../../../../vars.scss";
 @import "../../../../utils.css";
 
-.app .App-Pagination {
+.pagination {
 	@extend flexbox-container;
 	justify-content: flex-start;
 	flex-direction: row;
@@ -46,8 +46,8 @@
 		color: #aaa;
 
 	}
+}
 
-	&-previous {
-		border: none !important;
-	}
+.previous {
+	border: none !important;
 }

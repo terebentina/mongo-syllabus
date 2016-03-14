@@ -48,7 +48,7 @@
 			display: flex;
 			align-items: center;
 
-			&.actions {
+			&:global(.actions) {
 				justify-content: space-around;
 			}
 		}
