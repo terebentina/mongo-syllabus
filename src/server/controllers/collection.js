@@ -2,7 +2,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const _ = require('lodash');
 const restify = require('restify');
-const url = 'mongodb://192.168.55.103:27017';
+const url = 'mongodb://192.168.5.105:27017';
 
 const CollectionCtrl = {
 	/**

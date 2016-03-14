@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
 // @todo remove
-const url = 'mongodb://192.168.55.103:27017';
+const url = 'mongodb://192.168.5.105:27017';
 
 const DocCtrl = {
 	index(req, res, next) {

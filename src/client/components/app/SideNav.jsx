@@ -7,10 +7,8 @@ import styles from './SideNav.scss';
 
 export class SideNav extends React.Component {
 	static propTypes = {
-		selectedServer: React.PropTypes.number.isRequired,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
-		servers: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		dispatch: React.PropTypes.func.isRequired,
