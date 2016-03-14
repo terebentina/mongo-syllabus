@@ -1,59 +1,64 @@
 @import "../../../../../vars.scss";
 @import "../../../../../utils.css";
 
-.table {
-	.actions {
-		display: flex;
-		flex-flow: row nowrap;
-		flex-shrink: 0;
-		font-size: 100%;
+.row {
+	border: 1px solid #ddd;
+	border-right: none;
+}
 
-		a {
-			@extend icon-link;
-		}
+.cell {
+	font-size: 80%;
+	max-width: 10vw;
+	overflow: hidden;
+	border-right: 1px solid #ddd;
+	padding: 5px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+	.undefined {
+		background-color: #ddd;
+		width: 100%;
 	}
+}
 
-	tr {
-		border: 1px solid #ddd;
-		border-right: none;
+.actions {
+	composes: cell;
+	display: flex;
+	flex-flow: row nowrap;
+	flex-shrink: 0;
+	font-size: 100%;
+
+	a {
+		@extend icon-link;
 	}
+}
 
-	td {
-		font-size: 80%;
-		max-width: 10vw;
-		overflow: hidden;
-		border-right: 1px solid #ddd;
-		padding: 5px;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+.boolean {
+	composes: cell;
+	text-align: center;
+	font-style: italic;
+	color: #551a8b;
+}
 
-		.undefined {
-			background-color: #ddd;
-			width: 100%;
-		}
+.number {
+	composes: cell;
+	text-align: right;
+	color: #905;
+}
 
-		&.boolean {
-			text-align: center;
-			font-style: italic;
-			color: #551a8b;
-		}
+.array,
+.object {
+	composes: cell;
+	text-align: center;
+	color: #999;
+}
 
-		&.number {
-			text-align: right;
-			color: #905;
-		}
+.string {
+	composes: cell;
+	color: #690;
+}
 
-		&.array, &.object {
-			text-align: center;
-			color: #999;
-		}
-
-		&.string {
-			color: #690;
-		}
-
-		&.objectId {
-			color: #e74c3c;
-		}
-	}
+.objectId {
+	composes: cell;
+	color: #e74c3c;
 }

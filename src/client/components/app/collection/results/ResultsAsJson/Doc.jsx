@@ -4,7 +4,7 @@ const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
 import { confirmAndRemoveDoc } from '../../../../../actions';
 
-import './Doc.scss';
+import styles from './Doc.scss';
 
 const beautyOpts = { indent_size: 2 };
 
@@ -29,10 +29,10 @@ class Doc extends React.Component {
 
 	render() {
 		return (
-			<article>
+			<article className={styles.article}>
 				<header>
-					<a onClick={this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
-					<a onClick={this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
+					<a onClick={this.onEditClick}><svg className={styles.iconCreate}><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={this.onDeleteClick}><svg className={styles.iconDelete}><use xlinkHref="#icon-delete"></use></svg></a>
 				</header>
 				<div>
 					<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>

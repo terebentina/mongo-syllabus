@@ -1,6 +1,5 @@
 import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { pacomoDecorator } from '../../../utils/pacomo';
 import Pagination from './results/Pagination.jsx';
 import ResultsAsJson from './results/ResultsAsJson.jsx';
 import ResultsAsTable from './results/ResultsAsTable.jsx';
@@ -36,4 +35,4 @@ class Results extends React.Component {
 	}
 }
 
-export default pacomoDecorator(Results);
+export default Results;

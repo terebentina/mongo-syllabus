@@ -1,38 +1,33 @@
 @import "../../../../../vars.scss";
 @import "../../../../../utils.css";
 
-.App-Results .docs {
+.article {
+	width: 50vw;
 	@extend flexbox-container;
-	flex: 0 0 auto;
+	margin-bottom: 1em;
 
-	article {
-		width: 50vw;
-		@extend flexbox-container;
-		margin-bottom: 1em;
+	& > header {
+		display: flex;
+		background: #E6E6E6;
+		padding: 3px 10px;
+		flex-flow: row;
+		align-items: center;
+		flex: 0 0 auto;
 
-		& > header {
-			display: flex;
-			background: #E6E6E6;
-			padding: 3px 10px;
-			flex-flow: row;
-			align-items: center;
-			flex: 0 0 auto;
-
-			& > a {
-				@extend icon-link;
-			}
+		& > a {
+			@extend icon-link;
 		}
+	}
 
-		& > div {
-			max-height: 15vh;
-			border: 1px solid #ccc;
-			overflow: auto;
-			font-size: 80%;
+	& > div {
+		max-height: 15vh;
+		border: 1px solid #ccc;
+		overflow: auto;
+		font-size: 80%;
 
-			pre {
-				width: 100%;
-				white-space: pre-wrap;
-			}
+		pre {
+			width: 100%;
+			white-space: pre-wrap;
 		}
 	}
 }

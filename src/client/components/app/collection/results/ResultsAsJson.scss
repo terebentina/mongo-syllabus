@@ -1,0 +1,6 @@
+@import "../../../../utils.css";
+
+.docs {
+	@extend flexbox-container;
+	flex: 0 0 auto;
+}

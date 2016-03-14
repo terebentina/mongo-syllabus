@@ -2,7 +2,7 @@ import React from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { confirmAndRemoveDoc } from '../../../../../actions';
 
-import './Doc.scss';
+import styles from './Doc.scss';
 
 class Doc extends React.Component {
 	static propTypes = {
@@ -26,12 +26,12 @@ class Doc extends React.Component {
 
 	render() {
 		return (
-			<tr>
-				<td className="actions">
-					<a onClick={this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
-					<a onClick={this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
+			<tr className={styles.row}>
+				<td className={styles.actions}>
+					<a onClick={this.onEditClick}><svg className={styles.iconCreate}><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={this.onDeleteClick}><svg className={styles.iconDelete}><use xlinkHref="#icon-delete"></use></svg></a>
 				</td>
-				{Object.keys(this.props.types).map((prop) => <td key={prop} className={this.props.types[prop]}>{formatValue(this.props.doc[prop], this.props.types[prop])}</td>)}
+				{Object.keys(this.props.types).map((prop) => <td key={prop} className={styles[this.props.types[prop]]}>{formatValue(this.props.doc[prop], this.props.types[prop])}</td>)}
 			</tr>
 		);
 	}
@@ -39,7 +39,7 @@ class Doc extends React.Component {
 
 function formatValue(val, type) {
 	if (typeof val == 'undefined') {
-		return <div className="undefined">&nbsp;</div>;
+		return <div className={styles.undefined}>&nbsp;</div>;
 	}
 	if (type == 'array') {
 		const len = val.length;
