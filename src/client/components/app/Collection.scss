@@ -1,10 +1,12 @@
+@import "../../utils.css";
+
 .collection {
-	composes: column from '../../utils.css';
+	@extend flex-column;
 	padding-left: 1em;
 }
 
 .header {
-	composes: row from '../../utils.css';
+	@extend flex-row;
 	align-items: center;
 	flex: 0 1 auto;
 }
@@ -15,11 +17,11 @@
 }
 
 .iconLink {
-	composes: icon-link from '../../utils.css';
+	@extend icon-link;
 }
 
 .popover__trigger {
-	composes: icon-link from '../../utils.css';
+	@extend icon-link;
 }
 
 /*

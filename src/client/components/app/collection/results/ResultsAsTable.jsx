@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { typesFromResults } from '../../../../utils/mongodb';
 import Doc from './ResultsAsTable/Doc.jsx';
 
-import './ResultsAsTable.scss';
+import styles from './ResultsAsTable.scss';
 
 class ResultsAsTable extends React.Component {
 	static propTypes = {
@@ -27,7 +27,7 @@ class ResultsAsTable extends React.Component {
 
 	render() {
 		return (
-			<table className="table">
+			<table className={styles.table}>
 				<thead>
 					<tr>
 						<th>&nbsp;</th>

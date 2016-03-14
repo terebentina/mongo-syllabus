@@ -1,35 +1,19 @@
-.row {
+@define-extend flex-row {
 	display: flex;
 	flex-flow: row nowrap;
 	align-content: flex-start;
 	flex: 1 0 auto;
 }
 
-.column {
+@define-extend flex-column {
 	display: flex;
 	flex-flow: column nowrap;
 	align-content: flex-start;
 	flex: 1 0 auto;
 }
 
-.centered {
+@define-extend flex-centered {
 	justify-content: center;
-}
-
-.flexbox-container {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: flex-start;
-	align-content: flex-start;
-	align-items: stretch;
-	flex: 1 0 auto;
-}
-
-.icon-link {
-	display: flex;
-	font-size: 1.1em;
-	margin-right: 5px;
-	padding: 5px;
 }
 
 @define-extend flexbox-container {

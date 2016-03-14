@@ -5,14 +5,15 @@
 }
 
 @import "./vars.scss";
+@import "./utils.css";
 
 .app {
-	composes: column from './utils.css';
+	@extend flex-column;
 	min-height: 100vh;
 }
 
 .header {
-	composes: column from './utils.css';
+	@extend flex-column;
 	flex: 0 0 3em;
 	justify-content: center;
 	border: none;
@@ -26,7 +27,7 @@
 }
 
 .footer {
-	composes: column from './utils.css';
+	@extend flex-column;
 	flex-grow: 0;
 	height: 3em;
 	align-items: center;
@@ -34,7 +35,7 @@
 }
 
 .main {
-	composes: row from './utils.css';
+	@extend flex-row;
 	flex: 1 0 auto;
 	padding: 5px;
 	background-color: #F5F5F5;
