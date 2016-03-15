@@ -8,7 +8,7 @@ import styles from './Doc.scss';
 
 const beautyOpts = { indent_size: 2 };
 
-class Doc extends React.Component {
+export class Doc extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,

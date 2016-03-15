@@ -5,7 +5,7 @@ import styles from './PageMessage.scss';
 
 const duration = 4000;
 
-class PageMessage extends React.Component {
+export class PageMessage extends React.Component {
 	static propTypes = {
 		message: React.PropTypes.object,
 		onHide: React.PropTypes.func.isRequired,

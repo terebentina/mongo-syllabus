@@ -6,7 +6,7 @@ import styles from './Pagination.scss';
 const countOut = 2;
 const countIn = 2;
 
-class Pagination extends React.Component {
+export class Pagination extends React.Component {
 	static propTypes = {
 		total: React.PropTypes.number.isRequired,
 		currentPage: React.PropTypes.number.isRequired,

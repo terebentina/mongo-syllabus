@@ -4,7 +4,7 @@ import Pagination from './results/Pagination.jsx';
 import ResultsAsJson from './results/ResultsAsJson.jsx';
 import ResultsAsTable from './results/ResultsAsTable.jsx';
 
-class Results extends React.Component {
+export class Results extends React.Component {
 	static propTypes = {
 		viewMode: React.PropTypes.string.isRequired,
 		selectedDb: React.PropTypes.string.isRequired,

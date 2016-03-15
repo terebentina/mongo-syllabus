@@ -1,14 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { searchDocs, showMessage } from '../../../actions';
 import * as Constants from '../../../actions/constants';
 
 import styles from './QueryBox.scss';
 
-class QueryBox extends React.Component {
+export class QueryBox extends React.Component {
 	static propTypes = {
 		onSubmit: React.PropTypes.func.isRequired,
-		dispatch: React.PropTypes.func.isRequired,
+		actions: React.PropTypes.object.isRequired,
 	};
 
 	state = { query: '', limit: 30 };
@@ -30,9 +32,9 @@ class QueryBox extends React.Component {
 			if (this.state.query != '' && this.state.query != '{}') {
 				JSON.parse(this.state.query);
 			}
-			this.props.dispatch(searchDocs(this.state));
+			this.props.actions.searchDocs(this.state);
 		} catch (err) {
-			this.props.dispatch(showMessage('Invalid JSON entered. Please fix your query and try again', Constants.MESSAGE_ERROR));
+			this.props.actions.showMessage('Invalid JSON entered. Please fix your query and try again', Constants.MESSAGE_ERROR);
 		}
 	};
 
@@ -53,4 +55,11 @@ class QueryBox extends React.Component {
 	}
 }
 
-export default QueryBox;
+
+function mapActionsToProps(dispatch) {
+	return {
+		actions: bindActionCreators({ searchDocs, showMessage }, dispatch),
+	};
+}
+
+export default connect(null, mapActionsToProps)(QueryBox);

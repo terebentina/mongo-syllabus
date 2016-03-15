@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import shouldPureComponentUpdate from '../../../../node_modules/react-pure-render/function';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 export class Confirm extends React.Component {
 	static propTypes = {
-		// exactly 1 child
 		message: React.PropTypes.string,
 		fn: React.PropTypes.func,
 		dispatch: React.PropTypes.func.isRequired,

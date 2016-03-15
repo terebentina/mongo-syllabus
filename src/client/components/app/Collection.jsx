@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { searchDocs, fetchDocs, showModal, confirmAndDropCollection, setViewMode } from '../../actions';
 import QueryBox from './collection/QueryBox.jsx';
@@ -17,27 +18,27 @@ export class Collection extends React.Component {
 		docs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 		totalDocs: React.PropTypes.number.isRequired,
 		currentPage: React.PropTypes.number.isRequired,
-		dispatch: React.PropTypes.func.isRequired,
+		actions: React.PropTypes.object.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	onNewQuery = (filter) => {
-		this.props.dispatch(searchDocs(filter));
+		this.props.actions.searchDocs(filter);
 	};
 
 	onPageLoad = (pageNum) => {
-		this.props.dispatch(fetchDocs(pageNum));
+		this.props.actions.fetchDocs(pageNum);
 	};
 
 	onRenameClick = (e) => {
 		e.preventDefault();
-		this.props.dispatch(showModal('CollectionRename', { db: this.props.selectedDb, collection: this.props.selectedCollection }));
+		this.props.actions.showModal('CollectionRename', { db: this.props.selectedDb, collection: this.props.selectedCollection });
 	};
 
 	onDropClick = (e) => {
 		e.preventDefault();
-		this.props.dispatch(confirmAndDropCollection(this.props.selectedDb, this.props.selectedCollection));
+		this.props.actions.confirmAndDropCollection(this.props.selectedDb, this.props.selectedCollection);
 	};
 
 	onInfoClick = (e) => {
@@ -46,7 +47,7 @@ export class Collection extends React.Component {
 
 	setViewMode = (mode) => (e) => {
 		e.preventDefault();
-		this.props.dispatch(setViewMode(mode));
+		this.props.actions.setViewMode(mode);
 	};
 
 	render() {
@@ -66,7 +67,7 @@ export class Collection extends React.Component {
 						<a href="" onClick={this.setViewMode('table')}>as table</a>
 					</Popover>
 				</header>
-				<QueryBox dispatch={this.props.dispatch} onSubmit={this.onNewQuery} />
+				<QueryBox onSubmit={this.onNewQuery} />
 				<Results viewMode={this.props.viewMode} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={this.onPageLoad} />
 			</div>
 		);
@@ -87,4 +88,10 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Collection);
+function mapActionsToProps(dispatch) {
+	return {
+		actions: bindActionCreators({ searchDocs, fetchDocs, showModal, confirmAndDropCollection, setViewMode }, dispatch),
+	};
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Collection);

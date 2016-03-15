@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import Doc from './ResultsAsJson/Doc.jsx';
 
 import styles from './ResultsAsJson.scss';
 
-class ResultsAsJson extends React.Component {
+export class ResultsAsJson extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		results: React.PropTypes.array.isRequired,
 		dispatch: React.PropTypes.func.isRequired,
 	};
+
+	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	render() {
 		return (

@@ -1,17 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import { createCollection } from '../../../actions';
 
-class CollectionCreate extends React.Component {
+export class CollectionCreate extends React.Component {
 	static propTypes = {
 		payload: React.PropTypes.shape({
 			db: React.PropTypes.string,
 		}).isRequired,
 		doDestroy: React.PropTypes.func.isRequired,
-		dispatch: React.PropTypes.func.isRequired,
+		actions: React.PropTypes.object.isRequired,
 	};
 
 	state = { collectionName: '' };
+
+	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	onChange = (e) => {
 		this.setState({ collectionName: e.target.value });
@@ -29,7 +33,7 @@ class CollectionCreate extends React.Component {
 
 	save = (e) => {
 		e.preventDefault();
-		this.props.dispatch(createCollection(this.props.payload.db, this.state.collectionName));
+		this.props.actions.createCollection(this.props.payload.db, this.state.collectionName);
 		this.props.doDestroy(e);
 	};
 
@@ -54,4 +58,10 @@ class CollectionCreate extends React.Component {
 	}
 }
 
-export default connect()(CollectionCreate);
+function mapActionsToProps(dispatch) {
+	return {
+		actions: bindActionCreators({ createCollection }, dispatch),
+	};
+}
+
+export default connect(null, mapActionsToProps)(CollectionCreate);

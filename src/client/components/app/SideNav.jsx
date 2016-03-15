@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from '../../actions';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
@@ -7,16 +8,17 @@ import styles from './SideNav.scss';
 
 export class SideNav extends React.Component {
 	static propTypes = {
+		selectedServer: React.PropTypes.number.isRequired,
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-		dispatch: React.PropTypes.func.isRequired,
+		actions: React.PropTypes.object.isRequired,
 	};
 
 	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.selectedDb !== this.props.selectedDb) {
-			nextProps.dispatch(fetchCollections(nextProps.selectedDb));
+			this.props.actions.fetchCollections(nextProps.selectedDb);
 		}
 	};
 
@@ -28,17 +30,17 @@ export class SideNav extends React.Component {
 
 	onDbSelect = (e) => {
 		e.preventDefault();
-		this.props.dispatch(selectDb(e.target.value));
+		this.props.actions.selectDb(e.target.value);
 	};
 
 	onCollectionSelect = (collection) => (e) => {
 		e.preventDefault();
-		this.props.dispatch(selectAndSearchDocs(collection));
+		this.props.actions.selectAndSearchDocs(collection);
 	};
 
 	onAddCollectionClick = (e) => {
 		e.preventDefault();
-		this.props.dispatch(showModal('CollectionCreate', { db: this.props.selectedDb }));
+		this.props.actions.showModal('CollectionCreate', { db: this.props.selectedDb });
 	};
 
 	render() {
@@ -47,7 +49,7 @@ export class SideNav extends React.Component {
 				<div className={styles.servers}>
 					<h3 className={styles.h3}>Server:</h3>
 					<select className={styles.select} value={this.props.selectedServer} onChange={this.onServerSelect}>
-						<option value=""></option>
+						<option value={-1}></option>
 						{/*this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)*/}
 					</select>
 				</div>
@@ -58,14 +60,14 @@ export class SideNav extends React.Component {
 						<option value=""></option>
 						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
-					{this.props.selectedDb ? <a href="#"><svg className={styles.iconSettings}><use xlinkHref="#icon-settings"></use></svg></a> : null}
+					{this.props.selectedDb ? <a href="#"><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a> : null}
 				</div>
 
 				<div className={styles.collections}>
 					<h3 className={styles.h3}>Collections</h3>
-					<a onClick={this.onAddCollectionClick}><svg className={styles.iconAdd}><use xlinkHref="#icon-add"></use></svg></a>
+					<a onClick={this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
 					<nav className={styles.nav}>
-						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg className={styles.iconApps}><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
+						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
 					</nav>
 				</div>
 			</aside>
@@ -86,4 +88,10 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(SideNav);
+function mapActionsToProps(dispatch) {
+	return {
+		actions: bindActionCreators({ selectDb, selectAndSearchDocs, fetchCollections, showModal }, dispatch),
+	};
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(SideNav);

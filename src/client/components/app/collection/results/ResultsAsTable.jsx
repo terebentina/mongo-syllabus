@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import { typesFromResults } from '../../../../utils/mongodb';
 import Doc from './ResultsAsTable/Doc.jsx';
 
 import styles from './ResultsAsTable.scss';
 
-class ResultsAsTable extends React.Component {
+export class ResultsAsTable extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
@@ -24,6 +25,8 @@ class ResultsAsTable extends React.Component {
 			this.setState({ types: typesFromResults(nextProps.results) });
 		}
 	};
+
+	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	render() {
 		return (

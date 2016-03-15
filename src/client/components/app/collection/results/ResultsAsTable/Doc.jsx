@@ -4,7 +4,7 @@ import { confirmAndRemoveDoc } from '../../../../../actions';
 
 import styles from './Doc.scss';
 
-class Doc extends React.Component {
+export class Doc extends React.Component {
 	static propTypes = {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
