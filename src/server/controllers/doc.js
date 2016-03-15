@@ -8,7 +8,7 @@ const url = 'mongodb://192.168.5.105:27017';
 
 const DocCtrl = {
 	index(req, res, next) {
-		// warning!!! no req.params is sanitized!!! @todo
+		// warning!!! req.params are not sanitized!!! @todo
 		const dbName = req.params.db;
 		const collectionName = req.params.collection;
 		let query = {};

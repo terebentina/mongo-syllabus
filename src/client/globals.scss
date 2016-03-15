@@ -29,24 +29,28 @@ body {
 a {
 	color: #551a8b;
 	cursor: pointer;
-}
 
-a:hover {
-	color: $color2;
-}
+	&:hover {
+		color: $color2;
+	}
 
-a:active {
-	color: $color3;
-	background: #F5F5F5;
-}
+	&:active {
+		color: $color3;
+		background: #F5F5F5;
+	}
 
-a span,
-a svg {
-	cursor: pointer;
+	span,
+	svg {
+		cursor: pointer;
+	}
 }
 
 label span:first-of-type {
 	margin-right: 5px;
+}
+
+.popover.menu .popover__trigger {
+	display: flex;
 }
 
 .popover.menu .popover__content {

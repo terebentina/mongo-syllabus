@@ -101,12 +101,13 @@ function docs(state = [], action) {
 		case Constants.SELECT_DB:
 		case Constants.SELECT_COLLECTION:
 			return [];
-		case Constants.REMOVE_DOC:
+		case Constants.REMOVE_DOC: {
 			const idx = _.findIndex(state, { _id: action.docId });
 			if (idx > -1) {
 				return [...state.slice(0, idx), ...state.slice(idx + 1)];
 			}
 			return state;
+		}
 		case Constants.DROP_COLLECTION:
 			return [];
 		default:
