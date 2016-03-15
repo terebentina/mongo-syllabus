@@ -60,14 +60,14 @@ export class SideNav extends React.Component {
 						<option value=""></option>
 						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
-					{this.props.selectedDb ? <a href="#"><svg className="icon-settings"><use xlinkHref="#icon-settings"></use></svg></a> : null}
+					{this.props.selectedDb ? <a href="#"><svg><use xlinkHref="#icon-settings"></use></svg></a> : null}
 				</div>
 
 				<div className={styles.collections}>
 					<h3 className={styles.h3}>Collections</h3>
-					<a onClick={this.onAddCollectionClick}><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
+					<a onClick={this.onAddCollectionClick}><svg><use xlinkHref="#icon-add"></use></svg></a>
 					<nav className={styles.nav}>
-						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg className="icon-apps"><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
+						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
 					</nav>
 				</div>
 			</aside>

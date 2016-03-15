@@ -30,8 +30,8 @@ export class Doc extends React.Component {
 		return (
 			<tr className={styles.row}>
 				<td className={styles.actions}>
-					<a onClick={this.onEditClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
-					<a onClick={this.onDeleteClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
+					<a onClick={this.onEditClick}><svg><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={this.onDeleteClick}><svg><use xlinkHref="#icon-delete"></use></svg></a>
 				</td>
 				{Object.keys(this.props.types).map((prop) => <td key={prop} className={styles[this.props.types[prop]]}>{formatValue(this.props.doc[prop], this.props.types[prop])}</td>)}
 			</tr>

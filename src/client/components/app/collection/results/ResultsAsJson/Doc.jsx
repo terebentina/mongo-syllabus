@@ -33,8 +33,8 @@ export class Doc extends React.Component {
 		return (
 			<article className={styles.article}>
 				<header>
-					<a onClick={this.onEditClick}><svg className={styles.iconCreate}><use xlinkHref="#icon-create"></use></svg></a>
-					<a onClick={this.onDeleteClick}><svg className={styles.iconDelete}><use xlinkHref="#icon-delete"></use></svg></a>
+					<a onClick={this.onEditClick}><svg><use xlinkHref="#icon-create"></use></svg></a>
+					<a onClick={this.onDeleteClick}><svg><use xlinkHref="#icon-delete"></use></svg></a>
 				</header>
 				<div>
 					<Highlight className="language-javascript">{beautify(JSON.stringify(this.props.doc), beautyOpts)}</Highlight>

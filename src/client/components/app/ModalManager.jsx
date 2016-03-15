@@ -31,7 +31,7 @@ export class ModalManager extends React.Component {
 			<div id="modals">
 				<div className={styles.modal_wrapper}>
 					<div className={styles.modal}>
-						<a className={styles.close} onClick={this.destroy}><svg className="icon-close"><use xlinkHref="#icon-close"></use></svg></a>
+						<a className={styles.close} onClick={this.destroy}><svg><use xlinkHref="#icon-close"></use></svg></a>
 						<Modal payload={this.props.payload} doDestroy={this.destroy} />
 					</div>
 				</div>

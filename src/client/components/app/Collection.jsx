@@ -58,11 +58,11 @@ export class Collection extends React.Component {
 			<div className={styles.collection}>
 				<header className={styles.header}>
 					<h2 className={styles.h2}>{`Collection: ${this.props.selectedCollection}`}</h2>
-					<a className={styles.iconLink} onClick={this.onInfoClick}><svg className="icon-info"><use xlinkHref="#icon-info"></use></svg></a>
-					<a className={styles.iconLink} onClick={this.onRenameClick}><svg className="icon-create"><use xlinkHref="#icon-create"></use></svg></a>
-					<a className={styles.iconLink} onClick={this.onDropClick}><svg className="icon-delete"><use xlinkHref="#icon-delete"></use></svg></a>
-					<a className={styles.iconLink} href="#"><svg className="icon-add"><use xlinkHref="#icon-add"></use></svg></a>
-					<Popover className="menu" position="bottom" trigger={<svg className="icon-visibility"><use xlinkHref="#icon-visibility"></use></svg>}>
+					<a className={styles.iconLink} onClick={this.onInfoClick}><svg><use xlinkHref="#icon-info"></use></svg></a>
+					<a className={styles.iconLink} onClick={this.onRenameClick}><svg><use xlinkHref="#icon-create"></use></svg></a>
+					<a className={styles.iconLink} onClick={this.onDropClick}><svg><use xlinkHref="#icon-delete"></use></svg></a>
+					<a className={styles.iconLink} href="#"><svg><use xlinkHref="#icon-add"></use></svg></a>
+					<Popover className="menu" position="bottom" trigger={<svg><use xlinkHref="#icon-visibility"></use></svg>}>
 						<a href="" onClick={this.setViewMode('json')}>as Json</a>
 						<a href="" onClick={this.setViewMode('table')}>as table</a>
 					</Popover>
