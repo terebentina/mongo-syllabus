@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
@@ -13,7 +15,7 @@ export class Doc extends React.Component {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		doc: React.PropTypes.object.isRequired,
-		dispatch: React.PropTypes.func.isRequired,
+		actions: React.PropTypes.object.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
@@ -24,7 +26,7 @@ export class Doc extends React.Component {
 
 	onDeleteClick = (e) => {
 		e.preventDefault();
-		this.props.dispatch(confirmAndRemoveDoc(this.props.selectedDb, this.props.selectedCollection, this.props.doc._id));
+		this.props.actions.confirmAndRemoveDoc(this.props.selectedDb, this.props.selectedCollection, this.props.doc._id);
 	};
 
 	render() {
@@ -42,4 +44,10 @@ export class Doc extends React.Component {
 	}
 }
 
-export default Doc;
+function mapActionsToProps(dispatch) {
+	return {
+		actions: bindActionCreators({ confirmAndRemoveDoc }, dispatch),
+	};
+}
+
+export default connect(null, mapActionsToProps)(Doc);

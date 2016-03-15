@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { typesFromResults } from '../../../../utils/mongodb';
 import Doc from './ResultsAsTable/Doc.jsx';
@@ -11,7 +10,6 @@ export class ResultsAsTable extends React.Component {
 		selectedDb: React.PropTypes.string.isRequired,
 		selectedCollection: React.PropTypes.string.isRequired,
 		results: React.PropTypes.array.isRequired,
-		dispatch: React.PropTypes.func.isRequired,
 	};
 
 	state = { types: {} };
@@ -38,11 +36,11 @@ export class ResultsAsTable extends React.Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} types={this.state.types} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} doc={doc} dispatch={this.props.dispatch} />)}
+					{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} types={this.state.types} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} doc={doc} />)}
 				</tbody>
 			</table>
 		);
 	}
 }
 
-export default connect()(ResultsAsTable);
+export default ResultsAsTable;
