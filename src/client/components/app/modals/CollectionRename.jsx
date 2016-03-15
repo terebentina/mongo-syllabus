@@ -59,16 +59,10 @@ export class CollectionRename extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		selectedCollection: state.selectedCollection || '',
-	};
-}
-
 function mapActionsToProps(dispatch) {
 	return {
 		actions: bindActionCreators({ renameCollection }, dispatch),
 	};
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(CollectionRename);
+export default connect(null, mapActionsToProps)(CollectionRename);

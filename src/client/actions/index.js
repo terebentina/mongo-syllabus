@@ -93,6 +93,31 @@ export function fetchDocs(pageNum = 0) {
 	};
 }
 
+function removeDoc(db, collection, docId) {
+	return (dispatch) =>
+		request.delete(`${Constants.API_URL}/api/docs/${db}/${collection}/${docId}`)
+			.then(() => dispatch({ type: Constants.REMOVE_DOC, docId }))
+			.catch((err) => {
+				console.log('err', err.stack);
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
+			});
+}
+
+
+/**
+ * this dispatches the confirmation which is handled by a component. If the user confirms, the component will call the function provided by this action which, in turn, dispatches remove
+ * @param db
+ * @param collection
+ * @param docId
+ * @returns {Function}
+ */
+export function confirmAndRemoveDoc(db, collection, docId) {
+	return (dispatch) => {
+		dispatch(confirm('Are you sure you want to delete this document?', removeDoc.bind(this, db, collection, docId)));
+	};
+}
+
+
 //export function setCurrentPage(pageNum) {
 //	return {
 //		type: SET_CURRENT_PAGE,
@@ -137,20 +162,6 @@ export function hideMessage() {
 }
 
 
-/**
- * this dispatches the confirmation which is handled by a component. If the user confirms, the component will call the function provided by this action which, in turn, dispatches remove
- * @param db
- * @param collection
- * @param docId
- * @returns {Function}
- */
-export function confirmAndRemoveDoc(db, collection, docId) {
-	return (dispatch) => {
-		dispatch(confirm('Are you sure you want to delete this document?', removeDoc.bind(this, db, collection, docId)));
-	};
-}
-
-
 function confirm(message, fn) {
 	return {
 		type: Constants.CONFIRMATION,
@@ -179,16 +190,6 @@ export function renameCollection(oldData, newName) {
 				dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName });
 				dispatch(showMessage('Collection renamed'));
 			})
-			.catch((err) => {
-				console.log('err', err.stack);
-				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
-			});
-}
-
-function removeDoc(db, collection, docId) {
-	return (dispatch) =>
-		request.delete(`${Constants.API_URL}/api/docs/${db}/${collection}/${docId}`)
-			.then(() => dispatch({ type: Constants.REMOVE_DOC, docId }))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
