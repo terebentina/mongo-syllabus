@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var precss = require('precss');
 
 const babelQuery = {
 	presets: ['es2015', 'stage-0', 'react'],
@@ -16,10 +17,12 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
-			{ test: /\.scss$/, loader: 'style!css?sourceMap!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
-			{ test: /\.css$/, loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss' },
+			{ test: /\.scss$/, loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss?parser=postcss-scss' },
 		],
 	},
+	postcss: [
+		precss(),
+	],
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
 		modulesDirectories: ['src', 'node_modules'],

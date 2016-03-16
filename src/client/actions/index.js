@@ -15,12 +15,12 @@ function receiveDatabases(json) {
 function fetchDatabases() {
 	return (dispatch) => {
 		dispatch(requestDatabases());
-		return request.get(`/api/databases`)
+		return request.get(`${Constants.API_URL}/api/databases`)
 			.then((json) => dispatch(receiveDatabases(json)))
-			.catch((err) => {
-				dispatch(receiveDatabases([]));
-				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
-			});
+			.catch((err) => Promise.all([
+				dispatch(receiveDatabases([])),
+				dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR)),
+			]));
 	};
 }
 
@@ -64,31 +64,33 @@ export function setDocsFilter(obj = { query: '', limit: 30 }) {
 }
 
 export function selectAndSearchDocs(collection) {
-	return (dispatch) => {
-		dispatch(selectCollection(collection));
-		dispatch(setDocsFilter());
-		dispatch(fetchDocs());
-	};
+	return (dispatch) => Promise.all([
+		dispatch(selectCollection(collection)),
+		dispatch(setDocsFilter()),
+		dispatch(fetchDocs()),
+	]);
 }
 
 export function searchDocs(obj = { query: '', limit: 30 }) {
-	return (dispatch) => {
-		dispatch(setDocsFilter(obj));
-		dispatch(fetchDocs());
-	};
+	return (dispatch) => Promise.all([
+		dispatch(setDocsFilter(obj)),
+		dispatch(fetchDocs()),
+	]);
 }
 
 export function fetchDocs(pageNum = 0) {
 	return (dispatch, getState) => {
 		const state = getState();
 		if (pageNum != state.currentPage) {
-			dispatch(requestDocs());
-			return request.get(`${Constants.API_URL}/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: pageNum, limit: state.filter.limit })
-				.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
-				.catch((err) => {
-					dispatch(receiveDocs(state.selectedCollection, []));
-					return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
-				});
+			return Promise.all([
+				dispatch(requestDocs()),
+				request.get(`${Constants.API_URL}/api/docs/${state.selectedDb}/${state.selectedCollection}`, { query: state.filter.query, p: pageNum, limit: state.filter.limit })
+					.then(json => dispatch(receiveDocs(state.selectedCollection, pageNum, json)))
+					.catch((err) => Promise.all([
+						dispatch(receiveDocs(state.selectedCollection, pageNum, [])),
+						dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR)),
+					])),
+			]);
 		}
 	};
 }
@@ -142,15 +144,15 @@ export function selectCollection(collection) {
 }
 
 export function fetchCollections(db) {
-	return (dispatch) => {
-		dispatch(requestCollections(db));
-		return request.get(`${Constants.API_URL}/api/collections/${db}`)
+	return (dispatch) => Promise.all([
+		dispatch(requestCollections(db)),
+		request.get(`${Constants.API_URL}/api/collections/${db}`)
 			.then(json => dispatch(receiveCollections(db, json)))
-			.catch((err) => {
-				dispatch(receiveCollections(db, []));
-				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
-			});
-	};
+			.catch((err) => Promise.all([
+				dispatch(receiveCollections(db, [])),
+				dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR)),
+			])),
+	]);
 }
 
 export function showMessage(message, type = Constants.MESSAGE_SUCCESS) {
@@ -173,10 +175,10 @@ function confirm(message, fn) {
 export function createCollection(db, collectionName) {
 	return (dispatch) =>
 		request.post(`${Constants.API_URL}/api/collections/${db}/${collectionName}`)
-			.then(() => {
-				dispatch({ type: Constants.CREATE_COLLECTION, collectionName });
-				dispatch(showMessage('Collection created'));
-			})
+			.then(() => Promise.all([
+				dispatch({ type: Constants.CREATE_COLLECTION, collectionName }),
+				dispatch(showMessage('Collection created')),
+			]))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
@@ -186,10 +188,10 @@ export function createCollection(db, collectionName) {
 export function renameCollection(oldData, newName) {
 	return (dispatch) =>
 		request.put(`${Constants.API_URL}/api/collections/${oldData.db}/${oldData.collection}`, { collection: newName })
-			.then(() => {
-				dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName });
-				dispatch(showMessage('Collection renamed'));
-			})
+			.then(() => Promise.all([
+				dispatch({ type: Constants.RENAME_COLLECTION, oldName: oldData.collection, newName }),
+				dispatch(showMessage('Collection renamed')),
+			]))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
@@ -212,10 +214,10 @@ export function confirmAndDropCollection(db, collection) {
 function dropCollection(db, collection) {
 	return (dispatch) =>
 		request.delete(`${Constants.API_URL}/api/collections/${db}/${collection}`)
-			.then(() => {
-				dispatch({ type: Constants.DROP_COLLECTION, collection });
-				dispatch(showMessage('Collection dropped'));
-			})
+			.then(() => Promise.all([
+				dispatch({ type: Constants.DROP_COLLECTION, collection }),
+				dispatch(showMessage('Collection dropped')),
+			]))
 			.catch((err) => {
 				console.log('err', err.stack);
 				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
