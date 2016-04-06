@@ -4,12 +4,14 @@ import { bindActionCreators } from 'redux';
 import { hideModal } from '../../actions/index';
 import CollectionRename from './modals/CollectionRename.jsx';
 import CollectionCreate from './modals/CollectionCreate.jsx';
+import UpdateDocument from './modals/UpdateDocument.jsx';
 
 import styles from './ModalManager.scss';
 
 const Modals = {
 	CollectionRename,
 	CollectionCreate,
+	UpdateDocument,
 };
 
 export class ModalManager extends React.Component {

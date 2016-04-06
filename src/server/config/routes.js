@@ -17,6 +17,8 @@ module.exports = function() {
 	this.del('/api/collections/:db/:collection', CollectionCtrl.drop);
 	this.get('/api/docs/:db/:collection', DocCtrl.index);
 	this.del('/api/docs/:db/:collection/:docId', DocCtrl.remove);
+	this.put('/api/docs/:db/:collection/:docId', DocCtrl.update);
+	this.post('/api/docs/:db/:collection', DocCtrl.create);
 
 	if (process.env.NODE_ENV == 'development') {
 		// restify needs the route defined, even if it won't serve it itself (this is handled by a webpack plugin) otherwise we get a 406 and no chance for the plugin to handle the route

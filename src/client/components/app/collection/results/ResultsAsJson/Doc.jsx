@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
-import { confirmAndRemoveDoc } from '../../../../../actions';
+import { confirmAndRemoveDoc, showModal } from '../../../../../actions';
 
 import styles from './Doc.scss';
 
@@ -22,6 +22,7 @@ export class Doc extends React.Component {
 
 	onEditClick = (e) => {
 		e.preventDefault();
+		this.props.actions.showModal('UpdateDocument', { db: this.props.selectedDb, collection: this.props.selectedCollection, doc: this.props.doc });
 	};
 
 	onDeleteClick = (e) => {
@@ -46,7 +47,7 @@ export class Doc extends React.Component {
 
 function mapActionsToProps(dispatch) {
 	return {
-		actions: bindActionCreators({ confirmAndRemoveDoc }, dispatch),
+		actions: bindActionCreators({ confirmAndRemoveDoc, showModal }, dispatch),
 	};
 }
 

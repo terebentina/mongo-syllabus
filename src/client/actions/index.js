@@ -120,6 +120,16 @@ export function confirmAndRemoveDoc(db, collection, docId) {
 }
 
 
+export function updateDocument(oldData, doc) {
+	return (dispatch) =>
+		request.put(`${Constants.API_URL}/api/docs/${oldData.db}/${oldData.collection}/${oldData.doc._id}`, { doc })
+			.then(() => dispatch({ type: Constants.UPDATE_DOC, docId: oldData._id, doc }))
+			.catch((err) => {
+				console.log('err', err.stack);
+				return dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR));
+			});
+}
+
 //export function setCurrentPage(pageNum) {
 //	return {
 //		type: SET_CURRENT_PAGE,

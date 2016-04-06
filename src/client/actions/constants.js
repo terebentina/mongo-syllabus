@@ -6,6 +6,7 @@ export const REQUEST_DOCS = 'REQUEST_DOCS';
 export const RECEIVE_DOCS = 'RECEIVE_DOCS';
 export const FILTER_DOCS = 'FILTER_DOCS';
 export const REMOVE_DOC = 'REMOVE_DOC';
+export const UPDATE_DOC = 'UPDATE_DOC';
 export const SELECT_DB = 'SELECT_DB';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
