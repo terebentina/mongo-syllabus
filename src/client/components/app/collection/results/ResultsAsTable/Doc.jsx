@@ -22,18 +22,22 @@ export class Doc extends Component {
 	};
 
 	onDeleteClick = (e) => {
+		const { actions, selectedDb, selectedCollection, doc } = this.props;
+
 		e.preventDefault();
-		this.props.actions.confirmAndRemoveDoc(this.props.selectedDb, this.props.selectedCollection, this.props.doc._id);
+		actions.confirmAndRemoveDoc(selectedDb, selectedCollection, doc._id);
 	};
 
 	render() {
+		const { types, doc } = this.props;
+
 		return (
 			<tr className={styles.row}>
 				<td className={styles.actions}>
 					<a onClick={this.onEditClick}><svg><use xlinkHref="#icon-create"></use></svg></a>
 					<a onClick={this.onDeleteClick}><svg><use xlinkHref="#icon-delete"></use></svg></a>
 				</td>
-				{Object.keys(this.props.types).map((prop) => <td key={prop} className={styles[this.props.types[prop]]}>{formatValue(this.props.doc[prop], this.props.types[prop])}</td>)}
+				{Object.keys(types).map((prop) => <td key={prop} className={styles[types[prop]]}>{formatValue(doc[prop], types[prop])}</td>)}
 			</tr>
 		);
 	}
@@ -45,10 +49,10 @@ function formatValue(val, type) {
 	}
 	if (type == 'array') {
 		const len = val.length;
-		return `[${len ? len : ' '}]`;
+		return `[${len || ' '}]`;
 	} else if (type == 'object') {
 		const len = Object.keys(val).length;
-		return `{${len ? len : ' '}}`;
+		return `{${len || ' '}}`;
 	//} else if (type == 'objectId') {
 	//	return `oid(${val})`;
 	} else if (type == 'boolean') {

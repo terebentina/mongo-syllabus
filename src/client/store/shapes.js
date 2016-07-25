@@ -9,3 +9,8 @@ export const pageMessageShape = PropTypes.shape({
 	type: PropTypes.string,
 	message: PropTypes.string,
 });
+
+export const modalShape = PropTypes.shape({
+	modal: PropTypes.string.isRequired,
+	payload: PropTypes.any,
+});

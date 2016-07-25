@@ -21,13 +21,17 @@ export class Doc extends Component {
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	onEditClick = (e) => {
+		const { actions, selectedDb, selectedCollection, doc } = this.props;
+
 		e.preventDefault();
-		this.props.actions.showModal('UpdateDocument', { db: this.props.selectedDb, collection: this.props.selectedCollection, doc: this.props.doc });
+		actions.showModal('UpdateDocument', { db: selectedDb, collection: selectedCollection, doc: doc });
 	};
 
 	onDeleteClick = (e) => {
+		const { actions, selectedDb, selectedCollection, doc } = this.props;
+
 		e.preventDefault();
-		this.props.actions.confirmAndRemoveDoc(this.props.selectedDb, this.props.selectedCollection, this.props.doc._id);
+		actions.confirmAndRemoveDoc(selectedDb, selectedCollection, doc._id);
 	};
 
 	render() {

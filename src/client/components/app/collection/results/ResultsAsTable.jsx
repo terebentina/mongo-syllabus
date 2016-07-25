@@ -27,6 +27,8 @@ export class ResultsAsTable extends Component {
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	render() {
+		const { results, selectedDb, selectedCollection } = this.props;
+
 		return (
 			<table className={styles.table}>
 				<thead>
@@ -36,7 +38,7 @@ export class ResultsAsTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} types={this.state.types} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} doc={doc} />)}
+					{results.map((doc, i) => <Doc key={`doc_${i}`} types={this.state.types} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
 				</tbody>
 			</table>
 		);

@@ -33,13 +33,17 @@ export class Collection extends Component {
 	};
 
 	onRenameClick = (e) => {
+		const { actions, selectedDb, selectedCollection } = this.props;
+
 		e.preventDefault();
-		this.props.actions.showModal('CollectionRename', { db: this.props.selectedDb, collection: this.props.selectedCollection });
+		actions.showModal('CollectionRename', { db: selectedDb, collection: selectedCollection });
 	};
 
 	onDropClick = (e) => {
+		const { actions, selectedDb, selectedCollection } = this.props;
+
 		e.preventDefault();
-		this.props.actions.confirmAndDropCollection(this.props.selectedDb, this.props.selectedCollection);
+		actions.confirmAndDropCollection(selectedDb, selectedCollection);
 	};
 
 	onInfoClick = (e) => {

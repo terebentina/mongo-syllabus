@@ -22,10 +22,12 @@ export class Pagination extends Component {
 	};
 
 	render() {
-		if (!this.props.total) {
+		const { total, rpp, currentPage } = this.props;
+
+		if (!total) {
 			return false;
 		}
-		const totalPages = Math.ceil(this.props.total / this.props.rpp);
+		const totalPages = Math.ceil(total / rpp);
 		// Beginning group of pages: n1...n2
 		const n1 = 1;
 		const n2 = Math.min(countOut, totalPages - 1);
@@ -35,8 +37,8 @@ export class Pagination extends Component {
 		const n8 = totalPages;
 
 		// Middle group of pages: n4...n5
-		const n4 = Math.max(n2 + 1, this.props.currentPage + 1 - countIn);
-		const n5 = Math.min(n7 - 1, this.props.currentPage + 1 + countIn);
+		const n4 = Math.max(n2 + 1, currentPage + 1 - countIn);
+		const n5 = Math.min(n7 - 1, currentPage + 1 + countIn);
 		const useMiddle = (n5 >= n4);
 
 		// Point n3 between n2 and n4
@@ -48,15 +50,15 @@ export class Pagination extends Component {
 		const useN6 = (useMiddle && ((n7 - n5) > 1));
 		const links = [];
 
-		if (this.props.currentPage == 0) {
+		if (currentPage == 0) {
 			links.push(<span key="prev" className={styles.previous}>&lt;</span>);
 		} else {
-			links.push(<a key="prev" className={styles.previous} onClick={this.onPageClick(this.props.currentPage - 1)}>&lt;</a>);
+			links.push(<a key="prev" className={styles.previous} onClick={this.onPageClick(currentPage - 1)}>&lt;</a>);
 		}
 
 		// Generate links data in accordance with calculated numbers
 		for (let i = n1; i <= n2; i++) {
-			if (this.props.currentPage === i - 1) {
+			if (currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
 				links.push(<a key={`pag_${i}`} onClick={this.onPageClick(i - 1)}>{i}</a>);
@@ -66,7 +68,7 @@ export class Pagination extends Component {
 			links.push(<span key={`pag_${n3}`}>...</span>);
 		}
 		for (let i = n4; i <= n5; i++) {
-			if (this.props.currentPage === i - 1) {
+			if (currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
 				links.push(<a key={`pag_${i}`} onClick={this.onPageClick(i - 1)}>{i}</a>);
@@ -76,17 +78,17 @@ export class Pagination extends Component {
 			links.push(<span key={`pag_${n6}`}>...</span>);
 		}
 		for (let i = n7; i <= n8; i++) {
-			if (this.props.currentPage === i - 1) {
+			if (currentPage === i - 1) {
 				links.push(<span key={`pag_${i}`}>{i}</span>);
 			} else {
 				links.push(<a key={`pag_${i}`} onClick={this.onPageClick(i - 1)}>{i}</a>);
 			}
 		}
 
-		if (this.props.currentPage == totalPages - 1) {
+		if (currentPage == totalPages - 1) {
 			links.push(<span key="next">&gt;</span>);
 		} else {
-			links.push(<a key="next" className={styles.next} onClick={this.onPageClick(this.props.currentPage + 1)}>&gt;</a>);
+			links.push(<a key="next" className={styles.next} onClick={this.onPageClick(currentPage + 1)}>&gt;</a>);
 		}
 
 		return (

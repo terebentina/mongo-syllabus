@@ -14,9 +14,11 @@ export class ResultsAsJson extends Component {
 	shouldComponentUpdate = shouldPureComponentUpdate;
 
 	render() {
+		const { results, selectedDb, selectedCollection } = this.props;
+
 		return (
 			<div className={styles.docs}>
-				{this.props.results.map((doc, i) => <Doc key={`doc_${i}`} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} doc={doc} />)}
+				{results.map((doc, i) => <Doc key={`doc_${i}`} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
 			</div>
 		);
 	}

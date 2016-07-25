@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Pagination from './results/Pagination.jsx';
 import ResultsAsJson from './results/ResultsAsJson.jsx';
 import ResultsAsTable from './results/ResultsAsTable.jsx';
