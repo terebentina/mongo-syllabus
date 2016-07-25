@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { fetchDatabasesIfNeeded, hideMessage } from './actions';
+import { pageMessageShape } from './store/shapes';
 import Dashboard from './components/app/Dashboard.jsx';
 import DBDashboard from './components/app/DBDashboard.jsx';
 import Collection from './components/app/Collection.jsx';
@@ -12,13 +13,13 @@ import Confirm from './components/app/Confirm.jsx';
 import ModalManager from './components/app/ModalManager.jsx';
 import { PopoverWrapper } from '@terebentina/react-popover';
 
-import styles from './app.scss';
+import styles from './App.scss';
 
 // named export here so we can test App output without redux
 export class App extends Component {
 	static propTypes = {
 		modalToShow: PropTypes.object,
-		message: PropTypes.object,
+		message: pageMessageShape,
 		selectedDb: PropTypes.string.isRequired,
 		selectedCollection: PropTypes.string.isRequired,
 		actions: PropTypes.object.isRequired,
@@ -33,18 +34,20 @@ export class App extends Component {
 	onHide = () => this.props.actions.hideMessage();
 
 	render() {
+		const { selectedDb, selectedCollection, message, modalToShow } = this.props;
+
 		let content;
-		if (!this.props.selectedDb) {
+		if (!selectedDb) {
 			content = <Dashboard />;
-		} else if (!this.props.selectedCollection) {
-			content = <DBDashboard db={this.props.selectedDb} />;
+		} else if (!selectedCollection) {
+			content = <DBDashboard db={selectedDb} />;
 		} else {
 			content = <Collection />;
 		}
 
 		return (
 			<PopoverWrapper className={styles.app}>
-				<PageMessage message={this.props.message} onHide={this.onHide} />
+				<PageMessage message={message} onHide={this.onHide} />
 				<Confirm />
 				<header className={styles.header}>
 					<span>Mongo Syllabus</span>
@@ -54,7 +57,7 @@ export class App extends Component {
 					{content}
 				</main>
 				<footer className={styles.footer}>2016 Dan Caragea</footer>
-				{this.props.modalToShow ? <ModalManager modal={this.props.modalToShow.modal} payload={this.props.modalToShow.payload} /> : null}
+				{modalToShow ? <ModalManager modal={modalToShow.modal} payload={modalToShow.payload} /> : null}
 			</PopoverWrapper>
 		);
 	}

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { pageMessageShape } from '../../store/shapes';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import styles from './PageMessage.scss';
@@ -7,7 +8,7 @@ const duration = 4000;
 
 export class PageMessage extends Component {
 	static propTypes = {
-		message: PropTypes.object,
+		message: pageMessageShape,
 		onHide: PropTypes.func.isRequired,
 	};
 
