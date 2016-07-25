@@ -6,7 +6,7 @@ const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight.jsx';
 import { confirmAndRemoveDoc, showModal } from '../../../../../actions';
 
-import styles from './Doc.scss';
+import styles from './Doc.css';
 
 const beautyOpts = { indent_size: 2 };
 

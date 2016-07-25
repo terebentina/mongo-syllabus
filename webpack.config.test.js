@@ -17,7 +17,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, exclude: path.join(__dirname, 'node_modules') },
-			{ test: /\.scss$/, loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss?parser=postcss-scss' },
+			{ test: /\.css$/, loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss' },
 			{ test: /\.json$/, loader: 'json' },
 		],
 	},

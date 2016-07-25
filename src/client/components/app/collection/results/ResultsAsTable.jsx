@@ -3,7 +3,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import { typesFromResults } from '../../../../utils/mongodb';
 import Doc from './ResultsAsTable/Doc.jsx';
 
-import styles from './ResultsAsTable.scss';
+import styles from './ResultsAsTable.css';
 
 export class ResultsAsTable extends Component {
 	static propTypes = {

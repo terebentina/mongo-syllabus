@@ -5,7 +5,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import { searchDocs, showMessage } from '../../../actions';
 import * as Constants from '../../../actions/constants';
 
-import styles from './QueryBox.scss';
+import styles from './QueryBox.css';
 
 export class QueryBox extends Component {
 	static propTypes = {

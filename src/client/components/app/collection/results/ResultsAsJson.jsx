@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import Doc from './ResultsAsJson/Doc.jsx';
 
-import styles from './ResultsAsJson.scss';
+import styles from './ResultsAsJson.css';
 
 export class ResultsAsJson extends Component {
 	static propTypes = {

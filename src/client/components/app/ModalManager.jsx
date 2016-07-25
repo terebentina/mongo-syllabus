@@ -6,7 +6,7 @@ import CollectionRename from './modals/CollectionRename.jsx';
 import CollectionCreate from './modals/CollectionCreate.jsx';
 import UpdateDocument from './modals/UpdateDocument.jsx';
 
-import styles from './ModalManager.scss';
+import styles from './ModalManager.css';
 
 const Modals = {
 	CollectionRename,

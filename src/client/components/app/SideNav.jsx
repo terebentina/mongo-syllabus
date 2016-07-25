@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from 'actions';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import styles from './SideNav.scss';
+import styles from './SideNav.css';
 
 export class SideNav extends Component {
 	static propTypes = {

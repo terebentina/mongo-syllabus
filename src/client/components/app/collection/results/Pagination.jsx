@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import styles from './Pagination.scss';
+import styles from './Pagination.css';
 
 const countOut = 2;
 const countIn = 2;

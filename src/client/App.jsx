@@ -13,7 +13,7 @@ import PageMessage from './components/app/PageMessage.jsx';
 import Confirm from './components/app/Confirm.jsx';
 import ModalManager from './components/app/ModalManager.jsx';
 
-import styles from './App.scss';
+import styles from './App.css';
 
 // named export here so we can test App output without redux
 export class App extends Component {

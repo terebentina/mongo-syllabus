@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import Sinon from 'sinon';
 
 import PageMessage from '../PageMessage.jsx';
-import styles from '../PageMessage.scss';
+import styles from '../PageMessage.css';
 
 test('Components:PageMessage', (t) => {
 	const onHide = Sinon.spy();

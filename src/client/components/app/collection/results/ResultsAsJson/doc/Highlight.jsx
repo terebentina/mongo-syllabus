@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Prism from 'prismjs';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-import './Highlight.scss';
+import './Highlight.css';
 
 function hightlight(elem) {
 	Prism.highlightElement(elem, false);

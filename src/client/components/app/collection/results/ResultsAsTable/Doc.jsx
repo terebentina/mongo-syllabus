@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { confirmAndRemoveDoc } from '../../../../../actions';
 
-import styles from './Doc.scss';
+import styles from './Doc.css';
 
 export class Doc extends Component {
 	static propTypes = {

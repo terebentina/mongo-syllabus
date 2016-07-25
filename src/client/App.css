@@ -1,10 +1,10 @@
 :global {
 	@import '../../node_modules/normalize.css/normalize.css';
 	@import '../../node_modules/@terebentina/react-popover/lib/styles.css';
-	@import "./globals.scss";
+	@import "./globals.css";
 }
 
-@import "./vars.scss";
+@import "./vars.css";
 @import "./utils.css";
 
 .app {

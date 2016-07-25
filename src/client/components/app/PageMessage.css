@@ -1,4 +1,4 @@
-@import "../../vars.scss";
+@import "../../vars.css";
 
 .page-message {
 	position: fixed;
@@ -13,7 +13,7 @@
 
 .page-message--error {
 	composes: page-message;
-	// haha, abusing gradients for fun and profit.
+	/* haha, abusing gradients for fun and profit. */
 	background: linear-gradient(to right, rgba(240,65,36,0) 25%, rgba(240,65,36,1) 25%, rgba(240,65,36,1) 75%, rgba(240,65,36,0) 75%);
 	//background-color: #F04124;
 	//border-color: #F6A1A1;
@@ -22,9 +22,11 @@
 
 .page-message--success {
 	composes: page-message;
-	// haha, abusing gradients for fun and profit.
+	/* haha, abusing gradients for fun and profit. */
 	background: linear-gradient(to right, rgba(67,172,106,0) 25%, rgba(67,172,106,1) 25%, rgba(67,172,106,1) 75%, rgba(67,172,106,0) 75%);
-	//background-color: color(c4);
-	//border-color: darken(color(c4), 50%);
+	/*
+	background-color: color(c4);
+	border-color: darken(color(c4), 50%);
+	*/
 	color: #fff;
 }
