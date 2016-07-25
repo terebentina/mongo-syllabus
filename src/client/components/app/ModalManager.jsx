@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { hideModal } from '../../actions/index';
@@ -14,11 +14,11 @@ const Modals = {
 	UpdateDocument,
 };
 
-export class ModalManager extends React.Component {
+export class ModalManager extends Component {
 	static propTypes = {
-		modal: React.PropTypes.string.isRequired,
-		payload: React.PropTypes.any,
-		actions: React.PropTypes.object.isRequired,
+		modal: PropTypes.string.isRequired,
+		payload: PropTypes.any,
+		actions: PropTypes.object.isRequired,
 	};
 
 	destroy = (e) => {

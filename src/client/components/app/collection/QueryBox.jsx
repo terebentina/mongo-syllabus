@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -7,10 +7,10 @@ import * as Constants from '../../../actions/constants';
 
 import styles from './QueryBox.scss';
 
-export class QueryBox extends React.Component {
+export class QueryBox extends Component {
 	static propTypes = {
-		onSubmit: React.PropTypes.func.isRequired,
-		actions: React.PropTypes.object.isRequired,
+		onSubmit: PropTypes.func.isRequired,
+		actions: PropTypes.object.isRequired,
 	};
 
 	state = { query: '', limit: 30 };

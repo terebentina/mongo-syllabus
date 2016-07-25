@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -10,12 +10,12 @@ import styles from './Doc.scss';
 
 const beautyOpts = { indent_size: 2 };
 
-export class Doc extends React.Component {
+export class Doc extends Component {
 	static propTypes = {
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		doc: React.PropTypes.object.isRequired,
-		actions: React.PropTypes.object.isRequired,
+		selectedDb: PropTypes.string.isRequired,
+		selectedCollection: PropTypes.string.isRequired,
+		doc: PropTypes.object.isRequired,
+		actions: PropTypes.object.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;

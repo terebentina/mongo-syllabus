@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-class DBDashboard extends React.Component {
+class DBDashboard extends Component {
 	static propTypes = {
-		db: React.PropTypes.string.isRequired,
+		db: PropTypes.string.isRequired,
 	};
 
 	render() {

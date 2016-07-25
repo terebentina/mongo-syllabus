@@ -19,6 +19,15 @@ module.exports = {
 		pathinfo: true,
 		sourceMapFilename: '[name].map',
 	},
+	resolve: {
+		modulesDirectories: [
+			'',
+			'src',
+			'src/client',
+			'src/server',
+			'node_modules',
+		],
+	},
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },

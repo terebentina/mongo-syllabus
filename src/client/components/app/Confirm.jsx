@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
-export class Confirm extends React.Component {
+export class Confirm extends Component {
 	static propTypes = {
-		message: React.PropTypes.string,
-		fn: React.PropTypes.func,
-		dispatch: React.PropTypes.func.isRequired,
+		message: PropTypes.string,
+		fn: PropTypes.func,
+		dispatch: PropTypes.func.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;

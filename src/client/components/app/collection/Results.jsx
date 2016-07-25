@@ -1,38 +1,31 @@
-import React from 'react';
-import shouldPureComponentUpdate from 'react-pure-render/function';
+import React, { Component, PropTypes } from 'react';
 import Pagination from './results/Pagination.jsx';
 import ResultsAsJson from './results/ResultsAsJson.jsx';
 import ResultsAsTable from './results/ResultsAsTable.jsx';
 
-export class Results extends React.Component {
-	static propTypes = {
-		viewMode: React.PropTypes.string.isRequired,
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		total: React.PropTypes.number.isRequired,
-		currentPage: React.PropTypes.number.isRequired,
-		rpp: React.PropTypes.number.isRequired,
-		results: React.PropTypes.array.isRequired,
-		onPageLoadRequest: React.PropTypes.func.isRequired,
-	};
-
-	shouldComponentUpdate = shouldPureComponentUpdate;
-
-	render() {
-		let results;
-		if (this.props.viewMode == 'table') {
-			results = <ResultsAsTable selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.results} />;
-		} else {
-			results = <ResultsAsJson selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.results} />;
-		}
-		return (
-			<section className={this.props.viewMode}>
-				<Pagination total={this.props.total} currentPage={this.props.currentPage} rpp={this.props.rpp} onPageLoadRequest={this.props.onPageLoadRequest} />
-				{results}
-				<Pagination total={this.props.total} currentPage={this.props.currentPage} rpp={this.props.rpp} onPageLoadRequest={this.props.onPageLoadRequest} />
-			</section>
-		);
+export default function Results({ viewMode, selectedDb, selectedCollection, results, rpp, total, currentPage, onPageLoadRequest }) {
+	let resultsComponent;
+	if (viewMode == 'table') {
+		resultsComponent = <ResultsAsTable selectedDb={selectedDb} selectedCollection={selectedCollection} results={results} />;
+	} else {
+		resultsComponent = <ResultsAsJson selectedDb={selectedDb} selectedCollection={selectedCollection} results={results} />;
 	}
+	return (
+		<section className={viewMode}>
+			<Pagination total={total} currentPage={currentPage} rpp={rpp} onPageLoadRequest={onPageLoadRequest} />
+			{resultsComponent}
+			<Pagination total={total} currentPage={currentPage} rpp={rpp} onPageLoadRequest={onPageLoadRequest} />
+		</section>
+	);
 }
 
-export default Results;
+Results.propTypes = {
+	viewMode: PropTypes.string.isRequired,
+	selectedDb: PropTypes.string.isRequired,
+	selectedCollection: PropTypes.string.isRequired,
+	total: PropTypes.number.isRequired,
+	currentPage: PropTypes.number.isRequired,
+	rpp: PropTypes.number.isRequired,
+	results: PropTypes.array.isRequired,
+	onPageLoadRequest: PropTypes.func.isRequired,
+};

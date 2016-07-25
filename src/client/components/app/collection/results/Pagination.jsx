@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import styles from './Pagination.scss';
@@ -6,12 +6,12 @@ import styles from './Pagination.scss';
 const countOut = 2;
 const countIn = 2;
 
-export class Pagination extends React.Component {
+export class Pagination extends Component {
 	static propTypes = {
-		total: React.PropTypes.number.isRequired,
-		currentPage: React.PropTypes.number.isRequired,
-		rpp: React.PropTypes.number.isRequired,
-		onPageLoadRequest: React.PropTypes.func.isRequired,
+		total: PropTypes.number.isRequired,
+		currentPage: PropTypes.number.isRequired,
+		rpp: PropTypes.number.isRequired,
+		onPageLoadRequest: PropTypes.func.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;

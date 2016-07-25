@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { createCollection } from '../../../actions';
 
-export class CollectionCreate extends React.Component {
+export class CollectionCreate extends Component {
 	static propTypes = {
-		payload: React.PropTypes.shape({
-			db: React.PropTypes.string,
+		payload: PropTypes.shape({
+			db: PropTypes.string,
 		}).isRequired,
-		doDestroy: React.PropTypes.func.isRequired,
-		actions: React.PropTypes.object.isRequired,
+		doDestroy: PropTypes.func.isRequired,
+		actions: PropTypes.object.isRequired,
 	};
 
 	state = { collectionName: '' };

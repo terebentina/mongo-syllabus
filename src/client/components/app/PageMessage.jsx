@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import styles from './PageMessage.scss';
 
 const duration = 4000;
 
-export class PageMessage extends React.Component {
+export class PageMessage extends Component {
 	static propTypes = {
-		message: React.PropTypes.object,
-		onHide: React.PropTypes.func.isRequired,
+		message: PropTypes.object,
+		onHide: PropTypes.func.isRequired,
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -18,8 +18,10 @@ export class PageMessage extends React.Component {
 	};
 
 	render() {
-		if (this.props.message) {
-			return <div className={styles[`page-message--${this.props.message.type}`]}>{this.props.message.message}</div>;
+		const { message } = this.props;
+
+		if (message) {
+			return <div className={styles[`page-message--${message.type}`]}>{message.message}</div>;
 		}
 		return false;
 	}

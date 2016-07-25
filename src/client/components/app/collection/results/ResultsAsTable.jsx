@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { typesFromResults } from '../../../../utils/mongodb';
 import Doc from './ResultsAsTable/Doc.jsx';
 
 import styles from './ResultsAsTable.scss';
 
-export class ResultsAsTable extends React.Component {
+export class ResultsAsTable extends Component {
 	static propTypes = {
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		results: React.PropTypes.array.isRequired,
+		selectedDb: PropTypes.string.isRequired,
+		selectedCollection: PropTypes.string.isRequired,
+		results: PropTypes.array.isRequired,
 	};
 
 	state = { types: {} };

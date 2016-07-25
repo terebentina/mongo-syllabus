@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Prism from 'prismjs';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
@@ -8,10 +8,10 @@ function hightlight(elem) {
 	Prism.highlightElement(elem, false);
 }
 
-class Highlight extends React.Component {
+class Highlight extends Component {
 	static propTypes = {
-		children: React.PropTypes.node,
-		className: React.PropTypes.string.isRequired,
+		children: PropTypes.node,
+		className: PropTypes.string.isRequired,
 	};
 
 	componentDidMount = () => {

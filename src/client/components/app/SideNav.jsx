@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from '../../actions';
+import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from 'actions';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import styles from './SideNav.scss';
 
-export class SideNav extends React.Component {
+export class SideNav extends Component {
 	static propTypes = {
-		selectedServer: React.PropTypes.number.isRequired,
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		databases: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-		collections: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-		actions: React.PropTypes.object.isRequired,
+		selectedServer: PropTypes.number.isRequired,
+		selectedDb: PropTypes.string.isRequired,
+		selectedCollection: PropTypes.string.isRequired,
+		databases: PropTypes.arrayOf(PropTypes.string).isRequired,
+		collections: PropTypes.arrayOf(PropTypes.string).isRequired,
+		actions: PropTypes.object.isRequired,
 	};
 
 	componentWillReceiveProps = (nextProps) => {
@@ -44,11 +44,13 @@ export class SideNav extends React.Component {
 	};
 
 	render() {
+		const { selectedServer, databases, selectedDb, collections, selectedCollection } = this.props;
+
 		return (
 			<aside className={styles.sideNav}>
 				<div className={styles.servers}>
 					<h3 className={styles.h3}>Server:</h3>
-					<select className={styles.select} value={this.props.selectedServer} onChange={this.onServerSelect}>
+					<select className={styles.select} value={selectedServer} onChange={this.onServerSelect}>
 						<option value={-1}></option>
 						{/*this.props.servers.map((server) => <option key={`server_${server.id}`} value={server.id}>{server.name}</option>)*/}
 					</select>
@@ -56,18 +58,18 @@ export class SideNav extends React.Component {
 
 				<div className={styles.databases}>
 					<h3 className={styles.h3}>Databases:</h3>
-					<select className={styles.select} value={this.props.selectedDb} onChange={this.onDbSelect}>
+					<select className={styles.select} value={selectedDb} onChange={this.onDbSelect}>
 						<option value=""></option>
-						{this.props.databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
+						{databases.map((db, i) => <option key={`db_${i}`} value={db}>{db}</option>)}
 					</select>
-					{this.props.selectedDb ? <a href="#"><svg><use xlinkHref="#icon-settings"></use></svg></a> : null}
+					{selectedDb ? <a href="#"><svg><use xlinkHref="#icon-settings"></use></svg></a> : null}
 				</div>
 
 				<div className={styles.collections}>
 					<h3 className={styles.h3}>Collections</h3>
 					<a onClick={this.onAddCollectionClick}><svg><use xlinkHref="#icon-add"></use></svg></a>
 					<nav className={styles.nav}>
-						{this.props.collections.map((collection, i) => <a key={`col_${i}`} className={collection == this.props.selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
+						{collections.map((collection, i) => <a key={`col_${i}`} className={collection == selectedCollection ? styles.collectionActive : styles.collection} onClick={this.onCollectionSelect(collection)}><svg><use xlinkHref="#icon-apps"></use></svg>{collection}</a>)}
 					</nav>
 				</div>
 			</aside>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import mix from '../../../utils/mixins';
 import ModalMixin from '../mixins/ModalMixin.jsx';
 

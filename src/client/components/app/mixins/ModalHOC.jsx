@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { hideModal } from '../../../actions/index';
 
 
 export function modal(WrappedComponent) {
-	class Modal extends React.Component {
+	class Modal extends Component {
 		static propTypes = {
-			dispatch: React.PropTypes.func.isRequired,
+			dispatch: PropTypes.func.isRequired,
 		};
 
 		destroy() {

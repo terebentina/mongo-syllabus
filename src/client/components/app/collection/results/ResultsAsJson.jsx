@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import Doc from './ResultsAsJson/Doc.jsx';
 
 import styles from './ResultsAsJson.scss';
 
-export class ResultsAsJson extends React.Component {
+export class ResultsAsJson extends Component {
 	static propTypes = {
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		results: React.PropTypes.array.isRequired,
+		selectedDb: PropTypes.string.isRequired,
+		selectedCollection: PropTypes.string.isRequired,
+		results: PropTypes.array.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;

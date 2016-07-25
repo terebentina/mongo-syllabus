@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { searchDocs, fetchDocs, showModal, confirmAndDropCollection, setViewMode } from '../../actions';
+import { filterShape } from '../../store/shapes';
 import QueryBox from './collection/QueryBox.jsx';
 import Results from './collection/Results.jsx';
 import Popover from '@terebentina/react-popover';
 
 import styles from './Collection.scss';
 
-export class Collection extends React.Component {
+export class Collection extends Component {
 	static propTypes = {
-		viewMode: React.PropTypes.string.isRequired,
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		filter: React.PropTypes.object.isRequired,
-		docs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-		totalDocs: React.PropTypes.number.isRequired,
-		currentPage: React.PropTypes.number.isRequired,
-		actions: React.PropTypes.object.isRequired,
+		viewMode: PropTypes.string.isRequired,
+		selectedDb: PropTypes.string.isRequired,
+		selectedCollection: PropTypes.string.isRequired,
+		filter: filterShape.isRequired,
+		docs: PropTypes.arrayOf(PropTypes.object).isRequired,
+		totalDocs: PropTypes.number.isRequired,
+		currentPage: PropTypes.number.isRequired,
+		actions: PropTypes.object.isRequired,
 	};
 
 	shouldComponentUpdate = shouldPureComponentUpdate;
@@ -51,13 +52,15 @@ export class Collection extends React.Component {
 	};
 
 	render() {
-		if (!this.props.selectedDb || !this.props.selectedCollection) {
+		const { selectedDb, selectedCollection, viewMode, docs, totalDocs, currentPage, filter } = this.props;
+
+		if (!selectedDb || !selectedCollection) {
 			return null;
 		}
 		return (
 			<div className={styles.collection}>
 				<header className={styles.header}>
-					<h2 className={styles.h2}>{`Collection: ${this.props.selectedCollection}`}</h2>
+					<h2 className={styles.h2}>{`Collection: ${selectedCollection}`}</h2>
 					<a className={styles.iconLink} onClick={this.onInfoClick}><svg><use xlinkHref="#icon-info"></use></svg></a>
 					<a className={styles.iconLink} onClick={this.onRenameClick}><svg><use xlinkHref="#icon-create"></use></svg></a>
 					<a className={styles.iconLink} onClick={this.onDropClick}><svg><use xlinkHref="#icon-delete"></use></svg></a>
@@ -68,7 +71,7 @@ export class Collection extends React.Component {
 					</Popover>
 				</header>
 				<QueryBox onSubmit={this.onNewQuery} />
-				<Results viewMode={this.props.viewMode} selectedDb={this.props.selectedDb} selectedCollection={this.props.selectedCollection} results={this.props.docs} total={this.props.totalDocs} currentPage={this.props.currentPage} rpp={this.props.filter.limit} onPageLoadRequest={this.onPageLoad} />
+				<Results viewMode={viewMode} selectedDb={selectedDb} selectedCollection={selectedCollection} results={docs} total={totalDocs} currentPage={currentPage} rpp={filter.limit} onPageLoadRequest={this.onPageLoad} />
 			</div>
 		);
 	}

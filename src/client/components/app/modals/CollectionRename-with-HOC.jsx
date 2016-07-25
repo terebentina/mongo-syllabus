@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { modal } from '../mixins/ModalHOC.jsx';
 
-class CollectionRename extends React.Component {
+class CollectionRename extends Component {
 	//static propTypes = {
 	//};
 

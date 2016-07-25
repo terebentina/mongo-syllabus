@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
@@ -15,13 +15,13 @@ import { PopoverWrapper } from '@terebentina/react-popover';
 import styles from './app.scss';
 
 // named export here so we can test App output without redux
-export class App extends React.Component {
+export class App extends Component {
 	static propTypes = {
-		modalToShow: React.PropTypes.object,
-		message: React.PropTypes.object,
-		selectedDb: React.PropTypes.string.isRequired,
-		selectedCollection: React.PropTypes.string.isRequired,
-		actions: React.PropTypes.object.isRequired,
+		modalToShow: PropTypes.object,
+		message: PropTypes.object,
+		selectedDb: PropTypes.string.isRequired,
+		selectedCollection: PropTypes.string.isRequired,
+		actions: PropTypes.object.isRequired,
 	};
 
 	componentDidMount() {
