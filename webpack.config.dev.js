@@ -29,7 +29,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
+			{ test: /\.js$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
 			{ test: /\.css$/, loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss' },
 		],
 	},

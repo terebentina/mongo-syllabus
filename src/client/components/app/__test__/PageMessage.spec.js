@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import Sinon from 'sinon';
 
-import PageMessage from '../PageMessage.jsx';
+import PageMessage from '../PageMessage';
 import styles from '../PageMessage.css';
 
 test('Components:PageMessage', (t) => {

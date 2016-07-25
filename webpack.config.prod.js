@@ -1,6 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const babelQuery = {
 	presets: ['es2015', 'stage-0', 'react'],
@@ -20,7 +20,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx?$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
+			{ test: /\.js$/, loader: 'babel', query: babelQuery, include: path.join(__dirname, 'src/client') },
 			{ test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss') },
 		],
 	},

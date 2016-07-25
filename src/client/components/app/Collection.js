@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { searchDocs, fetchDocs, showModal, confirmAndDropCollection, setViewMode } from '../../actions';
 import { filterShape } from '../../store/shapes';
-import QueryBox from './collection/QueryBox.jsx';
-import Results from './collection/Results.jsx';
+import QueryBox from './collection/QueryBox';
+import Results from './collection/Results';
 import Popover from '@terebentina/react-popover';
 
 import styles from './Collection.css';

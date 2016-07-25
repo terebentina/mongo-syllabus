@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import mix from '../../../utils/mixins';
-import ModalMixin from '../mixins/ModalMixin.jsx';
+import ModalMixin from '../mixins/ModalMixin';
 
 class CollectionRename extends mix(React.Component).with(ModalMixin) {
 	//static propTypes = {

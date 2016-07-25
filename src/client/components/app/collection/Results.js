@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import Pagination from './results/Pagination.jsx';
-import ResultsAsJson from './results/ResultsAsJson.jsx';
-import ResultsAsTable from './results/ResultsAsTable.jsx';
+import Pagination from './results/Pagination';
+import ResultsAsJson from './results/ResultsAsJson';
+import ResultsAsTable from './results/ResultsAsTable';
 
 export default function Results({ viewMode, selectedDb, selectedCollection, results, rpp, total, currentPage, onPageLoadRequest }) {
 	let resultsComponent;

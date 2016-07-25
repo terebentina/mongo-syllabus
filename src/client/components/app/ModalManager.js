@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { hideModal } from '../../actions/index';
-import CollectionRename from './modals/CollectionRename.jsx';
-import CollectionCreate from './modals/CollectionCreate.jsx';
-import UpdateDocument from './modals/UpdateDocument.jsx';
+import CollectionRename from './modals/CollectionRename';
+import CollectionCreate from './modals/CollectionCreate';
+import UpdateDocument from './modals/UpdateDocument';
 
 import styles from './ModalManager.css';
 

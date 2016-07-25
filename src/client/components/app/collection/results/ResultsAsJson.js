@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import Doc from './ResultsAsJson/Doc.jsx';
+import Doc from './ResultsAsJson/Doc';
 
 import styles from './ResultsAsJson.css';
 

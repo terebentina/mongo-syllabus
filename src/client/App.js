@@ -5,13 +5,13 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import { PopoverWrapper } from '@terebentina/react-popover';
 import { fetchDatabasesIfNeeded, hideMessage } from './actions';
 import { pageMessageShape, modalShape } from './store/shapes';
-import Dashboard from './components/app/Dashboard.jsx';
-import DBDashboard from './components/app/DBDashboard.jsx';
-import Collection from './components/app/Collection.jsx';
-import SideNav from './components/app/SideNav.jsx';
-import PageMessage from './components/app/PageMessage.jsx';
-import Confirm from './components/app/Confirm.jsx';
-import ModalManager from './components/app/ModalManager.jsx';
+import Dashboard from './components/app/Dashboard';
+import DBDashboard from './components/app/DBDashboard';
+import Collection from './components/app/Collection';
+import SideNav from './components/app/SideNav';
+import PageMessage from './components/app/PageMessage';
+import Confirm from './components/app/Confirm';
+import ModalManager from './components/app/ModalManager';
 
 import styles from './App.css';
 

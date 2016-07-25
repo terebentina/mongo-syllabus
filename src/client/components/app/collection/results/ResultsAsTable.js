@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { typesFromResults } from '../../../../utils/mongodb';
-import Doc from './ResultsAsTable/Doc.jsx';
+import Doc from './ResultsAsTable/Doc';
 
 import styles from './ResultsAsTable.css';
 
