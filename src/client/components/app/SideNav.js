@@ -3,7 +3,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import styles from './SideNav.css';
 
-export class SideNav extends Component {
+class SideNav extends Component {
 	static propTypes = {
 		selectedServer: PropTypes.number.isRequired,
 		selectedDb: PropTypes.string.isRequired,

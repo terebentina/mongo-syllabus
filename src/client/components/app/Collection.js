@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { filterShape } from '../../store/shapes';
-import QueryBox from './collection/QueryBox';
+import { filterShape } from 'client/store/shapes';
+import QueryBoxConnector from './collection/QueryBoxConnector';
 import Results from './collection/Results';
 import Popover from '@terebentina/react-popover';
 
 import styles from './Collection.css';
 
-export class Collection extends Component {
+class Collection extends Component {
 	static propTypes = {
 		viewMode: PropTypes.string.isRequired,
 		selectedDb: PropTypes.string.isRequired,
@@ -71,7 +71,7 @@ export class Collection extends Component {
 						<a href="" onClick={this.setViewMode('table')}>as table</a>
 					</Popover>
 				</header>
-				<QueryBox onSubmit={this.onNewQuery} />
+				<QueryBoxConnector onSubmit={this.onNewQuery} />
 				<Results viewMode={viewMode} selectedDb={selectedDb} selectedCollection={selectedCollection} results={docs} total={totalDocs} currentPage={currentPage} rpp={filter.limit} onPageLoadRequest={this.onPageLoad} />
 			</div>
 		);

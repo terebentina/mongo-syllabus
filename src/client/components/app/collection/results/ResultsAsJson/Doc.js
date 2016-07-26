@@ -1,16 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 const beautify = require('js-beautify').js_beautify;
 import Highlight from './doc/Highlight';
-import { confirmAndRemoveDoc, showModal } from '../../../../../actions';
 
 import styles from './Doc.css';
 
 const beautyOpts = { indent_size: 2 };
 
-export class Doc extends Component {
+class Doc extends Component {
 	static propTypes = {
 		selectedDb: PropTypes.string.isRequired,
 		selectedCollection: PropTypes.string.isRequired,
@@ -49,10 +46,4 @@ export class Doc extends Component {
 	}
 }
 
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ confirmAndRemoveDoc, showModal }, dispatch),
-	};
-}
-
-export default connect(null, mapActionsToProps)(Doc);
+export default Doc;

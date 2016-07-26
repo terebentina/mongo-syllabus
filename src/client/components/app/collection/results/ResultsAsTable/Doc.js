@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { confirmAndRemoveDoc } from '../../../../../actions';
 
 import styles from './Doc.css';
 
-export class Doc extends Component {
+class Doc extends Component {
 	static propTypes = {
 		selectedDb: PropTypes.string.isRequired,
 		selectedCollection: PropTypes.string.isRequired,
@@ -63,10 +60,4 @@ function formatValue(val, type) {
 	return val;
 }
 
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ confirmAndRemoveDoc }, dispatch),
-	};
-}
-
-export default connect(null, mapActionsToProps)(Doc);
+export default Doc;

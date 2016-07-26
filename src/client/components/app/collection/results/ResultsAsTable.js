@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { typesFromResults } from '../../../../utils/mongodb';
-import Doc from './ResultsAsTable/Doc';
+import { typesFromResults } from 'client/utils/mongodb';
+import DocConnector from './ResultsAsTable/DocConnector';
 
 import styles from './ResultsAsTable.css';
 
@@ -38,7 +38,7 @@ export class ResultsAsTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{results.map((doc, i) => <Doc key={`doc_${i}`} types={this.state.types} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
+					{results.map((doc, i) => <DocConnector key={`doc_${i}`} types={this.state.types} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
 				</tbody>
 			</table>
 		);

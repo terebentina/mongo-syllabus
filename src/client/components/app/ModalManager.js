@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import styles from './ModalManager.css';
 
-export class ModalManager extends Component {
+class ModalManager extends Component {
 	static propTypes = {
 		component: PropTypes.func.isRequired,
 		payload: PropTypes.any,

@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { searchDocs, showMessage } from '../../../actions';
-import * as Constants from '../../../actions/constants';
+import * as Constants from 'client/actions/constants';
 
 import styles from './QueryBox.css';
 
-export class QueryBox extends Component {
+class QueryBox extends Component {
 	static propTypes = {
 		onSubmit: PropTypes.func.isRequired,
 		actions: PropTypes.object.isRequired,
@@ -55,11 +52,4 @@ export class QueryBox extends Component {
 	}
 }
 
-
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ searchDocs, showMessage }, dispatch),
-	};
-}
-
-export default connect(null, mapActionsToProps)(QueryBox);
+export default QueryBox;
