@@ -15,8 +15,10 @@
 	composes: page-message;
 	/* haha, abusing gradients for fun and profit. */
 	background: linear-gradient(to right, rgba(240,65,36,0) 25%, rgba(240,65,36,1) 25%, rgba(240,65,36,1) 75%, rgba(240,65,36,0) 75%);
-	//background-color: #F04124;
-	//border-color: #F6A1A1;
+	/*
+	background-color: #F04124;
+	border-color: #F6A1A1;
+	*/
 	color: #fff;
 }
 

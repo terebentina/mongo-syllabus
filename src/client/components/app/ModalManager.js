@@ -1,22 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { hideModal } from '../../actions/index';
-import CollectionRename from './modals/CollectionRename';
-import CollectionCreate from './modals/CollectionCreate';
-import UpdateDocument from './modals/UpdateDocument';
 
 import styles from './ModalManager.css';
 
-const Modals = {
-	CollectionRename,
-	CollectionCreate,
-	UpdateDocument,
-};
-
 export class ModalManager extends Component {
 	static propTypes = {
-		modal: PropTypes.string.isRequired,
+		component: PropTypes.func.isRequired,
 		payload: PropTypes.any,
 		actions: PropTypes.object.isRequired,
 	};
@@ -27,14 +15,17 @@ export class ModalManager extends Component {
 	};
 
 	render() {
-		const Modal = Modals[this.props.modal];
+		const {
+			component: Modal,
+			payload,
+		} = this.props;
 
 		return (
 			<div id="modals">
 				<div className={styles.modal_wrapper}>
 					<div className={styles.modal}>
 						<a className={styles.close} onClick={this.destroy}><svg><use xlinkHref="#icon-close"></use></svg></a>
-						<Modal payload={this.props.payload} doDestroy={this.destroy} />
+						<Modal payload={payload} doDestroy={this.destroy} />
 					</div>
 				</div>
 				<div className={styles.backdrop}></div>
@@ -43,10 +34,4 @@ export class ModalManager extends Component {
 	}
 }
 
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ hideModal }, dispatch),
-	};
-}
-
-export default connect(null, mapActionsToProps)(ModalManager);
+export default ModalManager;

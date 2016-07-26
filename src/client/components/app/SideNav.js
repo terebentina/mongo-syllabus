@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from 'actions';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import styles from './SideNav.css';
@@ -77,23 +74,4 @@ export class SideNav extends Component {
 	}
 }
 
-const EMPTY_ARR = [];
-function mapStateToProps(state) {
-	console.log('state.servers', state.servers);
-	return {
-		selectedServer: state.selectedServer || -1,
-		servers: state.servers || EMPTY_ARR,
-		selectedDb: state.selectedDb || '',
-		databases: state.databases || EMPTY_ARR,
-		selectedCollection: state.selectedCollection || '',
-		collections: state.collections || EMPTY_ARR,
-	};
-}
-
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ selectDb, selectAndSearchDocs, fetchCollections, showModal }, dispatch),
-	};
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(SideNav);
+export default SideNav;

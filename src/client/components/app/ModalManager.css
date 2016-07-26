@@ -15,7 +15,7 @@
 	justify-content: center;
 
 	.modal {
-		position: relative; // for the close modal button
+		position: relative;
 		z-index: $zModal;
 		border: 1px solid #E5E5E5;
 		background-color: #FFF;

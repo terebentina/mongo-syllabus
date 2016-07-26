@@ -7,11 +7,11 @@ import { fetchDatabasesIfNeeded, hideMessage } from './actions';
 import { pageMessageShape, modalShape } from './store/shapes';
 import Dashboard from './components/app/Dashboard';
 import DBDashboard from './components/app/DBDashboard';
-import Collection from './components/app/Collection';
-import SideNav from './components/app/SideNav';
+import CollectionConnector from './components/app/CollectionConnector';
+import SideNavConnector from './components/app/SideNavConnector';
 import PageMessage from './components/app/PageMessage';
 import Confirm from './components/app/Confirm';
-import ModalManager from './components/app/ModalManager';
+import ModalManagerConnector from './components/app/ModalManagerConnector';
 
 import styles from './App.css';
 
@@ -42,7 +42,7 @@ export class App extends Component {
 		} else if (!selectedCollection) {
 			content = <DBDashboard db={selectedDb} />;
 		} else {
-			content = <Collection />;
+			content = <CollectionConnector />;
 		}
 
 		return (
@@ -53,11 +53,11 @@ export class App extends Component {
 					<span>Mongo Syllabus</span>
 				</header>
 				<main className={styles.main}>
-					<SideNav />
+					<SideNavConnector />
 					{content}
 				</main>
 				<footer className={styles.footer}>2016 Dan Caragea</footer>
-				{modalToShow ? <ModalManager modal={modalToShow.modal} payload={modalToShow.payload} /> : null}
+				{modalToShow ? <ModalManagerConnector modal={modalToShow.modal} payload={modalToShow.payload} /> : null}
 			</PopoverWrapper>
 		);
 	}
