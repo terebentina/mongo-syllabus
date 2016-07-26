@@ -1,14 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
-import { createCollection } from '../../../actions';
+import { collectionCreatePayloadShape } from 'client/store/shapes';
 
-export class CollectionCreate extends Component {
+class CollectionCreate extends Component {
 	static propTypes = {
-		payload: PropTypes.shape({
-			db: PropTypes.string,
-		}).isRequired,
+		payload: collectionCreatePayloadShape.isRequired,
 		doDestroy: PropTypes.func.isRequired,
 		actions: PropTypes.object.isRequired,
 	};
@@ -58,10 +54,4 @@ export class CollectionCreate extends Component {
 	}
 }
 
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ createCollection }, dispatch),
-	};
-}
-
-export default connect(null, mapActionsToProps)(CollectionCreate);
+export default CollectionCreate;

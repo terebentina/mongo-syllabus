@@ -19,7 +19,7 @@ class QueryBox extends Component {
 	};
 
 	onChangeLimit = (e) => {
-		this.setState({ limit: e.target.value });
+		this.setState({ limit: parseInt(e.target.value, 10) });
 	};
 
 	sendQuery = (e) => {

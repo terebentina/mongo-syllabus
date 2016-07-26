@@ -1,29 +1,22 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import shouldPureComponentUpdate from 'react-pure-render/function';
+import { PropTypes } from 'react';
 
-export class Confirm extends Component {
-	static propTypes = {
-		message: PropTypes.string,
-		fn: PropTypes.func,
-		dispatch: PropTypes.func.isRequired,
-	};
-
-	shouldComponentUpdate = shouldPureComponentUpdate;
-
-	render() {
-		if (this.props.message && this.props.fn) {
-			if (confirm(this.props.message)) {
-				this.props.dispatch(this.props.fn());
-			}
-		}
-		return null;
+/**
+ * @return {null}
+ */
+function Confirm(props) {
+	const { message, fn, dispatch } = props;
+	// eslint-disable-next-line no-alert
+	if (confirm(message)) {
+		dispatch(fn());
 	}
+
+	return null;
 }
 
+Confirm.propTypes = {
+	message: PropTypes.string.isRequired,
+	fn: PropTypes.func.isRequired,
+	dispatch: PropTypes.func.isRequired,
+};
 
-function mapStateToProps(state) {
-	return state.confirmation || {};
-}
-
-export default connect(mapStateToProps)(Confirm);
+export default Confirm;

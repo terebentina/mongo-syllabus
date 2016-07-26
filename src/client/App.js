@@ -10,7 +10,7 @@ import DBDashboard from './components/app/DBDashboard';
 import CollectionConnector from './components/app/CollectionConnector';
 import SideNavConnector from './components/app/SideNavConnector';
 import PageMessage from './components/app/PageMessage';
-import Confirm from './components/app/Confirm';
+import ConfirmConnector from './components/app/ConfirmConnector';
 import ModalManagerConnector from './components/app/ModalManagerConnector';
 
 import styles from './App.css';
@@ -48,7 +48,7 @@ export class App extends Component {
 		return (
 			<PopoverWrapper className={styles.app}>
 				<PageMessage message={message} onHide={this.onHide} />
-				<Confirm />
+				<ConfirmConnector />
 				<header className={styles.header}>
 					<span>Mongo Syllabus</span>
 				</header>

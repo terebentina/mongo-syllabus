@@ -5,6 +5,7 @@ import { searchDocs, showMessage } from 'client/actions';
 import QueryBox from './QueryBox';
 
 function QueryBoxConnector(props) {
+	console.log('props', props);
 	return <QueryBox {...props} />;
 }
 

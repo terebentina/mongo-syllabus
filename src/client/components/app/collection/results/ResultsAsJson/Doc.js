@@ -21,7 +21,7 @@ class Doc extends Component {
 		const { actions, selectedDb, selectedCollection, doc } = this.props;
 
 		e.preventDefault();
-		actions.showModal('UpdateDocument', { db: selectedDb, collection: selectedCollection, doc: doc });
+		actions.showModal('DocumentUpdate', { db: selectedDb, collection: selectedCollection, doc: doc });
 	};
 
 	onDeleteClick = (e) => {

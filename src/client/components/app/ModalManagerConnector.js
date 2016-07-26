@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { hideModal } from '../../actions/index';
-import CollectionRename from './modals/CollectionRename';
-import CollectionCreate from './modals/CollectionCreate';
-import UpdateDocument from './modals/UpdateDocument';
+import { hideModal } from 'client/actions/index';
+import CollectionRenameConnector from './modals/CollectionRenameConnector';
+import CollectionCreateConnector from './modals/CollectionCreateConnector';
+import DocumentUpdateConnector from './modals/DocumentUpdateConnector';
 import ModalManager from './ModalManager';
 
 const Modals = {
-	CollectionRename,
-	CollectionCreate,
-	UpdateDocument,
+	CollectionRename: CollectionRenameConnector,
+	CollectionCreate: CollectionCreateConnector,
+	DocumentUpdate: DocumentUpdateConnector,
 };
 
 function ModalManagerConnector(props) {
@@ -23,6 +23,7 @@ ModalManagerConnector.propTypes = {
 };
 
 function mapStateToProps(state, { modal }) {
+	console.log('modal', modal);
 	return { component: Modals[modal] };
 }
 

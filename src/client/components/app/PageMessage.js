@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { pageMessageShape } from '../../store/shapes';
+import { pageMessageShape } from 'client/store/shapes';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import styles from './PageMessage.css';
