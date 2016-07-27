@@ -12,6 +12,33 @@ function receiveDatabases(json) {
 	};
 }
 
+function requestDbStats(db) {
+	return {
+		type: Constants.REQUEST_DB_STATS,
+		db,
+	};
+}
+
+function receiveDbStats(db, stats) {
+	return {
+		type: Constants.RECEIVE_DB_STATS,
+		db,
+		stats,
+	};
+}
+
+export function fetchDbStats(db) {
+	return (dispatch) => {
+		dispatch(requestDbStats(db));
+		return request.get(`${Constants.API_URL}/api/db/${db}/stats`)
+			.then((json) => dispatch(receiveDbStats(db, json)))
+			.catch((err) => Promise.all([
+				dispatch(receiveDbStats(db, {})),
+				dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR)),
+			]));
+	};
+}
+
 function fetchDatabases() {
 	return (dispatch) => {
 		dispatch(requestDatabases());
@@ -162,6 +189,13 @@ export function fetchCollections(db) {
 				dispatch(receiveCollections(db, [])),
 				dispatch(showMessage(`Server responded: ${err.statusText}`, Constants.MESSAGE_ERROR)),
 			])),
+	]);
+}
+
+export function loadDb(db) {
+	return (dispatch) => Promise.all([
+		dispatch(fetchCollections(db)),
+		dispatch(fetchDbStats(db)),
 	]);
 }
 

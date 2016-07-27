@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import App from './App';
+import AppConnector from './AppConnector';
 
 const store = configureStore();
 
 ReactDOM.render((
 	<Provider store={store}>
-		<App />
+		<AppConnector />
 	</Provider>
 ), document.getElementById('root'));

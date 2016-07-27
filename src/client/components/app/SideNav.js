@@ -15,7 +15,7 @@ class SideNav extends Component {
 
 	componentWillReceiveProps = (nextProps) => {
 		if (nextProps.selectedDb !== this.props.selectedDb) {
-			this.props.actions.fetchCollections(nextProps.selectedDb);
+			this.props.actions.loadDb(nextProps.selectedDb);
 		}
 	};
 

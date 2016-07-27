@@ -6,8 +6,10 @@ import * as Constants from 'client/actions/constants';
  * state = {
  *      databases: [],
  *      selectedDb: '',
+ *      selectedDbStats: {},
  *      collections: [],
  *      selectedCollection: '',
+ *      selectedCollectionStats: {},
  *      filter: {query: '', limit: 30}
  *      docs: [],
  *      totalDocs: 0,
@@ -23,6 +25,15 @@ function selectedDb(state = '', action) {
 	switch (action.type) {
 		case Constants.SELECT_DB:
 			return action.db;
+		default:
+			return state;
+	}
+}
+
+function selectedDbStats(state = {}, action) {
+	switch (action.type) {
+		case Constants.RECEIVE_DB_STATS:
+			return action.stats;
 		default:
 			return state;
 	}
@@ -144,10 +155,12 @@ function currentPage(state = null, action) {
 function isFetching(state = false, action) {
 	switch (action.type) {
 		case Constants.REQUEST_DATABASES:
+		case Constants.REQUEST_DB_STATS:
 		case Constants.REQUEST_COLLECTIONS:
 		case Constants.REQUEST_DOCS:
 			return true;
 		case Constants.RECEIVE_DATABASES:
+		case Constants.RECEIVE_DB_STATS:
 		case Constants.RECEIVE_COLLECTIONS:
 		case Constants.RECEIVE_DOCS:
 			return false;
@@ -204,6 +217,7 @@ function viewMode(state = 'json', action) {
 const rootReducer = combineReducers({
 	databases,
 	selectedDb,
+	selectedDbStats,
 	collections,
 	selectedCollection,
 	filter,

@@ -1,5 +1,3 @@
-'use strict';
-
 const restify = require('restify');
 const path = require('path');
 const ejs = require('ejs');
@@ -11,6 +9,7 @@ const mongoServers = require('../../../servers.json');
 
 module.exports = function() {
 	this.get('/api/databases', DatabaseCtrl.index);
+	this.get('/api/db/:db/stats', DatabaseCtrl.stats);
 	this.get('/api/collections/:db', CollectionCtrl.index);
 	this.post('/api/collections/:db/:collection', CollectionCtrl.create);
 	this.put('/api/collections/:db/:collection', CollectionCtrl.rename);

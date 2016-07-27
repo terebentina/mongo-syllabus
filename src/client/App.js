@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import { PopoverWrapper } from '@terebentina/react-popover';
-import { fetchDatabasesIfNeeded, hideMessage } from './actions';
 import { pageMessageShape, modalShape } from './store/shapes';
 import Dashboard from './components/app/Dashboard';
 import DBDashboard from './components/app/DBDashboard';
@@ -15,8 +12,7 @@ import ModalManagerConnector from './components/app/ModalManagerConnector';
 
 import styles from './App.css';
 
-// named export here so we can test App output without redux
-export class App extends Component {
+class App extends Component {
 	static propTypes = {
 		modalToShow: modalShape,
 		message: pageMessageShape,
@@ -63,19 +59,4 @@ export class App extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		modalToShow: state.modalToShow || null,
-		message: state.message || null,
-		selectedDb: state.selectedDb || '',
-		selectedCollection: state.selectedCollection || '',
-	};
-}
-
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ fetchDatabasesIfNeeded, hideMessage }, dispatch),
-	};
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(App);
+export default App;

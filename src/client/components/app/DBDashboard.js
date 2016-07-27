@@ -1,15 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-class DBDashboard extends Component {
-	static propTypes = {
-		db: PropTypes.string.isRequired,
-	};
-
-	render() {
-		return (
-			<div>DB Dashboard: {this.props.db}</div>
-		);
-	}
+function DBDashboard({ db, stats }) {
+	return (
+		<div>DB Dashboard: {db}</div>
+	);
 }
+
+DBDashboard.propTypes = {
+	db: PropTypes.string.isRequired,
+	stats: PropTypes.object,
+};
 
 export default DBDashboard;

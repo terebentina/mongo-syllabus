@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectDb, selectAndSearchDocs, fetchCollections, showModal } from 'client/actions';
+import { selectDb, selectAndSearchDocs, loadDb, showModal } from 'client/actions';
 import SideNav from './SideNav';
 
 function SideNavConnector(props) {
@@ -23,7 +23,7 @@ function mapStateToProps(state) {
 
 function mapActionsToProps(dispatch) {
 	return {
-		actions: bindActionCreators({ selectDb, selectAndSearchDocs, fetchCollections, showModal }, dispatch),
+		actions: bindActionCreators({ selectDb, selectAndSearchDocs, loadDb, showModal }, dispatch),
 	};
 }
 

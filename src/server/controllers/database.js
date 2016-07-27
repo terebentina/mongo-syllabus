@@ -24,6 +24,33 @@ const DatabaseCtrl = {
 			});
 		});
 	},
+
+	/**
+	 * get the stats for a certain db
+	 * @param req
+	 * @param res
+	 * @param next
+	 */
+	stats(req, res, next) {
+		// warning!!! req.params is not sanitized!!! @todo
+		const dbUrl = `${url}/${req.params.db}`;
+		MongoClient.connect(dbUrl, (err, db) => {
+			if (err) {
+				console.log('err1', err.stack);
+				return next(err);
+			}
+			db.stats().then((stats) => {
+				if (!stats) {
+					console.log('err2', stats);
+					return next(new Error('no stats'));
+				}
+
+				res.json(stats);
+				db.close();
+				next();
+			});
+		});
+	},
 };
 
 module.exports = DatabaseCtrl;
