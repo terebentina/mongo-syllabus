@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const precss = require('precss');
 
 const babelQuery = {
 	presets: ['es2015', 'stage-0', 'react'],
@@ -17,6 +18,9 @@ module.exports = {
 		publicPath: '/static',
 		pathinfo: true,
 		sourceMapFilename: '[name].map',
+	},
+	resolve: {
+		root: path.resolve(__dirname, './src'),
 	},
 	module: {
 		loaders: [

@@ -14,6 +14,11 @@ module.exports = {
 		path: path.join(__dirname, './static'),
 		filename: '[name].js',
 	},
+	resolve: {
+		extensions: ['', '.js', '', '.json'],
+		modulesDirectories: ['src', 'node_modules'],
+		root: path.resolve(__dirname, './src'),
+	},
 	module: {
 		loaders: [
 			{ test: /\.js$/, loader: 'babel', query: babelQuery, exclude: path.join(__dirname, 'node_modules') },
@@ -24,10 +29,6 @@ module.exports = {
 	postcss: [
 		precss(),
 	],
-	resolve: {
-		extensions: ['', '.js', '', '.json'],
-		modulesDirectories: ['src', 'node_modules'],
-	},
 	node: {
 		fs: 'empty',
 	},

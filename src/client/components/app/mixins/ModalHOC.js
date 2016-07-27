@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { hideModal } from '../../../actions/index';
+import { hideModal } from 'client/actions';
 
 
 export function modal(WrappedComponent) {

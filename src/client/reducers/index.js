@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import _ from 'lodash';
-import * as Constants from '../actions/constants';
+import * as Constants from 'client/actions/constants';
 
 /**
  * state = {

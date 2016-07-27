@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { hideModal } from '../../../actions/index';
+import { hideModal } from 'client/actions';
 
 const ModalMixin = (superclass) => class extends superclass {
 	destroy() {

@@ -1,6 +1,13 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.config.dev.js"
+      }
+    }
+  },
   "rules": {
     "indent": [2, "tab", {"SwitchCase": 1}],
     "react/jsx-indent": [2, "tab"],

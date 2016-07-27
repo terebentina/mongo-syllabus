@@ -1,4 +1,4 @@
-import request from '../utils/request';
+import request from 'client/utils/request';
 import * as Constants from './constants';
 
 function requestDatabases() {

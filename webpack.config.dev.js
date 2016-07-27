@@ -19,13 +19,7 @@ module.exports = {
 		sourceMapFilename: '[name].map',
 	},
 	resolve: {
-		modulesDirectories: [
-			'',
-			'src',
-			'src/client',
-			'src/server',
-			'node_modules',
-		],
+		root: path.resolve(__dirname, './src'),
 	},
 	module: {
 		loaders: [

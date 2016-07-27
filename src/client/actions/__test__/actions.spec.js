@@ -2,7 +2,7 @@ import test from 'tape';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
-import request from '../../utils/request';
+import request from 'client/utils/request';
 
 import * as Actions from '../';
 import * as Constants from '../constants';

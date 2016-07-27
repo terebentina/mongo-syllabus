@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import mix from '../../../utils/mixins';
+import React, { Component } from 'react';
+import mix from 'client/utils/mixins';
 import ModalMixin from '../mixins/ModalMixin';
 
-class CollectionRename extends mix(React.Component).with(ModalMixin) {
+class CollectionRename extends mix(Component).with(ModalMixin) {
 	//static propTypes = {
 	//};
 
