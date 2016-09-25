@@ -1,10 +1,10 @@
 class MixinBuilder {
-	constructor(superclass) {
-		this.superclass = superclass;
+	                    constructor(superclass) {
+		                    this.superclass = superclass;
 	}
 
-	with() {
-		return Array.from(arguments).reduce((c, m) => m(c), this.superclass);
+	                    with() {
+		                    return Array.from(arguments).reduce((c, m) => m(c), this.superclass);
 	}
 }
 

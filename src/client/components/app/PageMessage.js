@@ -7,25 +7,24 @@ import styles from './PageMessage.css';
 const duration = 4000;
 
 export class PageMessage extends Component {
-	static propTypes = {
-		message: pageMessageShape,
-		onHide: PropTypes.func.isRequired,
-	};
+  static propTypes = {
+    message: pageMessageShape, onHide: PropTypes.func.isRequired,
+  };
 
-	componentWillReceiveProps = (nextProps) => {
-		if (nextProps.message !== this.props.message && nextProps.message !== null) {
-			setTimeout(this.props.onHide, duration);
-		}
-	};
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.message !== this.props.message && nextProps.message !== null) {
+      setTimeout(this.props.onHide, duration);
+    }
+  };
 
-	render() {
-		const { message } = this.props;
+  render() {
+    const { message } = this.props;
 
-		if (message) {
-			return <div className={styles[`page-message--${message.type}`]}>{message.message}</div>;
-		}
-		return false;
-	}
+    if (message) {
+      return <div className={styles[`page-message--${message.type}`]}>{message.message}</div>;
+    }
+    return false;
+  }
 }
 
 export default PageMessage;

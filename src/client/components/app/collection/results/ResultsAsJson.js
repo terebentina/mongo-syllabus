@@ -5,23 +5,24 @@ import DocConnector from './ResultsAsJson/DocConnector';
 import styles from './ResultsAsJson.css';
 
 export class ResultsAsJson extends Component {
-	static propTypes = {
-		selectedDb: PropTypes.string.isRequired,
-		selectedCollection: PropTypes.string.isRequired,
-		results: PropTypes.array.isRequired,
-	};
+  static propTypes = {
+    selectedDb: PropTypes.string.isRequired,
+    selectedCollection: PropTypes.string.isRequired,
+    results: PropTypes.array.isRequired,
+  };
 
-	shouldComponentUpdate = shouldPureComponentUpdate;
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
-	render() {
-		const { results, selectedDb, selectedCollection } = this.props;
+  render() {
+    const { results, selectedDb, selectedCollection } = this.props;
 
-		return (
-			<div className={styles.docs}>
-				{results.map((doc, i) => <DocConnector key={`doc_${i}`} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
-			</div>
-		);
-	}
+    return (
+      <div className={styles.docs}>
+        {results.map((doc, i) =>
+          <DocConnector key={`doc_${i}`} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
+      </div>
+    );
+  }
 }
 
 export default ResultsAsJson;

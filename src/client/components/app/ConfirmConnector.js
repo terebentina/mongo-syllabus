@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import Confirm from './Confirm';
 
 function ConfirmConnector(props) {
-	const { message, fn } = props;
-	if (message && fn) {
-		return <Confirm {...props} />;
-	}
+  const { message, fn } = props;
+  if (message && fn) {
+    return <Confirm {...props} />;
+  }
 
-	return null;
+  return null;
 }
 
 ConfirmConnector.propTypes = {
-	message: PropTypes.string,
-	fn: PropTypes.func,
+  message: PropTypes.string,
+  fn: PropTypes.func,
 };
 
 function mapStateToProps(state) {
-	return state.confirmation || {};
+  return state.confirmation || {};
 }
 
 export default connect(mapStateToProps)(ConfirmConnector);

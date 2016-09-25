@@ -5,22 +5,22 @@ import { fetchDatabasesIfNeeded, hideMessage } from './actions';
 import App from './App';
 
 function AppConnector(props) {
-	return <App {...props} />;
+  return <App {...props} />;
 }
 
 function mapStateToProps(state) {
-	return {
-		modalToShow: state.modalToShow || null,
-		message: state.message || null,
-		selectedDb: state.selectedDb || '',
-		selectedCollection: state.selectedCollection || '',
-	};
+  return {
+    modalToShow: state.modalToShow || null,
+    message: state.message || null,
+    selectedDb: state.selectedDb || '',
+    selectedCollection: state.selectedCollection || '',
+  };
 }
 
 function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ fetchDatabasesIfNeeded, hideMessage }, dispatch),
-	};
+  return {
+    actions: bindActionCreators({ fetchDatabasesIfNeeded, hideMessage }, dispatch),
+  };
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(AppConnector);

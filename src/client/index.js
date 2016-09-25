@@ -7,7 +7,7 @@ import AppConnector from './AppConnector';
 const store = configureStore();
 
 ReactDOM.render((
-	<Provider store={store}>
-		<AppConnector />
-	</Provider>
+  <Provider store={store}>
+    <AppConnector />
+  </Provider>
 ), document.getElementById('root'));

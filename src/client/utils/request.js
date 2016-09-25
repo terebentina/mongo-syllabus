@@ -2,30 +2,60 @@ import axios from 'axios';
 import _ from 'lodash';
 
 export default {
-	get(url, params) {
-		return axios.get(url, { params }).then((response) => response.data);
+	                    get(url, params, forceJson = false) {
+		                    const config = { params };
+		                    if (forceJson) {
+			                    config.headers = {
+				                    Accept: 'application/json',
+			};
+			                    config.responseType = 'json';
+		}
+		                    return axios.get(url, config).then((response) => response.data);
 	},
 
-	put(url, params) {
-		return axios.put(url, params).then((response) => response.data);
+	                    put(url, params, forceJson = false) {
+		                    const config = {};
+		                    if (forceJson) {
+			                    config.headers = {
+				                    Accept: 'application/json',
+				                    'Content-Type': 'application/json',
+			};
+			                    config.responseType = 'json';
+		}
+		                    return axios.put(url, params, config).then((response) => response.data);
 	},
 
-	post(url, params) {
-		return axios.post(url, params).then((response) => response.data);
+	                    post(url, params, forceJson = false) {
+		                    const config = {};
+		                    if (forceJson) {
+			                    config.headers = {
+				                    Accept: 'application/json',
+				                    'Content-Type': 'application/json',
+			};
+			                    config.responseType = 'json';
+		}
+		                    return axios.post(url, params, config).then((response) => response.data);
 	},
 
-	delete(url, params) {
-		const finalUrl = buildUrl(url, params);
-		return axios.delete(finalUrl).then((response) => response.data);
+	                    delete(url, params, forceJson = false) {
+		                    const finalUrl = buildUrl(url, params);
+		                    const config = {};
+		                    if (forceJson) {
+			                    config.headers = {
+				                    Accept: 'application/json',
+			};
+			                    config.responseType = 'json';
+		}
+		                    return axios.delete(finalUrl, config).then((response) => response.data);
 	},
 
-	jsonp(url, params = {}) {
-		return new Promise((resolve, reject) => {
-			jsonp(url, { params }, (err, data) => {
-				if (err) {
-					return reject(err);
+	                    jsonp(url, params = {}) {
+		                    return new Promise((resolve, reject) => {
+			                    jsonp(url, { params }, (err, data) => {
+				                    if (err) {
+					                    return reject(err);
 				}
-				resolve(data);
+				                    resolve(data);
 			});
 		});
 	},
@@ -36,74 +66,74 @@ let count = 0;
 function noop() {}
 
 function jsonp(url, opts, fn) {
-	const params = opts.params;
+	                    const params = opts.params;
 
-	const id = opts.fnName || ('__jp' + (count++));
-	const callback = opts.callback || 'callback';
+	                    const id = opts.fnName || (`__jp${count++}`);
+	                    const callback = opts.callback || 'callback';
 
-	params[callback] = id;
+	                    params[callback] = id;
 
-	const target = document.getElementsByTagName('script')[0] || document.head;
-	let script;
-	const timer = setTimeout(() => {
-		cleanup();
-		fn(new Error('Timeout'));
+	                    const target = document.getElementsByTagName('script')[0] || document.head;
+	                    let script;
+	                    const timer = setTimeout(() => {
+		                    cleanup();
+		                    fn(new Error('Timeout'));
 	}, 60000);
 
-	function cleanup() {
-		if (script.parentNode) {
-			script.parentNode.removeChild(script);
+	                    function cleanup() {
+		                    if (script.parentNode) {
+			                    script.parentNode.removeChild(script);
 		}
-		window[id] = noop;
-		if (timer) {
-			clearTimeout(timer);
-		}
-	}
-
-	function cancel() {
-		if (window[id]) {
-			cleanup();
+		                    window[id] = noop;
+		                    if (timer) {
+			                    clearTimeout(timer);
 		}
 	}
 
-	window[id] = (data) => {
-		cleanup();
-		fn(null, data);
+	                    function cancel() {
+		                    if (window[id]) {
+			                    cleanup();
+		}
+	}
+
+	                    window[id] = (data) => {
+		                    cleanup();
+		                    fn(null, data);
 	};
 
 	// create script
-	script = document.createElement('script');
-	script.src = buildUrl(url, params);
-	target.parentNode.insertBefore(script, target);
+	                    script = document.createElement('script');
+	                    script.src = buildUrl(url, params);
+	                    target.parentNode.insertBefore(script, target);
 
-	return cancel;
+	                    return cancel;
 }
 
 function encode(val) {
-	return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
+	                    return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
 }
 
 function qs(key, val) {
-	let params = [];
-	if (Array.isArray(val)) {
-		val.forEach((subVal) => {
-			params = params.concat(qs(`${key}[]`, subVal));
+	                    let params = [];
+	                    if (Array.isArray(val)) {
+		                    val.forEach((subVal) => {
+			                    params = params.concat(qs(`${key}[]`, subVal));
 		});
 	} else {
-		params.push(`${encode(key)}=${encode(val)}`);
+		                    params.push(`${encode(key)}=${encode(val)}`);
 	}
-	return params;
+	                    return params;
 }
 
 function buildUrl(url, params) {
-	if (!params || !Object.keys(params).length) {
-		return url;
+	                    if (!params || !Object.keys(params).length) {
+		                    return url;
 	}
-	let linkedParams = [];
-	_.each(params, (val, key) => {
-		linkedParams = linkedParams.concat(qs(key, val));
+	                    let linkedParams = [];
+	                    _.each(params, (val, key) => {
+		                    linkedParams = linkedParams.concat(qs(key, val));
 	});
 
 	// add qs component
-	return url + (~url.indexOf('?') ? '&' : '?') + linkedParams.join('&');
+	                    return url + (~url.indexOf('?') ? '&' : '?') + linkedParams.join('&');
 }

@@ -5,20 +5,20 @@ import { confirmAndRemoveDoc } from 'client/actions';
 import Doc from './Doc';
 
 function DocConnector(props) {
-	return <Doc {...props} />;
+  return <Doc {...props} />;
 }
 
 DocConnector.propTypes = {
-	selectedDb: PropTypes.string.isRequired,
-	selectedCollection: PropTypes.string.isRequired,
-	doc: PropTypes.object.isRequired,
-	types: PropTypes.object.isRequired,
+  selectedDb: PropTypes.string.isRequired,
+  selectedCollection: PropTypes.string.isRequired,
+  doc: PropTypes.object.isRequired,
+  types: PropTypes.object.isRequired,
 };
 
 function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ confirmAndRemoveDoc }, dispatch),
-	};
+  return {
+    actions: bindActionCreators({ confirmAndRemoveDoc }, dispatch),
+  };
 }
 
 export default connect(null, mapActionsToProps)(DocConnector);

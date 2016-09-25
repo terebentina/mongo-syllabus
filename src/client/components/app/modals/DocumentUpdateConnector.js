@@ -6,18 +6,18 @@ import { documentUpdatePayloadShape } from 'client/store/shapes';
 import DocumentUpdate from './DocumentUpdate';
 
 function DocumentUpdateConnector(props) {
-	return <DocumentUpdate {...props} />;
+  return <DocumentUpdate {...props} />;
 }
 
 DocumentUpdateConnector.propTypes = {
-	payload: documentUpdatePayloadShape.isRequired,
-	doDestroy: PropTypes.func.isRequired,
+  payload: documentUpdatePayloadShape.isRequired,
+  doDestroy: PropTypes.func.isRequired,
 };
 
 function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators({ updateDocument }, dispatch),
-	};
+  return {
+    actions: bindActionCreators({ updateDocument }, dispatch),
+  };
 }
 
 export default connect(null, mapActionsToProps)(DocumentUpdateConnector);

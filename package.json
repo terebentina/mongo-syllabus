@@ -7,7 +7,7 @@
     "msyll": "cli.js"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "nf -j Procfile.dev start",
     "build": "webpack --progress --colors --config webpack.config.prod.js",
     "build-tests": "webpack --config webpack.config.test.js",
     "test": "testem",
@@ -32,6 +32,7 @@
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
     "redux-thunk": "^2.0.1",
+    "webpack": "^1.12.2",
     "restify": "^4.0.3"
   },
   "devDependencies": {
@@ -61,7 +62,6 @@
     "tape": "^4.2.2",
     "testem": "^1.5.0",
     "validate-commit-msg": "^2.4.0",
-    "webpack": "^1.12.2",
     "webpack-dev-middleware": "1.4.0",
     "webpack-hot-middleware": "^2.4.1"
   },

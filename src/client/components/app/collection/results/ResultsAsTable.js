@@ -6,43 +6,46 @@ import DocConnector from './ResultsAsTable/DocConnector';
 import styles from './ResultsAsTable.css';
 
 export class ResultsAsTable extends Component {
-	static propTypes = {
-		selectedDb: PropTypes.string.isRequired,
-		selectedCollection: PropTypes.string.isRequired,
-		results: PropTypes.array.isRequired,
-	};
+  static propTypes = {
+    selectedDb: PropTypes.string.isRequired,
+    selectedCollection: PropTypes.string.isRequired,
+    results: PropTypes.array.isRequired,
+  };
 
-	state = { types: {} };
+  state = { types: {} };
 
-	componentWillMount = () => {
-		this.setState({ types: typesFromResults(this.props.results) });
-	};
+  componentWillMount = () => {
+    this.setState({ types: typesFromResults(this.props.results) });
+  };
 
-	componentWillReceiveProps = (nextProps) => {
-		if (nextProps.results != this.props.results) {
-			this.setState({ types: typesFromResults(nextProps.results) });
-		}
-	};
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.results != this.props.results) {
+      this.setState({ types: typesFromResults(nextProps.results) });
+    }
+  };
 
-	shouldComponentUpdate = shouldPureComponentUpdate;
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
-	render() {
-		const { results, selectedDb, selectedCollection } = this.props;
+  render() {
+    const { results, selectedDb, selectedCollection } = this.props;
 
-		return (
-			<table className={styles.table}>
-				<thead>
-					<tr>
-						<th>&nbsp;</th>
-						{Object.keys(this.state.types).map((name, i) => <th key={i}>{name}</th>)}
-					</tr>
-				</thead>
-				<tbody>
-					{results.map((doc, i) => <DocConnector key={`doc_${i}`} types={this.state.types} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)}
-				</tbody>
-			</table>
-		);
-	}
+    return (
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            {Object.keys(this.state.types).map((name, i) => <th key={i}>{name}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            results.map((doc, i) =>
+              <DocConnector key={`doc_${i}`} types={this.state.types} selectedDb={selectedDb} selectedCollection={selectedCollection} doc={doc} />)
+          }
+        </tbody>
+      </table>
+    );
+  }
 }
 
 export default ResultsAsTable;
